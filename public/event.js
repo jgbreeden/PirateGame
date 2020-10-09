@@ -3,7 +3,6 @@ function Move(dir, dis) {//position, what direction, how far a player moves
 	this.dis = dis;
 }
 
-
 function Fire(speedx, speedy, dist){//how fast the missle travels and how far it can reach before it dies out
 	this.speedx = x;
 	this.speedy= y;
