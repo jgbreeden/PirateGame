@@ -28,3 +28,18 @@ function TreasureCollection(x, y, a){//determines where treasure chest how big t
 	this.y = y;
 	this.a = a;
 }
+
+function CheckBounds(playerX, playerY){
+	if (playerX <= 0){
+		playerX = 800;
+	}
+	else if (playerX >= 800){
+		playerX = 0;
+	}
+	else if(playerY <= 0){
+		playerY = 600;
+	}
+	else if(playerY >= 600){
+		playerY = 0;
+	}
+};
