@@ -29,7 +29,7 @@ function TreasureCollection(x, y, a){//determines where treasure chest how big t
 	this.a = a;
 }
 
-function CheckBounds(playerX, playerY){
+function CheckBounds(playerX, playerY){//if needed, my idea was to have several maps rather than a big one, but thats up to the group, but this is so the players x and y goes back to ther opposite side(credit to the asteroids game)
 	if (playerX <= 0){
 		playerX = 800;
 	}
