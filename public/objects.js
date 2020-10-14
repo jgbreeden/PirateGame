@@ -6,30 +6,32 @@ function PlayerShip(x, y, dir, a){//the place the players spawn, in relation to 
 	this.move = function(mvmt) {
 		this.dir = mvmt.dir;
 		if(this.dir == 0){
-			this.y -= this.dis;//make ship go up
+			this.y += this.dis;//Make move thing up/down/left/right
 		} else if(this.dir == 45){
 			this.y -= this.dis;
 			this.x += this.dis;
 		} else if (this.dir == 90){
 			this.x += this.dis;
 		} else if (this.dir == 135){
-			this.y += this.dis;
+			this.y -= this.dis;
 			this.x += this.dis;
 		} else if (this.dir == 180){
 			this.y += this.dis;
 		} else if (this.dir == 225){
-			this.y += this.dis;
+			this.y -= this.dis;
 			this.x += this.dis;
 		} else if (this.dir == 270){
 			this.x -= this.dis;
 		} else if (this.dir == 315){
-			this.y += this.dis;
+			this.y -= this.dis;
 			this.x += this.dis;
 		}
 	};
 }
+	//Playership up-to-date^^^
 
-function BountyShip(x, y, dir, a){//similar to the PlayerShip function, but this isn't controller by the player but is rather just spawned in and placed randomly on the map with no restriction 
+
+function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
 	this.y = y;
 	this.dir = dir;
