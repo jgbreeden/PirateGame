@@ -2,7 +2,6 @@
 <html>
 <head>
 <link href="PrettyMenu.css" rel="stylesheet" type="text/css">
-<link href="GameArea.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -12,7 +11,6 @@
 
 <div id="idea" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php" method="post">
     <div class="imgcontainer">
       <span onclick="document.getElementById('idea').style.display='none'" 
 	  class="close" title="Close Modal">&times;</span>
@@ -33,10 +31,9 @@
       </label>
 </div>
 
-<div class="canvas">
-</div>
-
-<div class="GameArea">
+<div id="GameArea">
+<canvas id="GameCanvas">
+</canvas>
 </div>
 
 <script>
