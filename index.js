@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+//var mangoDB = require('mangoDB');
 var connections = [];
 var users = [];
 
@@ -10,6 +11,7 @@ var users = [];
 }); */
 
 app.use(express.static(__dirname + '/public'));
+//we can also specify a specific html file so we don't nessecarily need index, but it automatically gets the index.html or first html file it finds
 
 io.on('connection', (socket) => {
 	connections.push(socket);
@@ -27,41 +29,42 @@ io.on('connection', (socket) => {
 		io.emit("user list", users);
 	});
 
-	socket.on('startGame', function () {
+	socket.on('startGame', function (){
 		//when game first starts
 		io.to('game').emit('big-announcement', 'the game will start soon');
 	});
-	socket.on('midGame', function () {
+	socket.on('midGame', function (){
 		//when the 3rd bounty is collected, and special event starts
 		io.to('some room').emit('Game Is Coming to an End. Get Your Points QUICK!');
 	});
-	socket.on('endGame', function () {
+	socket.on('endGame', function (){
 		//when the final bounty is collected
 		io.to('some room').emit('Game Has Ended');
 	});
-	socket.on('playerScore', function () {
+	socket.on('playerScore', function (){
 		//when a player places bounty into home base, storing data for amout of points
 		io.emit('score board', {user: socket.user, score: score});
 	});
-	socket.on('playerKill', function () {
+	socket.on('playerKill', function (){
 		//when a player is killed by a player or obstacle
 		socket.broadcast.emit('playerKilled', playerKilled)
 	});
-	socket.on('playerChat', function () {
+	socket.on('playerChat', function (){
 		//player game chat if we have one
 		io.emit('chat message', {user: socket.user, message: msg});
 	});	
-	socket.on('playerJoined', function () {
+	socket.on('playerJoined', function (){
 		//when players join a lobby
 		socket.join('some room');
+		io.emit('playerJoined', {user: socket.user, shipType: socket.user.ship } )
 	});	
-	socket.on('playerLeft', function () {
+	socket.on('playerLeft', function (){
 		//when players join a lobby
 		socket.leave('some room');
 	});	
-	socket.on('playerStart', function () {
+	socket.on('playerStart', function (){
 		//when players set name and ship
-		io.emit('playerData', {user: socket.user, shipType: ship});
+		io.emit('playerData', {user: socket.user, shipType: socket.user.ship});
 	});	
 	//events
 	socket.on('playerMove', function (){
