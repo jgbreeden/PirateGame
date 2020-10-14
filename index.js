@@ -1,16 +1,13 @@
 var express = require('express');
 var app = express();
+var path = require('path');
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 //var mangoDB = require('mangoDB');
 var connections = [];
 var users = [];
 
-/* app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/index.html');
-}); */
-
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname,'public')));
 //we can also specify a specific html file so we don't nessecarily need index, but it automatically gets the index.html or first html file it finds
 
 io.on('connection', (socket) => {
@@ -91,5 +88,5 @@ io.on('connection', (socket) => {
 
 
 http.listen(3000, () => {
-  console.log('listening on *:8000');
+  console.log('listening on *:3000');
 });
