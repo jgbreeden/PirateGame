@@ -3,8 +3,12 @@ var stuff = [];
 let radlen = 100;
 let	maxwidth = 800;
 let maxheight = 600;
+var Surface = document.getElementById("");
+Surface.style.height = maxheight;
+Surface.style.width = maxwidth;
+Surface.style.display = "none";
 
-var Surface = {
+/*{
 	canvas: document.createElement("canvas"),
 	start: function () {
 		this.canvas.width = maxwidth;
@@ -12,7 +16,7 @@ var Surface = {
 		this.context = this.canvas.getContext("2d");
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 	}
-}
+}*/
 
 function gameUpdate(){
 	Surface.clear();
@@ -25,7 +29,7 @@ function gameUpdate(){
 }
 
 function gameStart(){
-	Surface.start();
+	Surface.style.display = "block";
 	//create ships
 	var update = setInterval(gameUpdate, 20);
 	
