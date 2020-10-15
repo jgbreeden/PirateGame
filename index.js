@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
 	});
 	socket.on('playerKill', function (){
 		//when a player is killed by a player or obstacle
-		socket.broadcast.emit('playerKilled', playerKilled)
+		socket.broadcast.emit('playerKilled', playerKilled);
 	});
 	socket.on('playerChat', function (){
 		//player game chat if we have one
@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
 	socket.on('playerJoined', function (){
 		//when players join a lobby
 		socket.join('some room');
-		io.emit('playerJoined', {user: socket.user, shipType: socket.user.ship } )
+		io.emit('playerJoined', {user: socket.user, shipType: socket.user.ship });
 	});	
 	socket.on('playerLeft', function (){
 		//when players join a lobby
