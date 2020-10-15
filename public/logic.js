@@ -3,23 +3,29 @@ var stuff = [];
 let radlen = 100;
 let	maxwidth = 800;
 let maxheight = 600;
-var Surface = document.getElementById("");
+var Surface = document.getElementById("GameArea");
+var modal = document.getElementById('idea');
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
 Surface.style.display = "none";
 
-/*{
-	canvas: document.createElement("canvas"),
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+var Game = {
 	start: function () {
 		this.canvas.width = maxwidth;
 		this.canvas.height = maxheight;
 		this.context = this.canvas.getContext("2d");
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 	}
-}*/
+}
 
 function gameUpdate(){
-	Surface.clear();
+	//Surface.clear();
 	//display gameStart
 	//call our own ship update methods 
 	//loop through shipp arrays
@@ -30,6 +36,7 @@ function gameUpdate(){
 
 function gameStart(){
 	Surface.style.display = "block";
+	Game.start();
 	//create ships
 	var update = setInterval(gameUpdate, 20);
 	
@@ -39,7 +46,7 @@ function fire(){
 	
 }
 
-function move()
+//function move()
 
 // controllers 
 
