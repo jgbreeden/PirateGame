@@ -1,8 +1,13 @@
-function PlayerShip(x, y, dir, a){//the place the players spawn, in relation to their respawn port, with an area of interaction that moves with the player
+import users from "../index.js";
+
+function PlayerShip(x, y, dir, a){//the place the players spawn, 
+	//in relation to their respawn port, with an area of interaction that moves with the player
 	this.x = x;
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
+	this.img = document.createElement("img");
+	this.img.src = '';
 	this.move = function(mvmt) {
 		this.dir = mvmt.dir;
 		if(this.dir == 0){
@@ -25,9 +30,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn, in relation to 
 		} else if (this.dir == 315){
 			this.y -= this.dis;
 			this.x += this.dis;
-		}
+		};
 	};
-}
+};
 	//Playership up-to-date^^^
 
 
