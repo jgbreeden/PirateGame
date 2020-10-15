@@ -1,12 +1,23 @@
+import PlayerShip from 'object.js';
+
 function Move(dir, dis) {//position, what direction, how far a player moves
 	this.dir = dir;
 	this.dis = dis;
 }
 
 function Fire(speedx, speedy, dist){//how fast the missle travels and how far it can reach before it dies out
-	this.speedx = x;
-	this.speedy= y;
-	this.dist = dist;
+	var speed_x = Math.cos(this.sprite.rotation + Math.PI / 2) * 20;
+    var speed_y = Math.sin(this.sprite.rotation + Math.PI / 2) * 20;
+    var bullet = {};
+    bullet.speed_x = speed_x;
+    bullet.speed_y = speed_y;
+    bullet.sprite = game.add.sprite(
+		this.sprite.x + bullet.speed_x,
+		this.sprite.y + bullet.speed_y,
+		"bullet"
+	);
+    bullet_array.push(bullet);
+    this.shot = true;
 }
  
 function Collision(x, y, dam, playerSpeed, playerHealth, ){//determining where the missle hits so damage is multiplied, dam is set in relation to player choosen ship
