@@ -5,6 +5,7 @@ let radlen = 100;
 let	maxwidth = 800;
 let maxheight = 600;
 var Surface = document.getElementById("GameArea");
+var login = document.getElementById("LoginArea");
 var modal = document.getElementById('idea');
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
@@ -22,10 +23,11 @@ var game = {
 		this.canvas.width = maxwidth;
 		this.canvas.height = maxheight;
 		this.context = this.canvas.getContext("2d");
-		},
-	draw : function() {
 		this.img = document.createElement("img");
-		this.img.src = "imgs/ocean.png"
+		this.img.src = "imgs/ocean.png";
+	},
+	draw : function() {
+		this.context.drawImage(this.img, 0, 0);
 	},
 	clear : function() {
 		this.context.clearRect(0, 0, maxwidth, maxheight);
@@ -44,17 +46,11 @@ function gameUpdate(){
 
 function gameStart(){
 	game.start();
+	login.style.display = "none";
 	Surface.style.display = "block";
 	//create ships
 	var update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 270, 0);
-}
-
-function fire(){
-	if(PlayerShip.alive == false){
-		//make it similiar to asteroids?
-
-	}
 }
 
 //function move()
@@ -63,10 +59,11 @@ function fire(){
 
 window.addEventListener("keypress", function (e) {
 	//function call for diffrent key 
-	//if movement key 
-	var movement = newMove(dir, dis);
-	socket.emit("shipMoved", movement);
-	PlayerShip.move(movement);
+	//if movement key
+	var dis = 10;
+	var movement = new Move(0, dis);
+	socket.emit("playerMove", movement);
+	me.move(movement);
 });
 
 $(function () {
