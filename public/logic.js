@@ -1,5 +1,6 @@
 var users = [];
 var stuff = [];
+var me;
 let radlen = 100;
 let	maxwidth = 800;
 let maxheight = 600;
@@ -32,8 +33,8 @@ var game = {
 }
 
 function gameUpdate(){
-	Game.clear();
-	Game.draw();
+	game.clear();
+	game.draw();
 	me.draw();
 	//display gameStart
 	//call our own ship update methods 
@@ -45,7 +46,7 @@ function gameStart(){
 	Surface.style.display = "block";
 	//create ships
 	var update = setInterval(gameUpdate, 20);
-	var me = new PlayerShip(400, 300, 270, 0);
+	me = new PlayerShip(400, 300, 270, 0);
 }
 
 function fire(){
