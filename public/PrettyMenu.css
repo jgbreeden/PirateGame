@@ -27,3 +27,7 @@ button:hover {
   background-color: light-blue;
 }
 
+#GameCanvas {
+	border: 100px;
+}
+
