@@ -43,6 +43,7 @@ function gameUpdate(){
 }
 
 function gameStart(){
+	game.start();
 	Surface.style.display = "block";
 	//create ships
 	var update = setInterval(gameUpdate, 20);
