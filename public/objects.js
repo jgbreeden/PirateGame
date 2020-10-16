@@ -1,5 +1,3 @@
-import users from "../index.js";
-
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
 	//in relation to their respawn port, with an area of interaction that moves with the player
 	this.x = x;
