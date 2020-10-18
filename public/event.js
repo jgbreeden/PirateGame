@@ -1,5 +1,3 @@
-import PlayerShip from 'object.js';
-
 function Move(dir, dis) {//position, what direction, how far a player moves
 	this.dir = dir;
 	this.dis = dis;
