@@ -3,8 +3,8 @@ var stuff = [];
 let radlen = 100;
 let	maxwidth = 800;
 let maxheight = 600;
-//var Surface = document.getElementById("GameArea");
-//var modal = document.getElementById('idea');
+var Surface = document.getElementById("GameArea");
+var modal = document.getElementById('idea');
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
 Surface.style.display = "none";
@@ -29,6 +29,7 @@ var game = {
 
 function gameUpdate(){
 	Surface.clear();
+
 	//display gameStart
 	//call our own ship update methods 
 	//loop through shipp arrays
@@ -38,7 +39,7 @@ function gameUpdate(){
 }
 
 function gameStart(){
-	Surface.style.display = "block";
+	document.getElementById("GameArea").style.display = "block";
 
 	//create ships
 	var update = setInterval(gameUpdate, 20);
