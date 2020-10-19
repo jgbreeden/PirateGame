@@ -1,3 +1,4 @@
+var socket = io();
 var users = [];
 var stuff = [];
 var me;
@@ -25,6 +26,10 @@ var game = {
 		this.context = this.canvas.getContext("2d");
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
+		//testing keypresses from w3schools
+		window.addEventListener('keydown', function (e) {
+		game.key = e.119;//w
+	  })
 	},
 	draw : function() {
 		this.context.drawImage(this.img, 0, 0);
@@ -62,14 +67,15 @@ window.addEventListener("keypress", function (e) {
 	//if movement key
 	var dis = 10;
 	var movement = new Move(0, dis);
+
+	
 	socket.emit("playerMove", movement);
 	me.move(movement);
 });
 
 $(function () {
-	var socket = io();
 	socket.on("playerJoined", function(ev) {
-		
+
 	});
 	socket.on("shipFire", function(ev) {
 		
