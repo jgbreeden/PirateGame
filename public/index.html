@@ -14,7 +14,7 @@
     <div class="imgcontainer">
       <span onclick="document.getElementById('idea').style.display='none'" 
 	  class="close" title="Close Modal">&times;</span>
-      <img src="PirateAvatar.png" alt="Avatar" class="avatar">
+      <img src=imgs/"PirateAvatar.png" alt="Avatar" class="avatar">
 </div>
 </div>
 
@@ -25,7 +25,7 @@
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
         
-      <button type="submit">Login</button>
+	  <button onclick="gameStart()">Login</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
@@ -48,8 +48,9 @@ window.onclick = function(event) {
 </script>
 
 <script src='/socket.io/socket.io.js'></script>
-<script src="https://code.jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="objects.js"></script>
+<script src="event.js"></script>
 <script src="logic.js"></script>
 </body>
 </html>

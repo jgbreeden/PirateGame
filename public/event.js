@@ -1,5 +1,3 @@
-import PlayerShip from 'object.js';
-
 function Move(dir, dis) {//position, what direction, how far a player moves
 	this.dir = dir;
 	this.dis = dis;
@@ -40,17 +38,17 @@ function TreasureCollection(x, y, a){//determines where treasure chest how big t
 	this.a = a;
 }
 
-function CheckBounds(playerX, playerY){//if needed, my idea was to have several maps rather than a big one, but thats up to the group, but this is so the players x and y goes back to ther opposite side(credit to the asteroids game)
-	if (playerX <= 0){
-		playerX = 800;
+function CheckBounds(PlayerShip){//if needed, my idea was to have several maps rather than a big one, but thats up to the group, but this is so the players x and y goes back to ther opposite side(credit to the asteroids game)
+	if (PlayerShip.x <= 0){
+		PlayerShip.x = 800;
 	}
-	else if (playerX >= 800){
-		playerX = 0;
+	else if (PlayerShip.x >= 800){
+		PlayerShip.x = 0;
 	}
-	else if(playerY <= 0){
-		playerY = 600;
+	else if(PlayerShip.y <= 0){
+		PlayerShip.y = 600;
 	}
-	else if(playerY >= 600){
-		playerY = 0;
+	else if(PlayerShip.y >= 600){
+		PlayerShip.y = 0;
 	}
 };

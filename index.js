@@ -28,15 +28,15 @@ io.on('connection', (socket) => {
 
 	socket.on('startGame', function (){
 		//when game first starts
-		io.to('game').emit('big-announcement', 'the game will start soon');
+		io.emit('big-announcement', 'the game will start soon');
 	});
 	socket.on('midGame', function (){
 		//when the 3rd bounty is collected, and special event starts
-		io.to('some room').emit('Game Is Coming to an End. Get Your Points QUICK!');
+		io.emit('Game Is Coming to an End. Get Your Points QUICK!');
 	});
 	socket.on('endGame', function (){
 		//when the final bounty is collected
-		io.to('some room').emit('Game Has Ended');
+		io.emit('Game Has Ended');
 	});
 	socket.on('playerScore', function (){
 		//when a player places bounty into home base, storing data for amout of points
