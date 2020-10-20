@@ -10,7 +10,7 @@ var users = [];
 app.use(express.static(path.join(__dirname,'public')));
 //we can also specify a specific html file so we don't nessecarily need index, but it automatically gets the index.html or first html file it finds
 
-io.on('connection', (socket) => {
+io.on('connection', function(socket){
 	connections.push(socket);
 	console.log("Connections:" + connections.length);
 	socket.on('new user', function(user, callback) {
@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
 		users.push(user);
 		io.emit("user list", users);
 	});
-	socket.on('disconnect', () => {
+	socket.on('disconnect', function(){
 		connections.splice(connections.indexOf(socket), 1);
 		users.splice(users.indexOf(socket.user), 1);
 		console.log('Disconnection:' + socket.user);

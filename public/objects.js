@@ -8,7 +8,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {game.context.drawImage(this.img, this.x, this.y)};
 	this.move = function(mvmt) {
-		this.dir = mvmt.dir;
+		this.dir += mvmt.dir;
 		if(this.dir == 0){
 			this.y += this.dis;//Make move thing up/down/left/right
 		} else if(this.dir == 45){
