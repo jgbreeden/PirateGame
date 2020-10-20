@@ -26,6 +26,9 @@ var game = {
 		this.context = this.canvas.getContext("2d");
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
+		window.addEventListener('keydown', function (e) {
+			game.key = e.keyCode;//w
+		  })
 	},
 	draw : function() {
 		this.context.drawImage(this.img, 0, 0);
@@ -35,7 +38,7 @@ var game = {
 	}
 }
 
-function handleKey(){
+function handleKey(e.keyCode){
 	
 }
 
