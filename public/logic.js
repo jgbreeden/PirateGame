@@ -26,10 +26,6 @@ var game = {
 		this.context = this.canvas.getContext("2d");
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
-		//testing keypresses from w3schools
-		window.addEventListener('keydown', function (e) {
-		game.key = e.119;//w
-	  })
 	},
 	draw : function() {
 		this.context.drawImage(this.img, 0, 0);
@@ -37,6 +33,10 @@ var game = {
 	clear : function() {
 		this.context.clearRect(0, 0, maxwidth, maxheight);
 	}
+}
+
+function handleKey(){
+	
 }
 
 function gameUpdate(){
