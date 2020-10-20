@@ -39,7 +39,7 @@ var game = {
 }
 
 function handleKey(code){
-	if (code == KeyW) {
+	if (code == "KeyW") {
 		var dis = 10;
 		var movement = new Move(0, dis);
 		socket.emit("playerMove", movement);
