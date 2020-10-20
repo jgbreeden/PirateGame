@@ -7,8 +7,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {game.context.drawImage(this.img, this.x, this.y)};
-	this.move = function(mvmt) {
-		this.dir += mvmt.dir;
+	this.move = function(Move) {
+		this.dir += Move.dir;
 		if(this.dir == 0){
 			this.y += this.dis;//Make move thing up/down/left/right
 		} else if(this.dir == 45){
@@ -31,8 +31,12 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.x += this.dis;
 		};
 	};
+	this.fire = function(Fire){//make thing shoot thing
+
+
+	};
 };
-	//Playership up-to-date^^^
+	
 
 
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
@@ -58,6 +62,12 @@ function Treasure(x, y, val){//determines where treasure chest spawn, and the am
 	this.x = x;
 	this.y = y;
 	this.val = val;
+}
+
+function GameObstacle(x, y, a){//position for game created enemies such as sharks or other boats and their area of interaction(the space were the players interact with the game obstacles)
+	this.x = x;
+	this.y = y;
+	this.a = a;
 }
 
 
