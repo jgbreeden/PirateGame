@@ -26,7 +26,7 @@ var game = {
 		this.context = this.canvas.getContext("2d");
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
-		window.addEventListener('keydown', function (e) {
+		window.addEventListener('keypress', function (e) {
 			handleKey(e.code);
 		  })
 	},

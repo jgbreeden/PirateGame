@@ -10,7 +10,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.move = function(Move) {
 		this.dir += Move.dir;
 		if(this.dir == 0){
-			this.y += this.dis;//Make move thing up/down/left/right
+			this.y += Move.dis;//Make move thing up/down/left/right
 		} else if(this.dir == 45){
 			this.y -= this.dis;
 			this.x += this.dis;
