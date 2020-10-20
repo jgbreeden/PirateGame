@@ -27,7 +27,7 @@ var game = {
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
 		window.addEventListener('keydown', function (e) {
-			game.key = e.code;//w
+			keyHandle() = e.code;//w
 		  })
 	},
 	draw : function() {
@@ -39,7 +39,7 @@ var game = {
 }
 
 function handleKey(code){
-	if code == 119 {
+	if (code == 119) {
 		var dis = 10;
 		var movement = new Move(0, dis);
 		socket.emit("playerMove", movement);
