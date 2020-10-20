@@ -27,7 +27,7 @@ var game = {
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
 		window.addEventListener('keydown', function (e) {
-			handleKey(code);
+			handleKey(e.code);
 		  })
 	},
 	draw : function() {
@@ -48,7 +48,9 @@ function handleKey(code){
 	if (code == 115){
 
 	}
-	if
+	if (code == 065){
+
+	}
 }
 
 function gameUpdate(){
