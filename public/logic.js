@@ -27,7 +27,7 @@ var game = {
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
 		window.addEventListener('keydown', function (e) {
-			game.key = e.keyCode;//w
+			game.key = e.code;//w
 		  })
 	},
 	draw : function() {
@@ -38,8 +38,13 @@ var game = {
 	}
 }
 
-function handleKey(e.keyCode){
-	
+function handleKey(code){
+	if code == 119 {
+		var dis = 10;
+		var movement = new Move(0, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
+	}
 }
 
 function gameUpdate(){
@@ -68,15 +73,11 @@ function gameStart(){
 window.addEventListener("keypress", function (e) {
 	//function call for diffrent key 
 	//if movement key
-	var dis = 10;
-	var movement = new Move(0, dis);
-
 	
-	socket.emit("playerMove", movement);
-	me.move(movement);
 });
 
 $(function () {
+
 	socket.on("playerJoined", function(ev) {
 
 	});
