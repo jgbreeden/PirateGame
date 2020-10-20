@@ -26,8 +26,8 @@ var game = {
 		this.context = this.canvas.getContext("2d");
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
-		window.addEventListener('keydown', function (e) {
-			game.key = e.keyCode;//w
+		window.addEventListener('keypress', function (e) {
+			handleKey(e.code);
 		  })
 	},
 	draw : function() {
@@ -38,8 +38,22 @@ var game = {
 	}
 }
 
-function handleKey(e.keyCode){
-	
+function handleKey(code){
+	if (code == "KeyW") {
+		var dis = 10;
+		var movement = new Move(0, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
+	}
+	if (code == "KeyS"){
+
+	}
+	if (code == "KeyD"){
+
+	}
+	if(code == "KeyA"){
+
+	}
 }
 
 function gameUpdate(){
@@ -68,15 +82,16 @@ function gameStart(){
 window.addEventListener("keypress", function (e) {
 	//function call for diffrent key 
 	//if movement key
-	var dis = 10;
-	var movement = new Move(0, dis);
-
 	
-	socket.emit("playerMove", movement);
-	me.move(movement);
 });
 
 $(function () {
+	$('#loginForm').submit(function(e) {
+		e.preventDefault();
+		gameStart();
+			//$('#loginArea').hide;
+			//$('#GameArea').show;
+	});
 	socket.on("playerJoined", function(ev) {
 
 	});
