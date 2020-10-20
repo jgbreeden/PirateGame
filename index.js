@@ -64,7 +64,7 @@ io.on('connection', function(socket){
 		io.emit('playerData', {user: socket.user, shipType: socket.user.ship});
 	});	
 	//events
-	socket.on('playerMove', function (){
+	socket.on('playerMove', function (movement){
 		//data carrying the information of a sockets movement
 		socket.broadcast.emit('playerMove', movement);
 	});
