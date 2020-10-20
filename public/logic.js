@@ -39,19 +39,22 @@ var game = {
 }
 
 function handleKey(code){
-	if (code == "KeyW") {
+	if (code == "KeyW") {//move forward
 		var dis = 10;
 		var movement = new Move(0, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
-	if (code == "KeyS"){
+	if (code == "KeyS"){//move backwards
+		var dis = -10;
+		var movement = new Move(0, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
+	}
+	if (code == "KeyD"){//turn right
 
 	}
-	if (code == "KeyD"){
-
-	}
-	if(code == "KeyA"){
+	if(code == "KeyA"){//turn left
 
 	}
 }
