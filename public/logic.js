@@ -45,14 +45,14 @@ function handleKey(code){
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
-	if (code == KeyS){
+	if (code == "KeyS"){
 
 	}
-	if (code == KeyD){
+	if (code == "KeyD"){
 
 	}
-	if(code == KeyA){
-		
+	if(code == "KeyA"){
+
 	}
 }
 
