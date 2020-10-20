@@ -27,7 +27,7 @@ var game = {
 		this.img = document.createElement("img");
 		this.img.src = "imgs/ocean.png";
 		window.addEventListener('keydown', function (e) {
-			keyHandle() = e.code;//w
+			handleKey(code);
 		  })
 	},
 	draw : function() {
@@ -45,6 +45,10 @@ function handleKey(code){
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
+	if (code == 115){
+
+	}
+	if
 }
 
 function gameUpdate(){
@@ -77,7 +81,12 @@ window.addEventListener("keypress", function (e) {
 });
 
 $(function () {
-
+	$('#loginForm').submit(function(e) {
+		e.preventDefault();
+		gameStart();
+			//$('#loginArea').hide;
+			//$('#GameArea').show;
+	});
 	socket.on("playerJoined", function(ev) {
 
 	});
