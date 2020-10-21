@@ -52,10 +52,10 @@ function handleKey(code){
 		me.move(movement);
 	}
 	if (code == "KeyD"){//turn right
-
+		var dir = "";// will not be string but wait for clarification
 	}
 	if(code == "KeyA"){//turn left
-
+		var dir = "";// will not be string but wait for clarification
 	}
 }
 
