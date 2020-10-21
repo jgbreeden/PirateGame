@@ -25,7 +25,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.y -= this.dis;
 			this.x += this.dis;
 		} else if (this.dir == 270){
-			this.x -= this.dis;
+			this.x -= Move.dis;
 		} else if (this.dir == 315){
 			this.y -= this.dis;
 			this.x += this.dis;
