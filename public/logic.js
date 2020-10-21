@@ -39,20 +39,31 @@ var game = {
 }
 
 function handleKey(code){
-	if (code == "KeyW") {
+	if (code == "KeyW") {//move forward
+		var dis = -10;
+		var movement = new Move(0, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
+	}
+	if (code == "KeyS"){//move backwards
 		var dis = 10;
 		var movement = new Move(0, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
-	if (code == "KeyS"){
-
+	if (code == "KeyD"){//turn right
+		var dir = 45;
+		var dis = 10;
+		var movement = new Move(dir, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
 	}
-	if (code == "KeyD"){
-
-	}
-	if(code == "KeyA"){
-
+	if(code == "KeyA"){//turn left
+		var dir = -45;
+		var dis = 10;
+		var movement = new Move(dir, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
 	}
 }
 
@@ -98,8 +109,11 @@ $(function () {
 	socket.on("shipFire", function(ev) {
 		
 	});
-	socket.on("user list", function(ev) {
-		
+	socket.on("user list", function(list) {
+		$('#userList').text('');
+		for (i = 0; i < list.length; i++) { 
+			$('#userList').append($('<ul>').text(list[i]));
+		}
 	});
 	socket.on("playerKilled", function(ev) {
 		

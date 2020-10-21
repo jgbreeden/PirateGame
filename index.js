@@ -38,7 +38,7 @@ io.on('connection', function(socket){
 		//when the final bounty is collected
 		io.emit('Game Has Ended');
 	});
-	socket.on('playerScore', function (){
+	socket.on('playerScore', function (score){
 		//when a player places bounty into home base, storing data for amout of points
 		io.emit('score board', {user: socket.user, score: score});
 	});
@@ -46,22 +46,21 @@ io.on('connection', function(socket){
 		//when a player is killed by a player or obstacle
 		socket.broadcast.emit('playerKilled', playerKilled);
 	});
-	socket.on('playerChat', function (){
+	socket.on('playerChat', function (msg){
 		//player game chat if we have one
 		io.emit('chat message', {user: socket.user, message: msg});
 	});	
 	socket.on('playerJoined', function (){
 		//when players join a lobby
 		socket.join('some room');
-		io.emit('playerJoined', {user: socket.user, shipType: socket.user.ship });
 	});	
 	socket.on('playerLeft', function (){
 		//when players join a lobby
 		socket.leave('some room');
 	});	
-	socket.on('playerStart', function (){
+	socket.on('playerStart', function (ship){
 		//when players set name and ship
-		io.emit('playerData', {user: socket.user, shipType: socket.user.ship});
+		io.emit('playerData', {user: socket.user, shipType: ship});
 	});	
 	//events
 	socket.on('playerMove', function (movement){
