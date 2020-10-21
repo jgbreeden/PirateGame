@@ -6,29 +6,55 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.a = a;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
-	this.draw = function() {game.context.drawImage(this.img, this.x, this.y)};
+	this.draw = function() {
+		game.context.drawImage(this.img, this.x, this.y)
+		var len = 90;
+		var trans = 1;
+		var rot = 0;
+		ctx.beginPath();
+		ctx.strokeStyle = "blue";
+		ctx.rect(10, 10, 180, 180);
+		ctx.stroke();
+		for( i = 0; i < 10; i++){
+			var x = Math.sin(rot) * len;
+			var y = Math.cos(rot) * len;
+			ctx.strokeStyle = "rgba(0, 0, 0," + trans + ")";
+			ctx.beginPath();
+			ctx.moveTo(100, 100);
+			var linex = 100 + x;
+			var liney = 100 + y;
+			ctx.lineTo(linex, liney);
+			ctx.stroke();
+			rot -= 0.05;
+			trans -= 0.2;
+		}
+		rot += .55;
+		if(rot > Math.PI * 2) {
+			rot = 0;
+		}
+	};
 	this.move = function(Move) {
 		this.dir += Move.dir;
-		if(this.dir == 0){
-			this.y += Move.dis;//Make move thing up/down/left/right
-		} else if(this.dir == 45){
-			this.y -= this.dis;
-			this.x += this.dis;
-		} else if (this.dir == 90){
-			this.x += this.dis;
-		} else if (this.dir == 135){
-			this.y -= this.dis;
-			this.x += this.dis;
-		} else if (this.dir == 180){
-			this.y += this.dis;
-		} else if (this.dir == 225){
-			this.y -= this.dis;
-			this.x += this.dis;
-		} else if (this.dir == 270){
-			this.x -= this.dis;
-		} else if (this.dir == 315){
-			this.y -= this.dis;
-			this.x += this.dis;
+		if(this.dir == 0){//Right or E
+			this.x += Move.dis;//Make move thing up/down/left/right
+		} else if(this.dir == 45){//SE or SE
+			this.y -= Move.dis;
+			this.x -= Move.dis;
+		} else if (this.dir == 90){//S our Down
+			this.y -= Move.dis;
+		} else if (this.dir == 135){//SW or SW
+			this.y -= Move.dis;
+			this.x += Move.dis;
+		} else if (this.dir == 180){//W or left
+			this.x -= Move.dis;
+		} else if (this.dir == 225){// NW or NW
+			this.y += Move.dis;
+			this.x += Move.dis;
+		} else if (this.dir == 270){//N or UP
+			this.y += Move.dis;
+		} else if (this.dir == 315){//NE or NE
+			this.y += Move.dis;
+			this.x -= Move.dis;
 		};
 	};
 	this.fire = function(Fire){//make thing shoot thing
