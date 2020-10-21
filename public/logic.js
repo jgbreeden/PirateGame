@@ -98,8 +98,11 @@ $(function () {
 	socket.on("shipFire", function(ev) {
 		
 	});
-	socket.on("user list", function(ev) {
-		
+	socket.on("user list", function(list) {
+		$('#userList').text('');
+		for (i = 0; i < list.length; i++) { 
+			$('#userList').append($('<ul>').text(list[i]));
+		}
 	});
 	socket.on("playerKilled", function(ev) {
 		
