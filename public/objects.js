@@ -11,14 +11,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		var len = 90;
 		var trans = 1;
 		var rot = 0;
-		ctx.beginPath();
-		ctx.strokeStyle = "blue";
-		ctx.rect(10, 10, 180, 180);
-		ctx.stroke();
 		for( i = 0; i < 10; i++){
 			var x = Math.sin(rot) * len;
 			var y = Math.cos(rot) * len;
-			ctx.strokeStyle = "rgba(0, 0, 0," + trans + ")";
+			ctx.strokeStyle = "rgba(50, 205, 50," + trans + ")";
 			ctx.beginPath();
 			ctx.moveTo(100, 100);
 			var linex = 100 + x;
