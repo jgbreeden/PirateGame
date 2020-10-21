@@ -71,13 +71,13 @@ function gameUpdate(){
 	game.clear();
 	game.draw();
 	me.draw();
-	//display gameStart
-	//call our own ship update methods 
+
+
 	//loop through shipp arrays
 		//move based on new x,y coords
 }
 
-function severStart(){
+function serverStart(){
 	game.start();
 	$('#userlist').hide;
 	//create ships
@@ -86,7 +86,7 @@ function severStart(){
 }
 
 function gameStart(){
-
+	socket.emit("startGame");
 }
 
 $(function () {
