@@ -52,10 +52,18 @@ function handleKey(code){
 		me.move(movement);
 	}
 	if (code == "KeyD"){//turn right
-		var dir = "";// will not be string but wait for clarification
+		var dir = 45;
+		var dis = 10;
+		var movement = new Move(0, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
 	}
 	if(code == "KeyA"){//turn left
-		var dir = "";// will not be string but wait for clarification
+		var dir = -45;
+		var dis = 10;
+		var movement = new Move(0, dis);
+		socket.emit("playerMove", movement);
+		me.move(movement);
 	}
 }
 
