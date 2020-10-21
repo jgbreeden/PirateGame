@@ -14,13 +14,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		for( i = 0; i < 10; i++){
 			var x = Math.sin(rot) * len;
 			var y = Math.cos(rot) * len;
-			ctx.strokeStyle = "rgba(50, 205, 50," + trans + ")";
-			ctx.beginPath();
-			ctx.moveTo(100, 100);
+			game.context.strokeStyle = "rgba(50, 205, 50," + trans + ")";
+			game.context.beginPath();
+			game.context..moveTo(100, 100);
 			var linex = 100 + x;
 			var liney = 100 + y;
-			ctx.lineTo(linex, liney);
-			ctx.stroke();
+			game.context.lineTo(linex, liney);
+			game.context.stroke();
 			rot -= 0.05;
 			trans -= 0.2;
 		}
