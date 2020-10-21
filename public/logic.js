@@ -54,14 +54,14 @@ function handleKey(code){
 	if (code == "KeyD"){//turn right
 		var dir = 45;
 		var dis = 10;
-		var movement = new Move(dir, dis);
+		var movement = new Move(dir, 0);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if(code == "KeyA"){//turn left
 		var dir = -45;
 		var dis = 10;
-		var movement = new Move(dir, dis);
+		var movement = new Move(dir, 0);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
@@ -77,21 +77,26 @@ function gameUpdate(){
 		//move based on new x,y coords
 }
 
-function gameStart(){
+function severStart(){
 	game.start();
-	login.style.display = "none";
-	Surface.style.display = "block";
+	$('#userlist').hide;
 	//create ships
 	var update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 270, 0);
 }
 
+function gameStart(){
+
+}
+
 $(function () {
 	$('#loginForm').submit(function(e) {
 		e.preventDefault();
-		gameStart();
-			//$('#loginArea').hide;
-			//$('#GameArea').show;
+		socket.emit("new user", $('#uname').val(),function(data){
+		//gameStart();
+			$('#loginArea').hide;
+			$('#GameArea').show;
+		});
 	});
 	socket.on("playerJoined", function(ev) {
 
