@@ -10,7 +10,7 @@ var login = document.getElementById("LoginArea");
 var modal = document.getElementById('idea');
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
-//Surface.style.display = "none";
+
 
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -85,16 +85,6 @@ function gameStart(){
 	var update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 270, 0);
 }
-
-//function move()
-
-// controllers 
-
-window.addEventListener("keypress", function (e) {
-	//function call for diffrent key 
-	//if movement key
-	
-});
 
 $(function () {
 	$('#loginForm').submit(function(e) {
