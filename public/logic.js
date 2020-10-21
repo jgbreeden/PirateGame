@@ -102,7 +102,7 @@ $(function () {
 	socket.on("user list", function(list) {
 		$('#userList').text('');
 		for (i = 0; i < list.length; i++) { 
-			$('#userList').append($('<ul>').text(list[i]));
+			$('#userList').append($('<li>').text(list[i]));
 		}
 	});
 	socket.on("playerKilled", function(ev) {
