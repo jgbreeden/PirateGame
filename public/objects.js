@@ -4,16 +4,16 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
+	this.rot = 0;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
 		game.context.drawImage(this.img, this.x, this.y)
 		var len = 90;
 		var trans = 1;
-		var rot = 0;
 		for( i = 0; i < 10; i++){
-			var x = Math.sin(rot) * len;
-			var y = Math.cos(rot) * len;
+			var x = Math.sin(this.rot) * len;
+			var y = Math.cos(this.rot) * len;
 			game.context.strokeStyle = "rgba(50, 205, 50," + trans + ")";
 			game.context.beginPath();
 			game.context.moveTo(100, 100);
@@ -21,21 +21,24 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			var liney = 100 + y;
 			game.context.lineTo(linex, liney);
 			game.context.stroke();
-			rot -= 0.05;
+			this.rot -= 0.05;
 			trans -= 0.2;
 		}
-		rot += .55;
-		if(rot > Math.PI * 2) {
-			rot = 0;
+		this.rot += .55;
+		if(this.rot > Math.PI * 2) {
+			this.rot = 0;
 		}
 	};
 	this.move = function(Move) {
 		this.dir += Move.dir;
-		if(this.dir <= 0){//Right or E
+		if(this.dir < 0){
+			this.dir = 315;
+		};
+		if(this.dir > 315){
+			this.dir = 0;
+		};
+		if(this.dir == 0){//Right or E
 			this.x += Move.dis;//Make move thing up/down/left/right
-			if(this.dir <= 0){
-				this.dir = 315;
-			};
 		} else if(this.dir == 45){//SE or SE
 			this.y -= Move.dis;
 			this.x -= Move.dis;
@@ -54,9 +57,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		} else if (this.dir >= 315){//NE or NE
 			this.y += Move.dis;
 			this.x -= Move.dis;
-			if(this.dir >= 315){
-				this.dir = 0;
-			};
 		};
 	};
 	this.fire = function(Fire){//make thing shoot thing
