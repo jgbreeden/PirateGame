@@ -113,4 +113,7 @@ $(function () {
 	socket.on("playerKilled", function(ev) {
 		
 	});
+	socket.on("startGame", function(ev){
+		serverStart();
+	});
 });
