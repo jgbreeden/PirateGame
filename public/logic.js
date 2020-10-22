@@ -79,7 +79,8 @@ function gameUpdate(){
 //asdfghjk
 function serverStart(){
 	game.start();
-	$('#userlist').hide;
+	$('#userlist').hide();
+	$("#GameArea").show();
 	//for loop ships 
 	for (i = users; i < users; i++){
 			//this copy is only to race to not have to merge
