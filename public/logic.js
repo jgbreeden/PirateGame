@@ -1,6 +1,6 @@
 var socket = io();
 var users = [];
-var stuff = [];
+var ships = [];
 var me;
 let radlen = 100;
 let	maxwidth = 800;
