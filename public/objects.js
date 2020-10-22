@@ -14,13 +14,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		for( i = 0; i < 10; i++){
 			var x = Math.sin(rot) * len;
 			var y = Math.cos(rot) * len;
-			ctx.strokeStyle = "rgba(50, 205, 50," + trans + ")";
-			ctx.beginPath();
-			ctx.moveTo(100, 100);
+			game.context.strokeStyle = "rgba(50, 205, 50," + trans + ")";
+			game.context.beginPath();
+			game.context.moveTo(100, 100);
 			var linex = 100 + x;
 			var liney = 100 + y;
-			ctx.lineTo(linex, liney);
-			ctx.stroke();
+			game.context.lineTo(linex, liney);
+			game.context.stroke();
 			rot -= 0.05;
 			trans -= 0.2;
 		}
@@ -31,8 +31,11 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.move = function(Move) {
 		this.dir += Move.dir;
-		if(this.dir == 0){//Right or E
+		if(this.dir <= 0){//Right or E
 			this.x += Move.dis;//Make move thing up/down/left/right
+			if(this.dir <= 0){
+				this.dir = 315;
+			};
 		} else if(this.dir == 45){//SE or SE
 			this.y -= Move.dis;
 			this.x -= Move.dis;
@@ -48,9 +51,12 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.x += Move.dis;
 		} else if (this.dir == 270){//N or UP
 			this.y += Move.dis;
-		} else if (this.dir == 315){//NE or NE
+		} else if (this.dir >= 315){//NE or NE
 			this.y += Move.dis;
 			this.x -= Move.dis;
+			if(this.dir >= 315){
+				this.dir = 0;
+			};
 		};
 	};
 	this.fire = function(Fire){//make thing shoot thing
