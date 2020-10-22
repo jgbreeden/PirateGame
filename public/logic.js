@@ -76,7 +76,7 @@ function gameUpdate(){
 	//loop through shipp arrays
 		//move based on new x,y coords
 }
-
+//asdfghjk
 function serverStart(){
 	game.start();
 	$('#userlist').hide;
