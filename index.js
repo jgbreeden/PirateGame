@@ -28,7 +28,7 @@ io.on('connection', function(socket){
 
 	socket.on('startGame', function (){
 		//when game first starts
-		io.emit('big-announcement', 'the game will start soon');
+		io.emit('startGame', '');
 	});
 	socket.on('midGame', function (){
 		//when the 3rd bounty is collected, and special event starts
