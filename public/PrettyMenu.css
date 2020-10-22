@@ -31,3 +31,11 @@ button:hover {
 	border: 100px;
 }
 
+#lobby {
+	display: none;
+}
+
+#GameArea {
+	display: none;
+}
+
