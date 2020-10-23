@@ -79,8 +79,12 @@ function gameUpdate(){
 //asdfghjk
 function serverStart(){
 	game.start();
-	$('#userlist').hide;
-	//create ships
+	$('#userlist').hide();
+	$("#GameArea").show();
+	//for loop ships 
+	for (i = users; i < users; i++){
+			//this copy is only to race to not have to merge
+	}
 	var update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 270, 0);
 }
@@ -94,8 +98,8 @@ $(function () {
 		e.preventDefault();
 		socket.emit("new user", $('#uname').val(),function(data){
 		//gameStart();
-			$('#loginArea').hide;
-			$('#GameArea').show;
+			$('#LoginArea').hide();
+			$('#lobby').show();
 		});
 	});
 	socket.on("playerJoined", function(ev) {
