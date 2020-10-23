@@ -98,7 +98,7 @@ $(function () {
 		e.preventDefault();
 		socket.emit("new user", $('#uname').val(),function(data){
 		//gameStart();
-			$('#loginArea').hide();
+			$('#LoginArea').hide();
 			$('#lobby').show();
 		});
 	});
