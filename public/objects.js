@@ -8,7 +8,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
-		game.context.drawImage(this.img, this.x, this.y)
+		game.context.rotate(this.dir * Math.PI/180);
+		game.context.drawImage(this.img, this.x, this.y);
 		var len = 90;
 		var trans = 1;
 		for( i = 0; i < 10; i++){
@@ -16,9 +17,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			var y = Math.cos(this.rot) * len;
 			game.context.strokeStyle = "rgba(50, 205, 50," + trans + ")";
 			game.context.beginPath();
-			game.context.moveTo(100, 100);
-			var linex = 100 + x;
-			var liney = 100 + y;
+			game.context.moveTo(this.x, this.y);
+			var linex = this.x + x;
+			var liney = this.y + y;
 			game.context.lineTo(linex, liney);
 			game.context.stroke();
 			this.rot -= 0.05;
