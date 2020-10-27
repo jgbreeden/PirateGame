@@ -1,6 +1,7 @@
 var socket = io();
 var users = [];
 var ships = [];
+var update;
 var me;
 let radlen = 100;
 let	maxwidth = 800;
@@ -8,7 +9,6 @@ let maxheight = 600;
 var Surface = document.getElementById("GameArea");
 var login = document.getElementById("LoginArea");
 var modal = document.getElementById('idea');
-var update;
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
 
@@ -41,13 +41,13 @@ var game = {
 
 function handleKey(code){
 	if (code == "KeyW") {//move forward
-		var dis = -10;
+		var dis = 10;
 		var movement = new Move(0, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if (code == "KeyS"){//move backwards
-		var dis = 10;
+		var dis = -10;
 		var movement = new Move(0, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
@@ -73,18 +73,12 @@ function gameUpdate(){
 	game.draw();
 	me.draw();
 
-
-	//loop through shipp arrays
-		//move based on new x,y coords
 }
-//asdfghjk
 function serverStart(){
 	game.start();
 	$('#userlist').hide();
 	$("#GameArea").show();
-	//for loop ships 
-	for (i = users; i < users; i++){
-			//this copy is only to race to not have to merge
+	for (i = 0; i < users.length; i++){
 			ships[i] = new PlayerShip(400, 300, 270, 0);
 		}
 	update = setInterval(gameUpdate, 20);
