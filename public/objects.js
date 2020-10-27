@@ -8,9 +8,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
-		game.context.rotate(this.dir * Math.PI/180);
+		game.context.rotate(+this.dir * Math.PI/180);
 		game.context.drawImage(this.img, this.x, this.y);
-		game.context.rotate(this.dir * Math.PI/-180);
+		game.context.rotate(-this.dir * Math.PI/180);
 		var len = 90;
 		var trans = 1;
 		for( i = 0; i < 10; i++){
@@ -45,18 +45,18 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.y -= Move.dis;
 			this.x -= Move.dis;
 		} else if (this.dir == 90){//S our Down
-			this.y -= Move.dis;
+			this.y += Move.dis;
 		} else if (this.dir == 135){//SW or SW
-			this.y -= Move.dis;
-			this.x += Move.dis;
+			this.y += Move.dis;
+			this.x -= Move.dis;
 		} else if (this.dir == 180){//W or left
 			this.x -= Move.dis;
 		} else if (this.dir == 225){// NW or NW
 			this.y += Move.dis;
 			this.x += Move.dis;
 		} else if (this.dir == 270){//N or UP
-			this.y += Move.dis;
-		} else if (this.dir >= 315){//NE or NE
+			this.y -= Move.dis;
+		} else if (this.dir == 315){//NE or NE
 			this.y += Move.dis;
 			this.x -= Move.dis;
 		};
