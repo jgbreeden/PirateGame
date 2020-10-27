@@ -83,6 +83,11 @@ function serverStart(){
 		}
 	update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 270, 0);
+	playerPos();
+}
+
+function playerPos(){
+	socket.emit("startPosition", startPosition);
 }
 
 function gameStart(){
@@ -99,7 +104,7 @@ $(function () {
 		});
 	});
 	socket.on("startPosition", function(ev) {
-		
+
 	});
 	socket.on("shipFire", function(ev) {
 		
