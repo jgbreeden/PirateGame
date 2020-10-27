@@ -98,8 +98,8 @@ $(function () {
 			$('#lobby').show();
 		});
 	});
-	socket.on("playerJoined", function(ev) {
-
+	socket.on("startPosition", function(ev) {
+		
 	});
 	socket.on("shipFire", function(ev) {
 		

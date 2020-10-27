@@ -21,6 +21,12 @@ function TreasureCollection(x, y, a){//determines where treasure chest how big t
 	this.a = a;
 }
 
+function startPosition(user, x, y){
+	this.user = user;
+	this.x = x;
+	this.y = y;
+}
+
 function CheckBounds(PlayerShip){//if needed, my idea was to have several maps rather than a big one, but thats up to the group, but this is so the players x and y goes back to ther opposite side(credit to the asteroids game)
 	if (PlayerShip.x <= 20){
 		PlayerShip.dir = 0;
@@ -38,5 +44,4 @@ function CheckBounds(PlayerShip){//if needed, my idea was to have several maps r
 		PlayerShip.dir = 270;
 		PlayerShip.y = 570;
 	}
-	
 };
