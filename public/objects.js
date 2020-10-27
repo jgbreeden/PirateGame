@@ -43,7 +43,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.x += Move.dis;//Make move thing up/down/left/right
 		} else if(this.dir == 45){//SE or SE
 			this.y -= Move.dis;
-			this.x -= Move.dis;
+			this.x += Move.dis;
 		} else if (this.dir == 90){//S our Down
 			this.y += Move.dis;
 		} else if (this.dir == 135){//SW or SW
@@ -57,8 +57,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		} else if (this.dir == 270){//N or UP
 			this.y -= Move.dis;
 		} else if (this.dir == 315){//NE or NE
-			this.y += Move.dis;
-			this.x -= Move.dis;
+			this.y -= Move.dis;
+			this.x += Move.dis;
 		};
 	};
 	this.fire = function(Fire){//make thing shoot thing
