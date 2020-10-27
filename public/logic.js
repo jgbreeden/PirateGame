@@ -8,7 +8,7 @@ let maxheight = 600;
 var Surface = document.getElementById("GameArea");
 var login = document.getElementById("LoginArea");
 var modal = document.getElementById('idea');
-var update 
+var update;
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
 
@@ -85,7 +85,8 @@ function serverStart(){
 	//for loop ships 
 	for (i = users; i < users; i++){
 			//this copy is only to race to not have to merge
-	}
+			ships[i] = new PlayerShip(400, 300, 270, 0);
+		}
 	update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 270, 0);
 }
