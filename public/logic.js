@@ -79,8 +79,7 @@ function serverStart(){
 	$('#userlist').hide();
 	$("#GameArea").show();
 	for (i = 0; i < users.length; i++){
-			ships[i] = new Play
-			erShip(400, 300, 270, 0);
+			ships[i] = new PlayerShip(400, 300, 270, 0);
 		}
 	update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 270, 0);
@@ -90,7 +89,7 @@ function serverStart(){
 function playerPos(){
 	var name = document.getElementById("uname").value
 	var pos = new startPosition(name, me.x, me.y );
-	socket.emit("startPosition", startPosition);
+	socket.emit("startPosition", pos);
 }
 
 function gameStart(){
