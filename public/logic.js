@@ -105,8 +105,13 @@ $(function () {
 			$('#lobby').show();
 		});
 	});
-	socket.on("startPosition", function(ev) {
-
+	socket.on("startPosition", function(pos) {
+		for (i = 0; i < users.length; i++){
+			if (users[i] == pos.name){
+				ship[i].x = pos.x;
+				ship[i].y = pos.y;
+			}
+		}
 	});
 	socket.on("shipFire", function(ev) {
 		

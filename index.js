@@ -43,6 +43,9 @@ io.on('connection', function(socket){
 		//when a player places bounty into home base, storing data for amout of points
 		io.emit('score board', {user: socket.user, score: score});
 	});
+	socket.on('playerChat', function (playerFire){
+		socket.broadcast.emit('playerFired', playerFire)
+	});	
 	socket.on('playerKill', function (){
 		//when a player is killed by a player or obstacle
 		socket.broadcast.emit('playerKilled', playerKilled);
@@ -51,9 +54,9 @@ io.on('connection', function(socket){
 		//player game chat if we have one
 		io.emit('chat message', {user: socket.user, message: msg});
 	});	
-	socket.on('startPosition', function (){
+	socket.on('startPosition', function (pos){
 		//when players join a lobby
-		socket.broadcast.emit('startPosition', '');
+		socket.broadcast.emit('startPosition', pos);
 	});	
 	socket.on('playerStart', function (ship){
 		//when players set name and ship
