@@ -1,3 +1,4 @@
+var PORT = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -50,13 +51,9 @@ io.on('connection', function(socket){
 		//player game chat if we have one
 		io.emit('chat message', {user: socket.user, message: msg});
 	});	
-	socket.on('playerJoined', function (){
+	socket.on('startPosition', function (){
 		//when players join a lobby
-		socket.join('some room');
-	});	
-	socket.on('playerLeft', function (){
-		//when players join a lobby
-		socket.leave('some room');
+		socket.broadcast.emit('startPosition', '');
 	});	
 	socket.on('playerStart', function (ship){
 		//when players set name and ship
@@ -86,6 +83,6 @@ io.on('connection', function(socket){
 // };
 
 
-http.listen(3000, () => {
+http.listen(PORT, () => {
   console.log('listening on *:3000');
 });
