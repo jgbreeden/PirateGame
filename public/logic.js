@@ -1,6 +1,7 @@
 var socket = io();
 var users = [];
 var ships = [];
+var bullets = [];
 var update;
 var me;
 let radlen = 100;
@@ -66,6 +67,10 @@ function handleKey(code){
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
+	if(code == "KeySpace"){//fire
+		//var shoot = new 
+		//socket.emit("shipFire", shoot);
+	}
 }
 
 function gameUpdate(){
@@ -82,7 +87,7 @@ function serverStart(){
 			ships[i] = new PlayerShip(400, 300, 270, 0);
 		}
 	update = setInterval(gameUpdate, 20);
-	me = new PlayerShip(400, 300, 270, 0);
+	me = new PlayerShip(400, 300, 170, 0);
 	playerPos();
 }
 
