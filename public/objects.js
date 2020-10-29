@@ -74,7 +74,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 };
 	
 
-function Bullet(x, dir, y){
+function Bullet(x, y, dir){
 	this.x = x;
 	this.y = y;
 	this.dir = dir;
