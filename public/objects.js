@@ -8,10 +8,11 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
-		game.context.moveTo(this.x, this.y);
+		game.context.translate(this.x, this.y);
 		game.context.rotate(+this.dir * Math.PI/180);
-		game.context.drawImage(this.img, this.x, this.y);
+		game.context.drawImage(this.img, 0, 0);
 		game.context.rotate(-this.dir * Math.PI/180);
+		game.context.translate(-this.x, -this.y);
 		var len = 90;
 		var trans = 1;
 		for( i = 0; i < 10; i++){
@@ -60,16 +61,26 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		} else if (this.dir == 315){//NE or NE
 			this.y -= Move.dis;
 			this.x += Move.dis;
+			
+
 		};
+		CheckBounds(PlayerShip)
 	};
 	this.fire = function(Fire){//make thing shoot thing
-
+		//Create Projectile
+		//Emit Message
 
 	};
 };
 	
 
-
+function Bullet(x, y, dir){
+	this.x = x;
+	this.y = y;
+	this.dir = dir;
+	this.startx = x;
+	this.starty = y;
+}
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
 	this.y = y;

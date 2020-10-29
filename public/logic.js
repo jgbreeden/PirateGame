@@ -1,6 +1,7 @@
 var socket = io();
 var users = [];
 var ships = [];
+var bullets = [];
 var update;
 var me;
 let radlen = 100;
@@ -66,6 +67,10 @@ function handleKey(code){
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
+	if(code == "Space"){//fire
+		var shoot = new Bullet(me.x, me.y, me.dir);
+		socket.emit("shipFire", shoot);
+	}
 }
 
 function gameUpdate(){
@@ -79,18 +84,17 @@ function serverStart(){
 	$('#userlist').hide();
 	$("#GameArea").show();
 	for (i = 0; i < users.length; i++){
-			ships[i] = new Play
-			erShip(400, 300, 270, 0);
+			ships[i] = new PlayerShip(400, 300, 270, 0);
 		}
 	update = setInterval(gameUpdate, 20);
-	me = new PlayerShip(400, 300, 270, 0);
+	me = new PlayerShip(400, 300, 180, 0);
 	playerPos();
 }
 
 function playerPos(){
 	var name = document.getElementById("uname").value
 	var pos = new startPosition(name, me.x, me.y );
-	socket.emit("startPosition", startPosition);
+	socket.emit("startPosition", pos);
 }
 
 function gameStart(){
@@ -106,8 +110,14 @@ $(function () {
 			$('#lobby').show();
 		});
 	});
-	socket.on("startPosition", function(ev) {
-
+	socket.on("startPosition", function(pos) {
+		for (i = 0; i < users.length; i++){
+			if (users[i] == pos.name){
+				ship[i].x = pos.x;
+				ship[i].y = pos.y;
+				break;
+			}
+		}
 	});
 	socket.on("shipFire", function(ev) {
 		
