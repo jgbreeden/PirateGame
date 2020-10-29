@@ -76,8 +76,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 function Bullet(x, y){
 	this.x = x;
 	this.y = y;
-	this.start.x
-	this.start.y
+	this.start.x = x;
+	this.start.y = y;
 }
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
