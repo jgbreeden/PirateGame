@@ -64,7 +64,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			
 
 		};
-		//CheckBounds(PlayerShip)
+		CheckBounds(PlayerShip)
 	};
 	this.fire = function(Fire){//make thing shoot thing
 		//Create Projectile
