@@ -61,9 +61,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		} else if (this.dir == 315){//NE or NE
 			this.y -= Move.dis;
 			this.x += Move.dis;
-			//CheckBounds(PlayerShip)
+			
 
 		};
+		//CheckBounds(PlayerShip)
 	};
 	this.fire = function(Fire){//make thing shoot thing
 		//Create Projectile
@@ -76,8 +77,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 function Bullet(x, y){
 	this.x = x;
 	this.y = y;
-	this.start.x = x;
-	this.start.y = y;
+	this.dir = dir;
+	this.startx = x;
+	this.starty = y;
 }
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
