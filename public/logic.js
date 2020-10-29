@@ -115,6 +115,7 @@ $(function () {
 			if (users[i] == pos.name){
 				ship[i].x = pos.x;
 				ship[i].y = pos.y;
+				break;
 			}
 		}
 	});

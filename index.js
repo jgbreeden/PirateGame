@@ -43,8 +43,8 @@ io.on('connection', function(socket){
 		//when a player places bounty into home base, storing data for amout of points
 		io.emit('score board', {user: socket.user, score: score});
 	});
-	socket.on('playerChat', function (playerFire){
-		socket.broadcast.emit('playerFired', playerFire)
+	socket.on('shipFire', function (shipFire){
+		socket.broadcast.emit('shipFire', shipFire)
 	});	
 	socket.on('playerKill', function (){
 		//when a player is killed by a player or obstacle
