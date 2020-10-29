@@ -67,9 +67,9 @@ function handleKey(code){
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
-	if(code == "KeySpace"){//fire
-		//var shoot = new 
-		//socket.emit("shipFire", shoot);
+	if(code == "Space"){//fire
+		var shoot = new Bullet(me.x, me.y, me.dir);
+		socket.emit("shipFire", shoot);
 	}
 }
 
@@ -87,7 +87,7 @@ function serverStart(){
 			ships[i] = new PlayerShip(400, 300, 270, 0);
 		}
 	update = setInterval(gameUpdate, 20);
-	me = new PlayerShip(400, 300, 170, 0);
+	me = new PlayerShip(400, 300, 180, 0);
 	playerPos();
 }
 
