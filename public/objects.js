@@ -22,9 +22,27 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			game.context.beginPath();
 			game.context.moveTo(this.x, this.y);
 			var linex = this.x + x;
-			var liney = this.y + y;
+			var liney = this.y + y;	
 			game.context.lineTo(linex, liney);
 			game.context.stroke();
+			for (j = 0; j < ships.length; j++) {
+				var deltax = ships[j].x - this.x;
+				var deltay = ships[j].y - this.y;
+				var rad = Math.atan2(deltex, deltay);
+				if (rad < 0){
+					rad = Math.PI * 2 + rad;
+				}
+				if (trans == 1 && j == 2) {
+					
+				} 
+				if (rad > rot - 0.2 && rad < rot + 0.2
+					&& len * len >= deltex * deltax + deltay * deltay)
+					 game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
+					 game.context.fillRect(ships[t].x, ships[t].y, 10, 10);
+
+				
+
+			}
 			this.rot -= 0.05;
 			trans -= 0.2;
 		}
