@@ -41,24 +41,24 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		if(this.dir > 315){
 			this.dir = 0;
 		};
-		if(this.dir == 0){//Right or E
+		if(this.dir == 90){//Right or E
 			this.x += Move.dis;//Make move thing up/down/left/right
-		} else if(this.dir == 45){//SE or SE
+		} else if(this.dir == 135){//SE or SE
 			this.y += Move.dis;
 			this.x += Move.dis;
-		} else if (this.dir == 90){//S our Down
+		} else if (this.dir == 180){//S our Down
 			this.y += Move.dis;
-		} else if (this.dir == 135){//SW or SW
+		} else if (this.dir == 225){//SW or SW
 			this.y += Move.dis;
 			this.x -= Move.dis;
-		} else if (this.dir == 180){//W or left
+		} else if (this.dir == 270){//W or left
 			this.x -= Move.dis;
-		} else if (this.dir == 225){// NW or NW
+		} else if (this.dir == 315){// NW or NW
 			this.y -= Move.dis;
 			this.x -= Move.dis;
-		} else if (this.dir == 270){//N or UP
+		} else if (this.dir == 0){//N or UP
 			this.y -= Move.dis;
-		} else if (this.dir == 315){//NE or NE
+		} else if (this.dir == 45){//NE or NE
 			this.y -= Move.dis;
 			this.x += Move.dis;
 			

@@ -81,7 +81,7 @@ function gameUpdate(){
 }
 function serverStart(){
 	game.start();
-	$('#userlist').hide();
+	$('#lobby').hide();
 	$("#GameArea").show();
 	for (i = 0; i < users.length; i++){
 			ships[i] = new PlayerShip(400, 300, 270, 0);
@@ -89,6 +89,7 @@ function serverStart(){
 	update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(400, 300, 180, 0);
 	playerPos();
+	console.log("start");
 }
 
 function playerPos(){
