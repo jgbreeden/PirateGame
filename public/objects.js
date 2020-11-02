@@ -28,7 +28,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			for (j = 0; j < ships.length; j++) {
 				var deltax = ships[j].x - this.x;
 				var deltay = ships[j].y - this.y;
-				var rad = Math.atan2(deltex, deltay);
+				var rad = Math.atan2(deltax, deltay);
 				if (rad < 0){
 					rad = Math.PI * 2 + rad;
 				}
