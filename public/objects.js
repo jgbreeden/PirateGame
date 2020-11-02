@@ -25,23 +25,18 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			var liney = this.y + y;	
 			game.context.lineTo(linex, liney);
 			game.context.stroke();
-			for (j = 0; j < ships.length; j++) {
+			for (j = 0; j < users.length; j++) {
 				var deltax = ships[j].x - this.x;
 				var deltay = ships[j].y - this.y;
 				var rad = Math.atan2(deltax, deltay);
 				if (rad < 0){
 					rad = Math.PI * 2 + rad;
 				}
-				if (trans == 1 && j == 2) {
-					
-				} 
-				if (rad > rot - 0.2 && rad < rot + 0.2
-					&& len * len >= deltex * deltax + deltay * deltay)
+				if (rad > this.rot - 0.2 && rad < this.rot + 0.2
+					&& len * len >= deltex * deltax + deltay * deltay){
 					 game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
-					 game.context.fillRect(ships[t].x, ships[t].y, 10, 10);
-
-				
-
+					 game.context.fillRect(ships[j].x, ships[j].y, 10, 10);
+					}
 			}
 			this.rot -= 0.05;
 			trans -= 0.2;
@@ -90,8 +85,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 
 	};
 };
-	
 
+
+function User(x, y,){
+	this.x = x;
+	this.y = y;
+
+}
 function Bullet(x, y, dir){
 	this.x = x;
 	this.y = y;
