@@ -67,7 +67,8 @@ function handleKey(code){
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
-	if(code == "Space"){//fire
+	if(code == "KeyU"){//fire
+		console.log("Kill")
 		var shoot = new Bullet(me.x, me.y, me.dir);
 		socket.emit("shipFire", shoot);
 	}
@@ -120,7 +121,7 @@ $(function () {
 		}
 	});
 	socket.on("shipFire", function(ev) {
-		
+		console.log("Other Ship Fire")
 	});
 	socket.on("user list", function(list) {
 		$('#userList').text('');
