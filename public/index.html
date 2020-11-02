@@ -6,8 +6,12 @@
 </head>
 <body>
 
+
+
+<div class="text-block">
+<div style="background-image: url('imgs/Pixel.png');">
 <h2>Login Form</h2>
-<button onclick="document.getElementById('idea').style.display='block'" style="width:auto;">Login</button>
+<button onclick="document.getElementById('idea').style.display='block'" style="width:50%;">Login</button>
 
 <div id="idea" class="modal">
   
@@ -19,7 +23,7 @@
 </div>
 
 
- <div id="LoginArea">
+<div id="LoginArea">
  <form id="loginForm">
 	<label for="ships"> CHOOSE YOUR SHIP:</label>
  
@@ -28,6 +32,7 @@
 		<option value="shiptype2">Schooners</option>
 		<option value="shiptype3">Dutch Fleut</option>
 	</select>
+	
       <label for="uname"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" Id="uname" required>
 
@@ -40,6 +45,9 @@
       </label>
 </form>
 </div>
+</div>
+
+
 
 <div id="lobby">
 <ul id="userList"></ul>

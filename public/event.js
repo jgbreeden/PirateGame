@@ -28,19 +28,19 @@ function startPosition(user, x, y){
 }
 
 function CheckBounds(PlayerShip){//if needed, my idea was to have several maps rather than a big one, but thats up to the group, but this is so the players x and y goes back to ther opposite side(credit to the asteroids game)
-	if (PlayerShip.x <= 20){
+	if (PlayerShip.x <= map.mix){
 		PlayerShip.dir = 0;
 		PlayerShip.x = 30;
 	}
-	else if (PlayerShip.x >= 780){
+	else if (PlayerShip.x >= map.maxx){
 		PlayerShip.dir = 180;
 		PlayerShip.x = 770;
 	}
-	else if(PlayerShip.y <= 20){
+	else if(PlayerShip.y <= map.miny){
 		PlayerShip.dir = 90;
 		PlayerShip.y = 30;
-	}
-	else if(PlayerShip.y >= 580){
+	}  
+	else if(PlayerShip.y >= map.maxy){
 		PlayerShip.dir = 270;
 		PlayerShip.y = 570;
 	}

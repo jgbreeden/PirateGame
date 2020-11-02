@@ -22,9 +22,27 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			game.context.beginPath();
 			game.context.moveTo(this.x, this.y);
 			var linex = this.x + x;
-			var liney = this.y + y;
+			var liney = this.y + y;	
 			game.context.lineTo(linex, liney);
 			game.context.stroke();
+			for (j = 0; j < ships.length; j++) {
+				var deltax = ships[j].x - this.x;
+				var deltay = ships[j].y - this.y;
+				var rad = Math.atan2(deltax, deltay);
+				if (rad < 0){
+					rad = Math.PI * 2 + rad;
+				}
+				if (trans == 1 && j == 2) {
+					
+				} 
+				if (rad > rot - 0.2 && rad < rot + 0.2
+					&& len * len >= deltex * deltax + deltay * deltay)
+					 game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
+					 game.context.fillRect(ships[t].x, ships[t].y, 10, 10);
+
+				
+
+			}
 			this.rot -= 0.05;
 			trans -= 0.2;
 		}
@@ -41,24 +59,24 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		if(this.dir > 315){
 			this.dir = 0;
 		};
-		if(this.dir == 0){//Right or E
+		if(this.dir == 90){//Right or E
 			this.x += Move.dis;//Make move thing up/down/left/right
-		} else if(this.dir == 45){//SE or SE
+		} else if(this.dir == 135){//SE or SE
 			this.y += Move.dis;
 			this.x += Move.dis;
-		} else if (this.dir == 90){//S our Down
+		} else if (this.dir == 180){//S our Down
 			this.y += Move.dis;
-		} else if (this.dir == 135){//SW or SW
+		} else if (this.dir == 225){//SW or SW
 			this.y += Move.dis;
 			this.x -= Move.dis;
-		} else if (this.dir == 180){//W or left
+		} else if (this.dir == 270){//W or left
 			this.x -= Move.dis;
-		} else if (this.dir == 225){// NW or NW
+		} else if (this.dir == 315){// NW or NW
 			this.y -= Move.dis;
 			this.x -= Move.dis;
-		} else if (this.dir == 270){//N or UP
+		} else if (this.dir == 0){//N or UP
 			this.y -= Move.dis;
-		} else if (this.dir == 315){//NE or NE
+		} else if (this.dir == 45){//NE or NE
 			this.y -= Move.dis;
 			this.x += Move.dis;
 			

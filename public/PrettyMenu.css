@@ -39,3 +39,21 @@ button:hover {
 	display: none;
 }
 
+.image1 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+
+.text-block {
+	font-size: 25px;
+	position: absolute;
+	top: 200px;
+	right: 120px;
+	background-color: black;
+	color: white;
+	padding-left: 20px;
+	padding-right: 20px;
+}

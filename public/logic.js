@@ -4,6 +4,7 @@ var ships = [];
 var bullets = [];
 var update;
 var me;
+var myname;
 let radlen = 100;
 let	maxwidth = 800;
 let maxheight = 600;
@@ -38,6 +39,28 @@ var game = {
 	clear : function() {
 		this.context.clearRect(0, 0, maxwidth, maxheight);
 	}
+}
+var map = {
+	minx: 20,
+	maxx: 30,
+	miny: 20,
+	maxy: 600,
+	islands: [
+		{
+			name: "",
+			north: 140,
+			south: 160,
+			east: 160,
+			west: 140
+		},
+		{
+			name: "",
+			north: 130,
+			south: 150,
+			east: 660,
+			west: 630
+		}
+	]
 }
 
 function handleKey(code){
@@ -81,20 +104,27 @@ function gameUpdate(){
 
 }
 function serverStart(){
+	var x = 400;
+	var y = 300;
 	game.start();
-	$('#userlist').hide();
+	$('#lobby').hide();
 	$("#GameArea").show();
 	for (i = 0; i < users.length; i++){
-			ships[i] = new PlayerShip(400, 300, 270, 0);
+		if (users[i] == myname) {
+			x = map.islands[i].west;
+			y = map.islands[i].south;
+		} else {
+			ships[i] = new PlayerShip(400, 300, 0, 0);
 		}
+	}
 	update = setInterval(gameUpdate, 20);
-	me = new PlayerShip(400, 300, 180, 0);
+	me = new PlayerShip(x, y, 0, 0);
 	playerPos();
+	console.log("start");
 }
 
 function playerPos(){
-	var name = document.getElementById("uname").value
-	var pos = new startPosition(name, me.x, me.y );
+	var pos = new startPosition(myname, me.x, me.y );
 	socket.emit("startPosition", pos);
 }
 
@@ -102,10 +132,17 @@ function gameStart(){
 	socket.emit("startGame");
 }
 
+function openHelp() {
+	$("#help").show();
+}
+function closeHelp() {
+	$("#help").hide();
+}
 $(function () {
 	$('#loginForm').submit(function(e) {
 		e.preventDefault();
-		socket.emit("new user", $('#uname').val(),function(data){
+		myname = $('#uname').val();
+		socket.emit("new user", myname, function(data){
 		//gameStart();
 			$('#LoginArea').hide();
 			$('#lobby').show();
@@ -127,6 +164,7 @@ $(function () {
 		$('#userList').text('');
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
+			users.push(list[i]);
 		}
 	});
 	socket.on("playerKilled", function(ev) {
