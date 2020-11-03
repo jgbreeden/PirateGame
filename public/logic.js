@@ -161,10 +161,11 @@ $(function () {
 	});
 	socket.on("user list", function(list) {
 		$('#userList').text('');
-		new users = [];
+		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			users.push(User(list[i]));
+			var players = new User(list[i])
+			users.push(players);
 		}
 	});
 	socket.on("playerKilled", function(ev) {
