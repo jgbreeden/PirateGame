@@ -161,6 +161,7 @@ $(function () {
 	});
 	socket.on("user list", function(list) {
 		$('#userList').text('');
+		new users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
 			users.push(User(list[i]));
