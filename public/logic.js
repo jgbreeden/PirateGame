@@ -1,6 +1,5 @@
 var socket = io();
 var users = [];
-var ships = [];
 var bullets = [];
 var update;
 var me;
@@ -114,7 +113,7 @@ function serverStart(){
 			x = map.islands[i].west;
 			y = map.islands[i].south;
 		} else {
-			ships[i] = new PlayerShip(400, 300, 0, 0);
+			users[i] = new PlayerShip(400, 300, 0, 0);
 		}
 	}
 	update = setInterval(gameUpdate, 20);
@@ -164,7 +163,7 @@ $(function () {
 		$('#userList').text('');
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			users.push(list[i]);
+			users.push(User(user[i]));
 		}
 	});
 	socket.on("playerKilled", function(ev) {
