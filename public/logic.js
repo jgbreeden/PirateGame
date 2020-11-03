@@ -41,7 +41,7 @@ var game = {
 }
 var map = {
 	minx: 20,
-	maxx: 30,
+	maxx: 780,
 	miny: 20,
 	maxy: 600,
 	islands: [
@@ -109,7 +109,7 @@ function serverStart(){
 	$('#lobby').hide();
 	$("#GameArea").show();
 	for (i = 0; i < users.length; i++){
-		if (users[i] == myname) {
+		if (users[i].username == myname) {
 			x = map.islands[i].west;
 			y = map.islands[i].south;
 		} else {
@@ -163,7 +163,7 @@ $(function () {
 		$('#userList').text('');
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			users.push(User(user[i]));
+			users.push(User(list[i]));
 		}
 	});
 	socket.on("playerKilled", function(ev) {
