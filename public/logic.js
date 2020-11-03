@@ -113,7 +113,7 @@ function serverStart(){
 			x = map.islands[i].west;
 			y = map.islands[i].south;
 		} else {
-			users[i] = new PlayerShip(400, 300, 0, 0);
+			users[i].username = new PlayerShip(400, 300, 0, 0);
 		}
 	}
 	update = setInterval(gameUpdate, 20);
