@@ -13,42 +13,44 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		game.context.drawImage(this.img, 0, 0);
 		game.context.rotate(-this.dir * Math.PI/180);
 		game.context.translate(-this.x, -this.y);
-		this.radar
-		var len = 90;
-		var trans = 1;
+		this.radar()
+		
 		
 		
 	};
-	this. = function () {
-	for( i = 0; i < 10; i++){
-		var x = Math.sin(this.rot) * len;
-		var y = Math.cos(this.rot) * len;
-		game.context.strokeStyle = "rgba(50, 205, 50," + trans + ")";
-		game.context.beginPath();
-		game.context.moveTo(this.x, this.y);
-		var linex = this.x + x;
-		var liney = this.y + y;	
-		game.context.lineTo(linex, liney);
-		game.context.stroke();
-		for (j = 0; j < users.length; j++) {
-			var deltax = users[j] - this.x;
-			var deltay = users[j] - this.y;
-			var rad = Math.atan2(deltax, deltay);
-			if (rad < 0){
-				rad = Math.PI * 2 + rad;
-			}
-			if (rad > this.rot - 0.2 && rad < this.rot + 0.2
-				&& len * len >= deltex * deltax + deltay * deltay){
-				 game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
-				 game.context.fillRect(ships[j].x, ships[j].y, 10, 10);
+	this.radar = function () {
+		var len = 90;
+		var trans = 1;
+		for( i = 0; i < 10; i++){
+			var x = Math.sin(this.rot) * len;
+			var y = Math.cos(this.rot) * len;
+			game.context.strokeStyle = "rgba(50, 205, 50," + trans + ")";
+			game.context.beginPath();
+			game.context.moveTo(this.x, this.y);
+			var linex = this.x + x;
+			var liney = this.y + y;	
+			game.context.lineTo(linex, liney);
+			game.context.stroke();
+			for (j = 0; j < users.length; j++) {
+				var deltax = users[j] - this.x;
+				var deltay = users[j] - this.y;
+				var rad = Math.atan2(deltax, deltay);
+				if (rad < 0){
+					rad = Math.PI * 2 + rad;
 				}
-		}
-		this.rot -= 0.05;
-		trans -= 0.2;
+				if (rad > this.rot - 0.2 && rad < this.rot + 0.2
+					&& len * len >= deltex * deltax + deltay * deltay){
+					game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
+					game.context.fillRect(ships[j].x, ships[j].y, 10, 10);
+					}
+			}
+			this.rot -= 0.05;
+			trans -= 0.2;
 
-		this.rot += .55;
-		if(this.rot > Math.PI * 2) {
-			this.rot = 0;
+			this.rot += .55;
+			if(this.rot > Math.PI * 2) {
+				this.rot = 0;
+			}
 		}
 	}
 	this.move = function(Move) {
