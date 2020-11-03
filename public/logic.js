@@ -164,7 +164,7 @@ $(function () {
 		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			var players = new User(list[i])
+			var players = new User(list[i]);
 			users.push(players);
 		}
 	});
