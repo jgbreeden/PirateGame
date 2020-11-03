@@ -88,7 +88,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 
 
 function User(username){
-	this.ship;
+	this.ship = {};
 	this.username = username;
 
 }
