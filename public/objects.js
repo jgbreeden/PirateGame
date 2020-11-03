@@ -13,10 +13,14 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		game.context.drawImage(this.img, 0, 0);
 		game.context.rotate(-this.dir * Math.PI/180);
 		game.context.translate(-this.x, -this.y);
-		this.radar()
+		this.radar()            	
 		
-		
-		
+ //after the For statment 
+ //insert a new line with a if statment
+ // it should look like if (users[username] == myname)
+ // if not equal
+
+
 	};
 	this.radar = function () {
 		var len = 90;
@@ -32,16 +36,17 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			game.context.lineTo(linex, liney);
 			game.context.stroke();
 			for (j = 0; j < users.length; j++) {
-				var deltax = users[j] - this.x;
-				var deltay = users[j] - this.y;
-				var rad = Math.atan2(deltax, deltay);
-				if (rad < 0){
-					rad = Math.PI * 2 + rad;
-				}
-				if (rad > this.rot - 0.2 && rad < this.rot + 0.2
-					&& len * len >= deltex * deltax + deltay * deltay){
-					game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
-					game.context.fillRect(ships[j].x, ships[j].y, 10, 10);
+				if (users[j].username != myname)
+					var deltax = users[j].ship.x - this.x;
+					var deltay = users[j].ship.y - this.y;
+					var rad = Math.atan2(deltax, deltay);
+					if (rad < 0){
+						rad = Math.PI * 2 + rad;
+					}
+					if (rad > this.rot - 0.2 && rad < this.rot + 0.2
+						&& len * len >= deltax * deltax + deltay * deltay){
+						game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
+						game.context.fillRect(users[j].ship.x, users[j].ship.y, 10, 10);
 					}
 			}
 			this.rot -= 0.05;
@@ -52,7 +57,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.rot = 0;
 			}
 		}
-	}
+	};
 	this.move = function(Move) {
 		this.dir += Move.dir;
 		if(this.dir < 0){
