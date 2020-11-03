@@ -4,14 +4,16 @@ function Move(dir, dis) {//what direction, how far a player moves
 }
 
 function Fire(speedx, speedy, dist){//how fast the missle travels and how far it can reach before it dies out
-
+	this.speedx = speedx;
+	this.speedy = speedy;
+	this.dist = dist;
 }
  
 function Collision(x, y, dam, playerSpeed, playerHealth, ){//determining where the missle hits so damage is multiplied, dam is set in relation to player choosen ship
 	this.x = x;
 	this.y = y;
 	this.dam = dam;
-	this.playerSpeed = PlayerSpeed;
+	this.playerSpeed = playerSpeed;
 	this.playerHealth = playerHealth;
  }
 
@@ -28,7 +30,7 @@ function startPosition(user, x, y){
 }
 
 function CheckBounds(PlayerShip){//if needed, my idea was to have several maps rather than a big one, but thats up to the group, but this is so the players x and y goes back to ther opposite side(credit to the asteroids game)
-	if (PlayerShip.x <= map.mix){
+	if (PlayerShip.x <= map.minx){
 		PlayerShip.dir = 0;
 		PlayerShip.x = 30;
 	}
