@@ -4,12 +4,11 @@ var app = express();
 var path = require('path');
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-//var mangoDB = require('mangoDB');
+//var mySQL = require('mySQL');
 var connections = [];
 var users = [];
 
 app.use(express.static(path.join(__dirname,'public')));
-//we can also specify a specific html file so we don't nessecarily need index, but it automatically gets the index.html or first html file it finds
 
 io.on('connection', function(socket){
 	connections.push(socket);
@@ -71,20 +70,6 @@ io.on('connection', function(socket){
 		//data carrying the information of the game obstacles
 	});
 });
-
-//logic for creating game rooms(for sonny's file)
-
-// function hostCreateNewGame() {
-    // Create a unique Socket.IO Room
-    // var thisGameId = ( Math.random() * 100000 ) | 0;
-
-    // Return the Room ID (gameId) and the socket ID (mySocketId) to the browser client
-    // this.emit('newGameCreated', {gameId: thisGameId, mySocketId: this.id});
-
-    // Join the Room and wait for the players
-    // this.join(thisGameId.toString());
-// };
-
 
 http.listen(PORT, () => {
   console.log('listening on *:3000');
