@@ -40,24 +40,45 @@ var game = {
 	}
 }
 var map = {
-	minx: 20,
-	maxx: 780,
-	miny: 20,
-	maxy: 600,
+	minx: 40,
+	maxx: 700,
+	miny: 70,
+	maxy: 580,
 	islands: [
 		{
 			name: "",
-			north: 140,
-			south: 160,
-			east: 160,
-			west: 140
+			north: 170,
+			south: 200,
+			east: 210,
+			west: 150
 		},
 		{
 			name: "",
-			north: 130,
-			south: 150,
-			east: 660,
-			west: 630
+			north: 110,
+			south: 190,
+			east: 600,
+			west: 530
+		},
+		{
+			name: "",
+			north: 230,
+			south: 190,
+			east: 320,
+			west: 290
+		},
+		{
+			name: "",
+			north: 350,
+			south: 420,
+			east: 600,
+			west: 530
+		}, 
+		{
+			name: "",
+			north: 420,
+			south: 490,
+			east: 280,
+			west: 200
 		}
 	]
 }
@@ -171,6 +192,10 @@ $(function () {
 	socket.on("playerKilled", function(ev) {
 		
 	});
+	socket.on("joinInProgress", function(ev) {
+		$("#").hide();
+		$("#").show();
+	});	
 	socket.on("startGame", function(ev){
 		serverStart();
 	});

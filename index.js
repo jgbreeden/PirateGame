@@ -7,6 +7,7 @@ var io = require('socket.io')(http);
 //var mySQL = require('mySQL');
 var connections = [];
 var users = [];
+var runtime = false;
 
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -17,7 +18,13 @@ io.on('connection', function(socket){
 		callback(null);
 		socket.user = user;
 		users.push(user);
-		io.emit("user list", users);
+		if(runtime == false){
+			io.emit("user list", users);
+			console.log("You just joined, and my code didn't work")
+		} else if(runtime == true){
+			socket.emit('joinInProgess', '');
+			console.log("you can't do that")
+		};
 	});
 	socket.on('disconnect', function(){
 		connections.splice(connections.indexOf(socket), 1);
@@ -29,6 +36,7 @@ io.on('connection', function(socket){
 	socket.on('startGame', function (){
 		//when game first starts
 		io.emit('startGame', '');
+		runtime = true;
 	});
 	socket.on('midGame', function (){
 		//when the 3rd bounty is collected, and special event starts
