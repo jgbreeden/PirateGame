@@ -100,7 +100,10 @@ function gameUpdate(){
 	game.clear();
 	game.draw();
 	me.draw();
-
+	for (i = 0; i < bullets.length; i++){
+		var shot = new Bullet();
+		bullets.push(shot);
+	};
 }
 function serverStart(){
 	var x = 400;
