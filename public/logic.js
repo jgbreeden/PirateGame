@@ -78,14 +78,14 @@ function handleKey(code){
 	if (code == "KeyD"){//turn right
 		var dir = 45;
 		var dis = 10;
-		var movement = new Move(dir, 0);
+		var movement = new Move(dir, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if(code == "KeyA"){//turn left
 		var dir = -45;
 		var dis = 10;
-		var movement = new Move(dir, 0);
+		var movement = new Move(dir, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
@@ -161,9 +161,11 @@ $(function () {
 	});
 	socket.on("user list", function(list) {
 		$('#userList').text('');
+		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			users.push(User(list[i]));
+			var players = new User(list[i]);
+			users.push(players);
 		}
 	});
 	socket.on("playerKilled", function(ev) {
