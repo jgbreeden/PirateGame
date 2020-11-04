@@ -17,9 +17,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		
  //after the For statment 
  //insert a new line with a if statment
- // it should look like if (users[username] == myname)
+ // it should look like if (users[j].username == myname)
  // if not equal
-
+//only draw radar "if this = me"
 
 	};
 	this.radar = function () {
@@ -51,12 +51,12 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			}
 			this.rot -= 0.05;
 			trans -= 0.2;
-
-			this.rot += .55;
-			if(this.rot > Math.PI * 2) {
-				this.rot = 0;
-			}
 		}
+	this.rot += .55;
+	if(this.rot > Math.PI * 2) {
+			this.rot = 0;
+		}
+		
 	};
 	this.move = function(Move) {
 		this.dir += Move.dir;
@@ -89,7 +89,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			
 
 		};
-		CheckBounds(PlayerShip)
+		CheckBounds(this);
 	};
 	this.fire = function(Fire){//make thing shoot thing
 		//Create Projectile
