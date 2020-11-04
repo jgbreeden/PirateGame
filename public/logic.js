@@ -78,14 +78,14 @@ function handleKey(code){
 	if (code == "KeyD"){//turn right
 		var dir = 45;
 		var dis = 10;
-		var movement = new Move(dir, 0);
+		var movement = new Move(dir, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if(code == "KeyA"){//turn left
 		var dir = -45;
 		var dis = 10;
-		var movement = new Move(dir, 0);
+		var movement = new Move(dir, dis);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
