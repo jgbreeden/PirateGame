@@ -137,7 +137,7 @@ function serverStart(){
 			x = map.islands[i].west;
 			y = map.islands[i].south;
 		} else {
-			users[i].username = new PlayerShip(400, 300, 0, 0);
+			users[i].ship = new PlayerShip(400, 300, 0, 0);
 		}
 	}
 	update = setInterval(gameUpdate, 20);
@@ -173,9 +173,9 @@ $(function () {
 	});
 	socket.on("startPosition", function(pos) {
 		for (i = 0; i < users.length; i++){
-			if (users[i] == pos.name){
-				ship[i].x = pos.x;
-				ship[i].y = pos.y;
+			if (users[i].username == pos.user){
+				users[i].ship.x = pos.x;
+				users[i].ship.y = pos.y;
 				break;
 			}
 		}
