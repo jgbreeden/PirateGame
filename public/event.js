@@ -1,6 +1,7 @@
-function Move(dir, dis) {//what direction, how far a player moves
+function Move(dir, dis, user) {//what direction, how far a player moves
 	this.dir = dir;
 	this.dis = dis;
+	this.user = user;
 }
 
 function Fire(speedx, speedy, dist){//how fast the missle travels and how far it can reach before it dies out

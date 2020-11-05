@@ -195,6 +195,14 @@ $(function () {
 	socket.on("playerKilled", function(ev) {
 		
 	});
+	socket.on('playerMove', function(movement) {
+		for(i = 0; i < users.length; i ++){
+			if(movement.user == users[i].username){
+				console.log('your code is working');
+				users[i].ship.move(movement);
+			}
+		};
+	});
 	socket.on("joinInProgress", function(ev) {
 		$("#").hide();
 		$("#").show();
