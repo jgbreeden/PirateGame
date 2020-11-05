@@ -91,7 +91,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 		CheckBounds(this);
 	};
-	this.fire = function(Fire){//make thing shoot thing
+	this.fire = function(){//make thing shoot thing
 		//Create Projectile
 		//Emit Message
 
@@ -110,6 +110,8 @@ function Bullet(x, y, dir){
 	this.dir = dir;
 	this.startx = x;
 	this.starty = y;
+	this.move = move ;
+	//move method 
 }
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
