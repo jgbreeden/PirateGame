@@ -86,27 +86,27 @@ var map = {
 function handleKey(code){
 	if (code == "KeyW") {//move forward
 		var dis = 10;
-		var movement = new Move(0, dis);
+		var movement = new Move(0, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if (code == "KeyS"){//move backwards
 		var dis = -10;
-		var movement = new Move(0, dis);
+		var movement = new Move(0, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if (code == "KeyD"){//turn right
 		var dir = 45;
 		var dis = 10;
-		var movement = new Move(dir, dis);
+		var movement = new Move(dir, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if(code == "KeyA"){//turn left
 		var dir = -45;
 		var dis = 10;
-		var movement = new Move(dir, dis);
+		var movement = new Move(dir, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
@@ -114,6 +114,7 @@ function handleKey(code){
 		console.log("Kill")
 		var shoot = new Bullet(me.x, me.y, me.dir);
 		socket.emit("shipFire", shoot);
+		bullets.push(shoot);
 	}
 }
 
@@ -122,8 +123,7 @@ function gameUpdate(){
 	game.draw();
 	me.draw();
 	for (i = 0; i < bullets.length; i++){
-		var shot = new Bullet();
-		bullets.push(shot);
+		bullets[i].Move();
 	};
 }
 function serverStart(){
