@@ -40,9 +40,24 @@ function CheckBounds(PlayerShip){//if needed, my idea was to have several maps r
 	} else if (PlayerShip.y >= map.maxy){
 		PlayerShip.y = map.maxy - 10;
 	};
-	//for(i = 0; i < map.islands.length; i ++){
-	//	if(PlayerShip.y >= map.islands[i].north && PlayerShip.y ){
-	//		PlayerShip.y = map.islands[i].north - 10;
-	//	};
-	//};
+	console.log(PlayerShip.x + " : " + PlayerShip.y);
+	console.log(PlayerShip.dir);
+	for(i = 0; i < map.islands.length; i ++){
+		if(PlayerShip.y >= map.islands[i].north 
+		 && PlayerShip.y <= map.islands[i].south
+		 && PlayerShip.x >= map.islands[i].west
+		 && PlayerShip.x <= map.islands[i].east){
+			if(PlayerShip.dir == 0){
+				PlayerShip.y += 20;
+			} else if(PlayerShip.dir == 90){
+				PlayerShip.x -= 20;
+			} else if(PlayerShip.dir == 180){
+				PlayerShip.y -= 20;
+			} else if(PlayerShip.dir == 270){
+				PlayerShip.x += 20;
+			};
+			console.log("you just crash landed");
+			//console.log(PlayerShip.x + " : " + PlayerShip.y)
+		};
+	};
 };
