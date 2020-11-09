@@ -13,6 +13,10 @@ var modal = document.getElementById('idea');
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
 
+var fruits = ["apple", "orange", "pear"];
+var lunch = fruits[1];
+var len = lunch.length;
+console.log(lunch + ":" + len);
 
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -188,9 +192,13 @@ $(function () {
 		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			var players = new User(list[i]);
+			players.ship = new User(list[i]);
 			users.push(players);
 		}
+	});
+	socket.on("late user", function() {
+		players.ships =  new PlayerShip(400, 300, 0, 0);
+		users.push(players);
 	});
 	socket.on("playerKilled", function(ev) {
 		
