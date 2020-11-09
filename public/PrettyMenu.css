@@ -8,7 +8,7 @@ input {
 }
 
 button {
-  background-color: blue;
+  background-color: brown;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -46,6 +46,14 @@ button:hover {
 	width: 100%;
 }
 
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
 
 .text-block {
 	font-size: 25px;
@@ -56,4 +64,26 @@ button:hover {
 	color: white;
 	padding-left: 20px;
 	padding-right: 20px;
+}
+
+.footer {
+	width: 100%;
+	padding: 50px;
+	background-color: black;
+	display: block;
+}
+
+.titled {
+	padding-left: 50px;
+}
+
+.Titleontop {
+	position: absolute;
+	top: 200px;
+	left: 120px;
+	background-color: black;
+}
+
+.back {
+	width: 100%
 }
