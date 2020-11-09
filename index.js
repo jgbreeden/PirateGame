@@ -72,7 +72,6 @@ io.on('connection', function(socket){
 	//events
 	socket.on('playerMove', function (movement){
 		//data carrying the information of a sockets movement
-		console.log("hi");
 		socket.broadcast.emit('playerMove', movement);
 	});
 	socket.on('entitiesList', function (){

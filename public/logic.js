@@ -51,10 +51,10 @@ var map = {
 	islands: [
 		{
 			name: "",
-			north: 170,
-			south: 200,
-			east: 210,
-			west: 150
+			north: 150,
+			south: 180,
+			east: 200,
+			west: 160
 		},
 		{
 			name: "",
@@ -65,8 +65,8 @@ var map = {
 		},
 		{
 			name: "",
-			north: 230,
-			south: 190,
+			north: 240,
+			south: 290,
 			east: 320,
 			west: 290
 		},
@@ -211,9 +211,15 @@ $(function () {
 			}
 		};
 	});
-	socket.on("joinInProgress", function(ev) {
-		$("#").hide();
-		$("#").show();
+	socket.on("joinInProgress", function(list) {
+		$("#LoginArea").hide();
+		users = [];
+		for (i = 0; i < list.length; i++) { 
+			$('#userList').append($('<li>').text(list[i]));
+			var players = new User(list[i]);
+			users.push(players);
+		}
+		serverStart();
 	});	
 	socket.on("startGame", function(ev){
 		serverStart();
