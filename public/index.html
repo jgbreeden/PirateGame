@@ -1,67 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="PrettyMenu.css" rel="stylesheet" type="text/css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="PrettyMenu.css" rel="stylesheet" type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
+<img src="imgs/Black.jpg" id="back">
+
+<div id="Titleontop">
+<img src="imgs/NotFinal1.png" id="titled">
+</div>
 
 
-<div class="text-block">
-<div style="background-image: url('imgs/Pixel.png');">
-<h2>Login Form</h2>
-<button onclick="document.getElementById('idea').style.display='block'" style="width:50%;">Login</button>
 
-<div id="idea" class="modal">
+<button class="open-button" onclick="openForm()">Login</button>
+
+<div class="form-popup" id="myForm">
   
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('idea').style.display='none'" 
-	  class="close" title="Close Modal">&times;</span>
-      <img src="imgs/profilepicture1.png" alt="Avatar" class="avatar">
-</div>
-</div>
+    <h1>Login</h1>
 
-
+<img src="imgs/profilepicture1.png" alt="Avatar" class="avatar">
+ 
 <div id="LoginArea">
- <form id="loginForm">
+  <form id="loginForm">
 	<label for="ships"> CHOOSE YOUR SHIP:</label>
  
-	<select name="ships" id="cars">
+	  <select name="ships" id="cars">
 		<option value="shiptype1">sloop</option>
 		<option value="shiptype2">Schooners</option>
 		<option value="shiptype3">Dutch Fleut</option>
-	</select>
-	
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" Id="uname" required>
+	  </select>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" Id="psw" required>
-        
-	  <button>Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-</form>
-</div>
-</div>
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
 
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit" class="btn">Login</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
 
 
 <div id="lobby">
-<ul id="userList"></ul>
+	<ul id="userList"></ul>
 
-<button onclick="gameStart()">Start</button>
+	<button onclick="gameStart()">Start</button>
+	<p> Cannot join </p>
 </div>
 
 <div id="GameArea">
-<canvas id="GameCanvas">
-</canvas>
-
+	<canvas id="GameCanvas">
+	</canvas>
 </div>
 
 <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
 var modal = document.getElementById('idea');
 
 window.onclick = function(event) {
@@ -76,6 +79,9 @@ window.onclick = function(event) {
 <script src="objects.js"></script>
 <script src="event.js"></script>
 <script src="logic.js"></script>
+
+<footer class="footer">
+
 </body>
 </html>
 

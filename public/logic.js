@@ -228,9 +228,13 @@ $(function () {
 		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			var players = new User(list[i]);
+			players.ship = new User(list[i]);
 			users.push(players);
 		}
+	});
+	socket.on("late user", function() {
+		players.ships =  new PlayerShip(400, 300, 0, 0);
+		users.push(players);
 	});
 	socket.on("playerKilled", function(ev) {
 		

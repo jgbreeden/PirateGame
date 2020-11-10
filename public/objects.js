@@ -97,7 +97,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 
 	};
 };
-
+//hi 
 
 function User(username){
 	this.ship = {};
