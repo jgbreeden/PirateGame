@@ -13,14 +13,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		game.context.drawImage(this.img, 0, 0);
 		game.context.rotate(-this.dir * Math.PI/180);
 		game.context.translate(-this.x, -this.y);
-		this.radar()            	
-		
- //after the For statment 
- //insert a new line with a if statment
- // it should look like if (users[j].username == myname)
- // if not equal
-//only draw radar "if this = me"
-
+		if (this == me) {
+			this.radar();
+		}
 	};
 	this.radar = function () {
 		var len = 90;
