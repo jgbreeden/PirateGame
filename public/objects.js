@@ -4,6 +4,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
+	this.munitions = 0;
 	this.rot = 0;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
@@ -13,14 +14,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		game.context.drawImage(this.img, 0, 0);
 		game.context.rotate(-this.dir * Math.PI/180);
 		game.context.translate(-this.x, -this.y);
-		this.radar()            	
-		
- //after the For statment 
- //insert a new line with a if statment
- // it should look like if (users[j].username == myname)
- // if not equal
-//only draw radar "if this = me"
-
+		if (this == me) {
+			this.radar();
+		}
 	};
 	this.radar = function () {
 		var len = 90;
@@ -110,7 +106,12 @@ function Bullet(x, y, dir){
 	this.dir = dir;
 	this.startx = x;
 	this.starty = y;
-	this.move = move ;
+	this.move = function(){
+		//check distant travled
+			//self destruct if max distance or collides
+				//if collides with ship emit damage
+			//display boom
+	} ;
 	//move method 
 }
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
