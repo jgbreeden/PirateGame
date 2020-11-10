@@ -123,7 +123,7 @@ function gameUpdate(){
 	game.draw();
 	me.draw();
 	for (i = 0; i < bullets.length; i++){
-		bullets[i].Move();
+		bullets[i].move();
 	};
 }
 function serverStart(){
