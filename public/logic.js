@@ -83,28 +83,28 @@ var map = {
 	],
 	corners: [
 		{//top corner, left
-			north: 80,
-			south: "",
-			east: "",
-			west: 50			
+			north: 60,
+			south: 80,
+			east: 50,
+			west: 30			
 		},
 		{//top corner, right
-			north: 80,
-			south: "",
-			east: "",
-			west: 690			
+			north: 60,
+			south: 80,
+			east: 690,
+			west: 670			
 		},
 		{//bottom corner, left
-			north: 50,
-			south: "",
-			east: "",
-			west: 570			
+			north: 570,
+			south: 590,
+			east: 50,
+			west: 30			
 		},
 		{//bottom corner, right
-			north: 690,
-			south: "",
-			east: "",
-			west: 570			
+			north: 570,
+			south: 590,
+			east: 690,
+			west: 670			
 		}
 	],
 	ports: [
@@ -233,13 +233,14 @@ $(function () {
 		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			players.ship = new User(list[i]);
-			users.push(players);
+			var player = new User(list[i]);
+			users.push(player);
 		}
 	});
-	socket.on("late user", function() {
-		players.ships =  new PlayerShip(400, 300, 0, 0);
-		users.push(players);
+	socket.on("late user", function(user) {
+		var player = new User(user);
+		player.ship = new PlayerShip(400, 300, 0, 0);
+		users.push(player);
 	});
 	socket.on("playerKilled", function(ev) {
 		
@@ -247,7 +248,6 @@ $(function () {
 	socket.on('playerMove', function(movement) {
 		for(i = 0; i < users.length; i ++){
 			if(movement.user == users[i].username){
-				console.log('your code is working');
 				users[i].ship.move(movement);
 			}
 		};
@@ -257,8 +257,8 @@ $(function () {
 		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			var players = new User(list[i]);
-			users.push(players);
+			var player = new User(list[i]);
+			users.push(player);
 		}
 		serverStart();
 	});	

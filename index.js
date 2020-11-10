@@ -22,17 +22,17 @@ io.on('connection', function(socket){
 			io.emit("user list", users);
 		} else if(runtime == true){
 			socket.emit('joinInProgess', '');
+			socket.broadcast.emit('late user', socket.user);
 		};
 	});
 	socket.on('disconnect', function(){
 		connections.splice(connections.indexOf(socket), 1);
 		users.splice(users.indexOf(socket.user), 1);
 		console.log('Disconnection:' + socket.user);
-		io.emit("user list", users);
+		io.emit("user list", users); 
 	});
 
 	socket.on('startGame', function (){
-		//when game first starts
 		io.emit('startGame', '');
 		runtime = true;
 	});
