@@ -151,10 +151,15 @@ function handleKey(code){
 		me.move(movement);
 	}
 	if(code == "KeyU"){//fire
-		console.log("Kill")
-		var shoot = new Bullet(me.x, me.y, me.dir);
-		socket.emit("shipFire", shoot);
-		bullets.push(shoot);
+		if (me.munitions > 0 ){
+			var shoot = new Bullet(me.x, me.y, me.dir);
+			socket.emit("shipFire", shoot);
+			bullets.push(shoot);
+			me.munitions--;
+			console.log("Bullets left " + me.munitions);
+		} else {
+			console.log("Out of Bullets");
+		}
 	}
 }
 

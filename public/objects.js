@@ -4,7 +4,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
-	this.munitions = 0;
+	this.munitions = 6;
 	this.rot = 0;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
