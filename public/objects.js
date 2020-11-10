@@ -4,6 +4,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
+	this.munitions = 0;
 	this.rot = 0;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
@@ -105,7 +106,12 @@ function Bullet(x, y, dir){
 	this.dir = dir;
 	this.startx = x;
 	this.starty = y;
-	this.move = move ;
+	this.move = function(){
+		//check distant travled
+			//self destruct if max distance or collides
+				//if collides with ship emit damage
+			//display boom
+	} ;
 	//move method 
 }
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
