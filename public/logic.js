@@ -80,8 +80,48 @@ var map = {
 			east: 280,
 			west: 200
 		}
+	],
+	corners: [
+		{//top corner, left
+			north: 80,
+			south: "",
+			east: "",
+			west: 50			
+		},
+		{//top corner, right
+			north: 80,
+			south: "",
+			east: "",
+			west: 690			
+		},
+		{//bottom corner, left
+			north: 50,
+			south: "",
+			east: "",
+			west: 570			
+		},
+		{//bottom corner, right
+			north: 690,
+			south: "",
+			east: "",
+			west: 570			
+		}
+	],
+	ports: [
+		{
+			x: 50,
+			y: 360
+		},
+		{
+			x: 480,
+			y: 70
+		},
+		{
+			x: 690,
+			y: 330
+		}
 	]
-}
+};
 
 function handleKey(code){
 	if (code == "KeyW") {//move forward
