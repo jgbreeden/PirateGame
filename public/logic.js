@@ -13,10 +13,6 @@ var modal = document.getElementById('idea');
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
 
-var fruits = ["apple", "orange", "pear"];
-var lunch = fruits[1];
-var len = lunch.length;
-console.log(lunch + ":" + len);
 
 window.onclick = function(event) {
     if (event.target == modal) {
