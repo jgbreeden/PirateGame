@@ -20,10 +20,8 @@ io.on('connection', function(socket){
 		users.push(user);
 		if(runtime == false){
 			io.emit("user list", users);
-			console.log("You just joined, and my code didn't work")
 		} else if(runtime == true){
 			socket.emit('joinInProgess', '');
-			console.log("you can't do that")
 		};
 	});
 	socket.on('disconnect', function(){

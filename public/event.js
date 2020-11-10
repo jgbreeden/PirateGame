@@ -30,9 +30,10 @@ function startPosition(user, x, y){
 	this.y = y;
 }
 
-function CheckBounds(PlayerShip){//if needed, my idea was to have several maps rather than a big one, but thats up to the group, but this is so the players x and y goes back to ther opposite side(credit to the asteroids game)
+function CheckBounds(PlayerShip){
 	if (PlayerShip.x <= map.minx){
 		PlayerShip.x = map.minx + 10;
+		console.log("Minx");
 	} else if (PlayerShip.x >= map.maxx){
 		PlayerShip.x = map.maxx - 10;
 	} else if (PlayerShip.y <= map.miny){
@@ -40,8 +41,6 @@ function CheckBounds(PlayerShip){//if needed, my idea was to have several maps r
 	} else if (PlayerShip.y >= map.maxy){
 		PlayerShip.y = map.maxy - 10;
 	};
-	console.log(PlayerShip.x + " : " + PlayerShip.y);
-	console.log(PlayerShip.dir);
 	for(i = 0; i < map.islands.length; i ++){
 		if(PlayerShip.y >= map.islands[i].north 
 		 && PlayerShip.y <= map.islands[i].south
@@ -49,15 +48,54 @@ function CheckBounds(PlayerShip){//if needed, my idea was to have several maps r
 		 && PlayerShip.x <= map.islands[i].east){
 			if(PlayerShip.dir == 0){
 				PlayerShip.y += 20;
+			} else if(PlayerShip.dir == 45){
+				PlayerShip.y += 20;
+				PlayerShip.x -= 20;
 			} else if(PlayerShip.dir == 90){
+				PlayerShip.x -= 20;
+			} else if(PlayerShip.dir == 135){
+				PlayerShip.y -= 20;
 				PlayerShip.x -= 20;
 			} else if(PlayerShip.dir == 180){
 				PlayerShip.y -= 20;
+			} else if(PlayerShip.dir == 225){
+				PlayerShip.y -= 20;
+				PlayerShip.x += 20;
 			} else if(PlayerShip.dir == 270){
+				PlayerShip.x += 20;
+			} else if(PlayerShip.dir == 315){
+				PlayerShip.y += 20;
 				PlayerShip.x += 20;
 			};
 			console.log("you just crash landed");
-			//console.log(PlayerShip.x + " : " + PlayerShip.y)
+		};
+	};
+	for(i = 0; i < map.corners.length; i ++){
+		if(PlayerShip.y >= map.corners[i].north 
+			&& PlayerShip.y <= map.corners[i].south
+			&& PlayerShip.x >= map.corners[i].west
+			&& PlayerShip.x <= map.corners[i].east){
+			   if(PlayerShip.dir == 0){
+				   PlayerShip.y += 20;
+			   } else if(PlayerShip.dir == 45){
+				   PlayerShip.y += 20;
+				   PlayerShip.x -= 20;
+			   } else if(PlayerShip.dir == 90){
+				   PlayerShip.x -= 20;
+			   } else if(PlayerShip.dir == 135){
+				   PlayerShip.y -= 20;
+				   PlayerShip.x -= 20;
+			   } else if(PlayerShip.dir == 180){
+				   PlayerShip.y -= 20;
+			   } else if(PlayerShip.dir == 225){
+				   PlayerShip.y -= 20;
+				   PlayerShip.x += 20;
+			   } else if(PlayerShip.dir == 270){
+				   PlayerShip.x += 20;
+			   } else if(PlayerShip.dir == 315){
+				   PlayerShip.y += 20;
+				   PlayerShip.x += 20;
+			   };
 		};
 	};
 };
