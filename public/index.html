@@ -6,15 +6,18 @@
 </head>
 <body>
 
-<img src="imgs/Black.jpg" id="back">
 
-<div id="Titleontop">
+
+<div style="background-image: url('imgs/Black.jpg') "id="Titleontop">
 <img src="imgs/NotFinal1.png" id="titled">
 </div>
 
 
 
 <button class="open-button" onclick="openForm()">Login</button>
+
+<footer class="footer">
+
 
 <div class="form-popup" id="myForm">
   
@@ -33,7 +36,7 @@
 	  </select>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Username" Id="uname" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
@@ -80,7 +83,7 @@ window.onclick = function(event) {
 <script src="event.js"></script>
 <script src="logic.js"></script>
 
-<footer class="footer">
+
 
 </body>
 </html>
