@@ -6,6 +6,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.a = a;
 	this.munitions = 6;
 	this.rot = 0;
+	this.visible = true;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
@@ -82,8 +83,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		} else if (this.dir == 45){//NE or NE
 			this.y -= Move.dis;
 			this.x += Move.dis;
-			
-
 		};
 		CheckBounds(this);
 	};
@@ -107,6 +106,9 @@ function Bullet(x, y, dir){
 	this.startx = x;
 	this.starty = y;
 	this.move = function(){
+		if(x >= startx + 60 || ){
+			
+		}
 		//check distant travled
 			//self destruct if max distance or collides
 				//if collides with ship emit damage
