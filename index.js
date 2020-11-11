@@ -20,21 +20,19 @@ io.on('connection', function(socket){
 		users.push(user);
 		if(runtime == false){
 			io.emit("user list", users);
-			console.log("You just joined, and my code didn't work")
 		} else if(runtime == true){
 			socket.emit('joinInProgess', '');
-			console.log("you can't do that")
+			socket.broadcast.emit('late user', socket.user);
 		};
 	});
 	socket.on('disconnect', function(){
 		connections.splice(connections.indexOf(socket), 1);
 		users.splice(users.indexOf(socket.user), 1);
 		console.log('Disconnection:' + socket.user);
-		io.emit("user list", users);
+		io.emit("user list", users); 
 	});
 
 	socket.on('startGame', function (){
-		//when game first starts
 		io.emit('startGame', '');
 		runtime = true;
 	});

@@ -13,10 +13,6 @@ var modal = document.getElementById('idea');
 Surface.style.height = maxheight;
 Surface.style.width = maxwidth;
 
-var fruits = ["apple", "orange", "pear"];
-var lunch = fruits[1];
-var len = lunch.length;
-console.log(lunch + ":" + len);
 
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -84,8 +80,48 @@ var map = {
 			east: 280,
 			west: 200
 		}
+	],
+	corners: [
+		{//top corner, left
+			north: 60,
+			south: 80,
+			east: 50,
+			west: 30			
+		},
+		{//top corner, right
+			north: 60,
+			south: 80,
+			east: 690,
+			west: 670			
+		},
+		{//bottom corner, left
+			north: 570,
+			south: 590,
+			east: 50,
+			west: 30			
+		},
+		{//bottom corner, right
+			north: 570,
+			south: 590,
+			east: 690,
+			west: 670			
+		}
+	],
+	ports: [
+		{
+			x: 50,
+			y: 360
+		},
+		{
+			x: 480,
+			y: 70
+		},
+		{
+			x: 690,
+			y: 330
+		}
 	]
-}
+};
 
 function handleKey(code){
 	if (code == "KeyW") {//move forward
@@ -115,10 +151,15 @@ function handleKey(code){
 		me.move(movement);
 	}
 	if(code == "KeyU"){//fire
-		console.log("Kill")
-		var shoot = new Bullet(me.x, me.y, me.dir);
-		socket.emit("shipFire", shoot);
-		bullets.push(shoot);
+		if (me.munitions > 0 ){
+			var shoot = new Bullet(me.x, me.y, me.dir);
+			socket.emit("shipFire", shoot);
+			bullets.push(shoot);
+			me.munitions--;
+			console.log("Bullets left " + me.munitions);
+		} else {
+			console.log("Out of Bullets");
+		}
 	}
 }
 
@@ -127,7 +168,7 @@ function gameUpdate(){
 	game.draw();
 	me.draw();
 	for (i = 0; i < bullets.length; i++){
-		bullets[i].Move();
+		bullets[i].move();
 	};
 }
 function serverStart(){
@@ -192,13 +233,14 @@ $(function () {
 		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			players.ship = new User(list[i]);
-			users.push(players);
+			var player = new User(list[i]);
+			users.push(player);
 		}
 	});
-	socket.on("late user", function() {
-		players.ships =  new PlayerShip(400, 300, 0, 0);
-		users.push(players);
+	socket.on("late user", function(user) {
+		var player = new User(user);
+		player.ship = new PlayerShip(400, 300, 0, 0);
+		users.push(player);
 	});
 	socket.on("playerKilled", function(ev) {
 		
@@ -206,7 +248,6 @@ $(function () {
 	socket.on('playerMove', function(movement) {
 		for(i = 0; i < users.length; i ++){
 			if(movement.user == users[i].username){
-				console.log('your code is working');
 				users[i].ship.move(movement);
 			}
 		};
@@ -216,8 +257,8 @@ $(function () {
 		users = [];
 		for (i = 0; i < list.length; i++) { 
 			$('#userList').append($('<li>').text(list[i]));
-			var players = new User(list[i]);
-			users.push(players);
+			var player = new User(list[i]);
+			users.push(player);
 		}
 		serverStart();
 	});	
