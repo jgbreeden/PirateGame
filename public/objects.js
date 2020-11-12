@@ -106,9 +106,31 @@ function Bullet(x, y, dir){
 	this.startx = x;
 	this.starty = y;
 	this.move = function(){
-		//if(x >= startx + 60 || ){
-			
-		//}
+		let dis = 3;
+		if(this.dir == 90){//Right or E
+			this.x += dis;//Make move thing up/down/left/right
+		} else if(this.dir == 135){//SE or SE
+			this.y += dis;
+			this.x += dis;
+		} else if (this.dir == 180){//S our Down
+			this.y += dis;
+		} else if (this.dir == 225){//SW or SW
+			this.y += dis;
+			this.x -= dis;
+		} else if (this.dir == 270){//W or left
+			this.x -= dis;
+		} else if (this.dir == 315){// NW or NW
+			this.y -= dis;
+			this.x -= dis;
+		} else if (this.dir == 0){//N or UP
+			this.y -= dis;
+		} else if (this.dir == 45){//NE or NE
+			this.y -= dis;
+			this.x += dis;
+		};
+		console.log(x);
+		console.log(y);
+		
 		//check distant travled
 			//self destruct if max distance or collides
 				//if collides with ship emit damage
