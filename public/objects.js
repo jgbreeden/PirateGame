@@ -106,9 +106,9 @@ function Bullet(x, y, dir){
 	this.startx = x;
 	this.starty = y;
 	this.move = function(){
-		if(x >= startx + 60 || ){
+		//if(x >= startx + 60 || ){
 			
-		}
+		//}
 		//check distant travled
 			//self destruct if max distance or collides
 				//if collides with ship emit damage
