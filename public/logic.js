@@ -50,7 +50,7 @@ var map = {
 			north: 150,
 			south: 180,
 			east: 200,
-			west: 160
+			west: 150
 		},
 		{
 			name: "",
@@ -166,6 +166,11 @@ function handleKey(code){
 function gameUpdate(){
 	game.clear();
 	game.draw();
+	for(i = 0; i < users.length; i++){
+		if(users[i].ship.visible == true){
+			users[i].ship.draw();
+		}
+	}
 	me.draw();
 	for (i = 0; i < bullets.length; i++){
 		bullets[i].move();
@@ -187,6 +192,7 @@ function serverStart(){
 	}
 	update = setInterval(gameUpdate, 20);
 	me = new PlayerShip(x, y, 0, 0);
+	me.visible = true;
 	playerPos();
 	console.log("start");
 }

@@ -1,3 +1,5 @@
+const len = 90;
+
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
 	//in relation to their respawn port, with an area of interaction that moves with the player
 	this.x = x;
@@ -6,7 +8,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.a = a;
 	this.munitions = 6;
 	this.rot = 0;
-	this.visible = true;
+	this.visible = false;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
@@ -17,10 +19,15 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		game.context.translate(-this.x, -this.y);
 		if (this == me) {
 			this.radar();
-		}
+		} else {
+			var disx = me.x - this.x;
+			var disy = me.y - this.y;
+			if(len * len / 2 <= disx * disx + disy * disy){
+				this.visible = false;
+			}
+		};
 	};
 	this.radar = function () {
-		var len = 90;
 		var trans = 1;
 		for( i = 0; i < 10; i++){
 			var x = Math.sin(this.rot) * len;
@@ -39,21 +46,23 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 					var rad = Math.atan2(deltax, deltay);
 					if (rad < 0){
 						rad = Math.PI * 2 + rad;
-					}
-					if (rad > this.rot - 0.2 && rad < this.rot + 0.2
-						&& len * len >= deltax * deltax + deltay * deltay){
+					};
+					if (len * len/2 >= deltax * deltax + deltay * deltay){
+						users[j].ship.visible = true;
+					} else if (rad > this.rot - 0.2 && rad < this.rot + 0.2
+					 && len * len >= deltax * deltax + deltay * deltay){
 						game.context.fillStyle = "rgba(255, 0, 0" + trans +")";
 						game.context.fillRect(users[j].ship.x, users[j].ship.y, 10, 10);
-					}
-			}
+					
+					};
+			};
 			this.rot -= 0.05;
 			trans -= 0.2;
-		}
+		};
 	this.rot += .55;
 	if(this.rot > Math.PI * 2) {
 			this.rot = 0;
-		}
-		
+		};
 	};
 	this.move = function(Move) {
 		this.dir += Move.dir;
