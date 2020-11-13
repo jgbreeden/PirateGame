@@ -40,6 +40,7 @@ function CheckBounds(PlayerShip){
 	} else if (PlayerShip.y >= map.maxy){
 		PlayerShip.y = map.maxy - 10;
 	};
+	console.log(PlayerShip.x + " : " + PlayerShip.y)
 	for(i = 0; i < map.islands.length; i ++){
 		if(PlayerShip.y >= map.islands[i].north 
 		 && PlayerShip.y <= map.islands[i].south
