@@ -6,7 +6,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
-	this.munitions = 6;
+	this.munitions = 90;
 	this.rot = 0;
 	this.visible = false;
 	this.img = document.createElement("img");
@@ -178,8 +178,9 @@ function Bullet(x, y, dir){
 	};
 	this.draw = function() {
 		game.context.beginPath();
-		game.context.arc(this.x, this.y, 10, 2 * Math.PI);
+		game.context.arc(this.x, this.y, 10, 0, 2 * Math.PI);
 		game.context.fillStyle = "rgba(255, 0, 0)";
+		game.context.fill();
 	}
 	//move method 
 			
