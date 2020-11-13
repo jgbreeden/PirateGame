@@ -171,6 +171,7 @@ function gameUpdate(){
 		bullets[i].move();
 		//bullets.splice(i, 1)
 	};
+	Bullet.draw();
 }
 function serverStart(){
 	var x = 400;

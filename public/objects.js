@@ -127,16 +127,22 @@ function Bullet(x, y, dir){
 		} else if (this.dir == 45){//NE or NE
 			this.y -= dis;
 			this.x += dis;
+		} else {
+			console(this.dir)
 		};
-		console.log(x);
-		console.log(y);
-		
+
+	};
+	this.draw = function() {
+		game.context.beginPath();
+		game.context.arc(this.x, this.y, 10, 2 * Math.PI);
+		game.context.fillStyle = "rgba(255, 0, 0)";
+	}
+	//move method 
+			
 		//check distant travled
 			//self destruct if max distance or collides
 				//if collides with ship emit damage
-			//display boom
-	} ;
-	//move method 
+			//display boo
 }
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
