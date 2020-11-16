@@ -12,11 +12,46 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
-		game.context.translate(this.x, this.y);
+		let imgw = this.img.width/2
+		var offsetx = this.x;
+		var offsety = this.y;
+		switch (this.dir) {
+			case 0:
+				offsetx -= imgw;
+				offsety -= imgw;
+				break;
+			case 45:
+				offsety -= imgw * 1.4;
+				break;
+			case 90:
+				offsetx += imgw;
+				offsety -= imgw;
+				break;
+			case 135:
+				offsetx += imgw * 1.4;
+				break;
+			case 180:
+				offsetx += imgw;
+				offsety += imgw;
+				break;
+			case 225:
+				offsety += imgw * 1.4;
+				break;
+			case 270:
+				offsetx -= imgw;
+				offsety += imgw;
+				break;
+			case 315:
+				offsetx -= imgw * 1.4;
+				break;
+			default:
+				console.log("The code is bad")
+		  }
+		game.context.translate(offsetx, offsety);
 		game.context.rotate(+this.dir * Math.PI/180);
 		game.context.drawImage(this.img, 0, 0);
 		game.context.rotate(-this.dir * Math.PI/180);
-		game.context.translate(-this.x, -this.y);
+		game.context.translate(-offsetx, -offsety);
 		if (this == me) {
 			this.radar();
 		} else {

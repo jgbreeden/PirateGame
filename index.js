@@ -38,15 +38,15 @@ io.on('connection', function(socket){
 	});
 	socket.on('midGame', function (){
 		//when the 3rd bounty is collected, and special event starts
-		io.emit('Game Is Coming to an End. Get Your Points QUICK!');
+		io.emit('midGame');
 	});
 	socket.on('endGame', function (){
 		//when the final bounty is collected
-		io.emit('Game Has Ended');
+		io.emit('endGame');
 	});
 	socket.on('playerScore', function (score){
 		//when a player places bounty into home base, storing data for amout of points
-		io.emit('score board', {user: socket.user, score: score});
+		io.emit('scoreBoard', {user: socket.user, score: score});
 	});
 	socket.on('shipFire', function (shoot){
 		socket.broadcast.emit('shipFire', shoot)
@@ -57,7 +57,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('playerChat', function (msg){
 		//player game chat if we have one
-		io.emit('chat message', {user: socket.user, message: msg});
+		io.emit('chatMessage', {user: socket.user, message: msg});
 	});	
 	socket.on('startPosition', function (pos){
 		//when players join a lobby
