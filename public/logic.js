@@ -150,6 +150,12 @@ function handleKey(code){
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
+
+	if (code == "keyY"){//dock
+		this.docked = true; 
+
+
+	}
 	if(code == "KeyU"){//fire
 		if (me.munitions > 0 ){
 			var shoot = new Bullet(me.x, me.y, me.dir);
@@ -174,9 +180,9 @@ function gameUpdate(){
 	me.draw();
 	for (i = 0; i < bullets.length; i++){
 		bullets[i].move();
-		bullets[i].draw();
 		//bullets.splice(i, 1)
 	};
+	Bullet.draw();
 }
 function serverStart(){
 	var x = 400;
