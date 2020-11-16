@@ -45,7 +45,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				offsetx -= imgw * 1.4;
 				break;
 			default:
-				console.log("The code is bad")
+				console.log("The code is not working")
 		  }
 		game.context.translate(offsetx, offsety);
 		game.context.rotate(+this.dir * Math.PI/180);
