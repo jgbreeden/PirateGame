@@ -9,49 +9,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.munitions = 90;
 	this.rot = 0;
 	this.visible = false;
+	this.docked == false;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
-		let imgw = this.img.width/2
-		var offsetx = this.x;
-		var offsety = this.y;
-		switch (this.dir) {
-			case 0:
-				offsetx -= imgw;
-				offsety -= imgw;
-				break;
-			case 45:
-				offsety -= imgw * 1.4;
-				break;
-			case 90:
-				offsetx += imgw;
-				offsety -= imgw;
-				break;
-			case 135:
-				offsetx += imgw * 1.4;
-				break;
-			case 180:
-				offsetx += imgw;
-				offsety += imgw;
-				break;
-			case 225:
-				offsety += imgw * 1.4;
-				break;
-			case 270:
-				offsetx -= imgw;
-				offsety += imgw;
-				break;
-			case 315:
-				offsetx -= imgw * 1.4;
-				break;
-			default:
-				console.log("The code is bad")
-		  }
-		game.context.translate(offsetx, offsety);
 		game.context.rotate(+this.dir * Math.PI/180);
 		game.context.drawImage(this.img, 0, 0);
 		game.context.rotate(-this.dir * Math.PI/180);
-		game.context.translate(-offsetx, -offsety);
 		if (this == me) {
 			this.radar();
 		} else {
@@ -130,9 +94,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 		CheckBounds(this);
 	};
-	this.fire = function(){//make thing shoot thing
-		//Create Projectile
-		//Emit Message
+	this.dock = function(){
 
 	};
 };
@@ -178,9 +140,8 @@ function Bullet(x, y, dir){
 	};
 	this.draw = function() {
 		game.context.beginPath();
-		game.context.arc(this.x, this.y, 10, 0, 2 * Math.PI);
+		game.context.arc(this.x, this.y, 10, 2 * Math.PI);
 		game.context.fillStyle = "rgba(255, 0, 0)";
-		game.context.fill();
 	}
 	//move method 
 			
