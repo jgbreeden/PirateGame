@@ -114,28 +114,37 @@ function Bullet(x, y, dir){
 	this.dir = dir;
 	this.startx = x;
 	this.starty = y;
+	this.life = 100;
 	this.move = function(){
 		let dis = 3;
 		if(this.dir == 90){//Right or E
 			this.x += dis;//Make move thing up/down/left/right
+			this.life = this.life - 1;
 		} else if(this.dir == 135){//SE or SE
 			this.y += dis;
 			this.x += dis;
+			this.life = this.life - 1;
 		} else if (this.dir == 180){//S our Down
 			this.y += dis;
+			this.life = this.life - 1;
 		} else if (this.dir == 225){//SW or SW
 			this.y += dis;
 			this.x -= dis;
+			this.life = this.life - 1;
 		} else if (this.dir == 270){//W or left
 			this.x -= dis;
+			this.life = this.life - 1;
 		} else if (this.dir == 315){// NW or NW
 			this.y -= dis;
 			this.x -= dis;
+			this.life = this.life - 1;
 		} else if (this.dir == 0){//N or UP
 			this.y -= dis;
+			this.life = this.life - 1;
 		} else if (this.dir == 45){//NE or NE
 			this.y -= dis;
 			this.x += dis;
+			this.life = this.life - 1;
 		} else {
 			console(this.dir)
 		};
@@ -143,7 +152,7 @@ function Bullet(x, y, dir){
 	};
 	this.draw = function() {
 		game.context.beginPath();
-		game.context.arc(this.x, this.y, 10, 0, 2 * Math.PI);
+		game.context.arc(this.x, this.y, 5, 0, 2 * Math.PI);
 		game.context.fillStyle = "rgba(255, 0, 0)";
 		game.context.fill();
 	}
