@@ -178,6 +178,7 @@ function gameUpdate(){
 		//bullets.splice(i, 1)
 	};
 }
+
 function serverStart(){
 	var x = 400;
 	var y = 300;
@@ -197,6 +198,20 @@ function serverStart(){
 	me.visible = true;
 	playerPos();
 	console.log("start");
+}
+
+function checkDistance(ob1, ob2) {
+	x1 = ob1.x;
+	x2 = ob2.x;
+	y1 = ob1.y;
+	y2 = ob2.y;
+	difx = x1 - x2;
+	dify = y1 - y2;
+	powx = Math.pow(difx, 2);
+	powy = Math.pow(dify, 2);
+	sum = powx + powy;
+	distance = Math.sqrt(sum);
+	return distance;
 }
 
 function playerPos(){

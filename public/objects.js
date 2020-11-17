@@ -128,7 +128,12 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.y -= Move.dis;
 			this.x += Move.dis;
 		};
-		CheckBounds(this);
+		this.life = this.life - 1;
+		for (i = 0; i <users.length; i++){
+			if(users[i].checkDistance(users[i], this) < 10 ){
+				console.log("end me");
+			}
+		}
 	};
 	this.fire = function(){//make thing shoot thing
 		//Create Projectile
@@ -150,40 +155,41 @@ function Bullet(x, y, dir){
 	this.startx = x;
 	this.starty = y;
 	this.life = 100;
+	
 	this.move = function(){
 		let dis = 3;
 		if(this.dir == 90){//Right or E
 			this.x += dis;//Make move thing up/down/left/right
-			this.life = this.life - 1;
+
 		} else if(this.dir == 135){//SE or SE
 			this.y += dis;
 			this.x += dis;
-			this.life = this.life - 1;
+
 		} else if (this.dir == 180){//S our Down
 			this.y += dis;
-			this.life = this.life - 1;
+
 		} else if (this.dir == 225){//SW or SW
 			this.y += dis;
 			this.x -= dis;
-			this.life = this.life - 1;
+
 		} else if (this.dir == 270){//W or left
 			this.x -= dis;
-			this.life = this.life - 1;
+
 		} else if (this.dir == 315){// NW or NW
 			this.y -= dis;
 			this.x -= dis;
-			this.life = this.life - 1;
+
 		} else if (this.dir == 0){//N or UP
 			this.y -= dis;
-			this.life = this.life - 1;
+
 		} else if (this.dir == 45){//NE or NE
 			this.y -= dis;
 			this.x += dis;
-			this.life = this.life - 1;
 		} else {
 			console(this.dir)
 		};
-
+		this.life = this.life - 1;
+		checkDistance(me, bullets[i])
 	};
 	this.draw = function() {
 		game.context.beginPath();
@@ -191,12 +197,7 @@ function Bullet(x, y, dir){
 		game.context.fillStyle = "rgba(255, 0, 0)";
 		game.context.fill();
 	}
-	//move method 
-			
-		//check distant travled
-			//self destruct if max distance or collides
-				//if collides with ship emit damage
-			//display boo
+
 }
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
