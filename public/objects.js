@@ -9,6 +9,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.munitions = 90;
 	this.rot = 0;
 	this.visible = false;
+	this.docked == false;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
@@ -45,7 +46,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				offsetx -= imgw * 1.4;
 				break;
 			default:
-				console.log("The code is bad")
+				console.log("The code is not working")
 		  }
 		game.context.translate(offsetx, offsety);
 		game.context.rotate(+this.dir * Math.PI/180);
@@ -135,9 +136,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			}
 		}
 	};
-	this.fire = function(){//make thing shoot thing
-		//Create Projectile
-		//Emit Message
+	this.dock = function(){
 
 	};
 };
@@ -195,7 +194,6 @@ function Bullet(x, y, dir){
 		game.context.beginPath();
 		game.context.arc(this.x, this.y, 5, 0, 2 * Math.PI);
 		game.context.fillStyle = "rgba(255, 0, 0)";
-		game.context.fill();
 	}
 
 }
