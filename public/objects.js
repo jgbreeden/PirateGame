@@ -133,6 +133,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.dock = function(){
 
 	};
+	this.hit = function(){
+
+	}
 };
 //hi 
 
@@ -187,6 +190,8 @@ function Bullet(x, y, dir){
 		for (u = 0; u <users.length; u++){
 			if(checkDistance(users[u].ship, this) < 10 ){
 				console.log("end me");
+				this.life = 0;
+				users[u].ship.hit();
 			}
 		}
 	};

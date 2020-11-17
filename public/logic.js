@@ -180,8 +180,11 @@ function gameUpdate(){
 	me.draw();
 	for (i = 0; i < bullets.length; i++){
 		bullets[i].move();
-		bullets[i].draw();
-		//bullets.splice(i, 1)
+		if (bullets[i].life > 0) {
+			bullets[i].draw();
+		} else {
+			bullets.splice(i, 1)
+		}
 	};
 }
 
