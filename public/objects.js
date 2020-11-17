@@ -129,12 +129,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.y -= Move.dis;
 			this.x += Move.dis;
 		};
-		this.life = this.life - 1;
-		for (i = 0; i <users.length; i++){
-			if(users[i].checkDistance(users[i], this) < 10 ){
-				console.log("end me");
-			}
-		}
 	};
 	this.dock = function(){
 
@@ -189,11 +183,18 @@ function Bullet(x, y, dir){
 		};
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
+		this.life = this.life - 1;
+		for (u = 0; u <users.length; u++){
+			if(checkDistance(users[u].ship, this) < 10 ){
+				console.log("end me");
+			}
+		}
 	};
 	this.draw = function() {
 		game.context.beginPath();
 		game.context.arc(this.x, this.y, 5, 0, 2 * Math.PI);
 		game.context.fillStyle = "rgba(255, 0, 0)";
+		game.context.fill();
 	}
 
 }
