@@ -157,7 +157,7 @@ function handleKey(code){
 
 	}
 	
-	if(code == "KeyU"){//fire
+	if(code == "KeyE"){//fire
 		if (me.munitions > 0 ){
 			var shoot = new Bullet(me.x, me.y, me.dir);
 			socket.emit("shipFire", shoot);
