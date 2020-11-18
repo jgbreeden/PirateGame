@@ -8,8 +8,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.a = a;
 	this.munitions = 90;
 	this.rot = 0;
+	this.health = 100;
 	this.visible = false;
 	this.docked = false;
+	this.explosion = false;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
@@ -137,12 +139,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				&& this.y <= map.ports[i].y
 				&& this.x >= map.ports[i].x
 				&& this.x <= map.ports[i].x){
-
 				}
-
-		} 
-
+		}
 	};
+	this.hit = function(x, y){
+		boom = new Explosion(x, y);
+		//socket.emit("startPosition", pos);
+	}
 };
 //hi 
 
@@ -191,12 +194,22 @@ function Bullet(x, y, dir){
 		} else {
 			console(this.dir)
 		};
-
+		this.life = this.life - 1;
+		checkDistance(me, bullets[i])
+		this.life = this.life - 1;
+		for (u = 0; u <users.length; u++){
+			if(checkDistance(users[u].ship, this) < 10 ){
+				console.log("end me");
+				this.life = 0;
+				users[u].ship.hit(this.x, this.y);
+			}
+		}
 	};
 	this.draw = function() {
 		game.context.beginPath();
 		game.context.arc(this.x, this.y, 5, 0, 2 * Math.PI);
 		game.context.fillStyle = "rgba(255, 0, 0)";
+		game.context.fill();
 	}
 	//move method 
 			
@@ -205,6 +218,13 @@ function Bullet(x, y, dir){
 				//if collides with ship emit damage
 			//display boo
 }
+
+function Explosion(x, y){
+	this.img = document.createElement("img");
+	this.img.src = "imgs/explosion.png";
+	game.context.drawImage(this.img, x, y);
+}
+
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
 	this.x = x;
 	this.y = y;
@@ -235,5 +255,3 @@ function GameObstacle(x, y, a){//position for game created enemies such as shark
 	this.y = y;
 	this.a = a;
 }
-
-
