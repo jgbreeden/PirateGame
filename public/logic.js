@@ -148,14 +148,15 @@ function handleKey(code){
 		var dis = 10;
 		var movement = new Move(dir, dis, myname);
 		socket.emit("playerMove", movement);
-		me.move(movement);
-	}
+		me.move(movement);     
+		}
 
 	if (code == "keyY"){//dock
 		this.docked = true; 
 
 
 	}
+	
 	if(code == "KeyE"){//fire
 		if (me.munitions > 0 ){
 			var shoot = new Bullet(me.x, me.y, me.dir);
