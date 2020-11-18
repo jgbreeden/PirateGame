@@ -148,8 +148,8 @@ function handleKey(code){
 		var dis = 10;
 		var movement = new Move(dir, dis, myname);
 		socket.emit("playerMove", movement);
-		me.move(movement);
-	}
+		me.move(movement);     
+		}
 
 	if (code == "keyY"){//dock
 		this.docked = true; 
@@ -181,10 +181,14 @@ function gameUpdate(){
 	me.draw();
 	for (i = 0; i < bullets.length; i++){
 		bullets[i].move();
-		//bullets.splice(i, 1)
+		if (bullets[i].life > 0) {
+			bullets[i].draw();
+		} else {
+			bullets.splice(i, 1)
+		}
 	};
-	Bullet.draw();
 }
+
 function serverStart(){
 	var x = 400;
 	var y = 300;
@@ -204,6 +208,20 @@ function serverStart(){
 	me.visible = true;
 	playerPos();
 	console.log("start");
+}
+
+function checkDistance(ob1, ob2) {
+	x1 = ob1.x;
+	x2 = ob2.x;
+	y1 = ob1.y;
+	y2 = ob2.y;
+	difx = x1 - x2;
+	dify = y1 - y2;
+	powx = Math.pow(difx, 2);
+	powy = Math.pow(dify, 2);
+	sum = powx + powy;
+	distance = Math.sqrt(sum);
+	return distance;
 }
 
 function playerPos(){
