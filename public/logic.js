@@ -156,6 +156,7 @@ function handleKey(code){
 
 
 	}
+	
 	if(code == "KeyU"){//fire
 		if (me.munitions > 0 ){
 			var shoot = new Bullet(me.x, me.y, me.dir);

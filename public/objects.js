@@ -9,7 +9,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.munitions = 90;
 	this.rot = 0;
 	this.visible = false;
-	this.docked == false;
+	this.docked = false;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {
@@ -132,6 +132,15 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		CheckBounds(this);
 	};
 	this.dock = function(){
+		for (i = 0; i < map.ports.length; i++){
+			if(this.y >= map.ports[i].y 
+				&& this.y <= map.ports[i].y
+				&& this.x >= map.ports[i].x
+				&& this.x <= map.ports[i].x){
+					
+				}
+
+		} 
 
 	};
 };
