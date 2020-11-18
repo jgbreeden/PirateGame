@@ -10,6 +10,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.rot = 0;
 	this.visible = false;
 	this.docked == false;
+	this.score = 0;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/ship.png";
 	this.draw = function() {

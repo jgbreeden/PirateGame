@@ -30,6 +30,9 @@ io.on('connection', function(socket){
 		users.splice(users.indexOf(socket.user), 1);
 		console.log('Disconnection:' + socket.user);
 		io.emit("user list", users); 
+		if(users == null){
+			runtime = false;
+		}
 	});
 
 	socket.on('startGame', function (){
@@ -46,6 +49,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('playerScore', function (score){
 		//when a player places bounty into home base, storing data for amout of points
+		console.log(score);
 		io.emit('scoreBoard', {user: socket.user, score: score});
 	});
 	socket.on('shipFire', function (shoot){
