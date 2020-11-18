@@ -130,6 +130,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.y -= Move.dis;
 			this.x += Move.dis;
 		};
+		CheckBounds(this);
 	};
 	this.dock = function(){
 
