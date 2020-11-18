@@ -165,32 +165,24 @@ function Bullet(x, y, dir){
 		let dis = 3;
 		if(this.dir == 90){//Right or E
 			this.x += dis;//Make move thing up/down/left/right
-			this.life = this.life - 1;
 		} else if(this.dir == 135){//SE or SE
 			this.y += dis;
 			this.x += dis;
-			this.life = this.life - 1;
 		} else if (this.dir == 180){//S our Down
 			this.y += dis;
-			this.life = this.life - 1;
 		} else if (this.dir == 225){//SW or SW
 			this.y += dis;
 			this.x -= dis;
-			this.life = this.life - 1;
 		} else if (this.dir == 270){//W or left
 			this.x -= dis;
-			this.life = this.life - 1;
 		} else if (this.dir == 315){// NW or NW
 			this.y -= dis;
 			this.x -= dis;
-			this.life = this.life - 1;
 		} else if (this.dir == 0){//N or UP
 			this.y -= dis;
-			this.life = this.life - 1;
 		} else if (this.dir == 45){//NE or NE
 			this.y -= dis;
 			this.x += dis;
-			this.life = this.life - 1;
 		} else {
 			console(this.dir)
 		};
