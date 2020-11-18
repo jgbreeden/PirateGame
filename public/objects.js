@@ -190,7 +190,6 @@ function Bullet(x, y, dir){
 		};
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
-		this.life = this.life - 1;
 		for (u = 0; u <users.length; u++){
 			if(checkDistance(users[u].ship, this) < 10 ){
 				console.log("end me");
