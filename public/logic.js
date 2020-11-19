@@ -277,7 +277,7 @@ $(function () {
 	});
 	socket.on("playerHit", function(playerHit) {
 		for(i = 0; i < users.length; i++){
-			if(playerHit.uname == users[i].username){
+			if(playerHit.user == users[i].username){
 				users[i].ship.explosion = playerHit;
 			}
 		}
