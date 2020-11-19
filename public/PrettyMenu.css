@@ -49,8 +49,8 @@ button:hover {
 .form-popup {
   display: none;
   position: fixed;
-  bottom: 0;
-  right: 15px;
+  top: 10%;
+  left: 20%;
   border: 3px solid #f1f1f1;
   z-index: 9;
 }
@@ -86,4 +86,19 @@ button:hover {
 
 .back {
 	width: 100%
+}
+
+#button{
+    height: 40px;
+    width: 40px;
+    background-color: grey;
+    position: fixed;
+    top: 136px;
+    left: 176px;
+}
+
+#statPage{
+	position: fixed;
+	top:0;
+	left:0;
 }

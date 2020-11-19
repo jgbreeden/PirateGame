@@ -53,9 +53,9 @@ io.on('connection', function(socket){
 	socket.on('shipFire', function (shoot){
 		socket.broadcast.emit('shipFire', shoot)
 	});	
-	socket.on('playerKill', function (){
+	socket.on('playerHit', function (playerHit){
 		//when a player is killed by a player or obstacle
-		socket.broadcast.emit('playerKilled', playerKilled);
+		socket.broadcast.emit('playerHit', playerHit);
 	});
 	socket.on('playerChat', function (msg){
 		//player game chat if we have one

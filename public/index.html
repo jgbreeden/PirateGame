@@ -4,38 +4,24 @@
 	<link href="PrettyMenu.css" rel="stylesheet" type="text/css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-
-
-
-<div style="background-image: url('imgs/Black.jpg') "id="Titleontop">
-<img src="imgs/NotFinal1.png" id="titled">
-</div>
-
-
+<body style="background-image: url('imgs/NotFinal1.png');">
 
 <button class="open-button" onclick="openForm()">Login</button>
 
-<footer class="footer">
-
-
 <div class="form-popup" id="myForm">
   
-    <h1>Login</h1>
-
-<img src="imgs/profilepicture1.png" alt="Avatar" class="avatar">
+<h1>Login</h1>
  
 <div id="LoginArea">
   <form id="loginForm">
 	<label for="ships"> CHOOSE YOUR SHIP:</label>
- 
-	  <select name="ships" id="cars">
-		<option value="shiptype1">sloop</option>
-		<option value="shiptype2">Schooners</option>
-		<option value="shiptype3">Dutch Fleut</option>
+	  <select name="ships" id="ships" onchange="shipType(this.value)">
+      <option value="1">sloop</option>
+      <option value="2">Schooners</option>
+      <option value="3">Dutch Fleut</option>
 	  </select>
 
-    <label for="email"><b>Email</b></label>
+    <label for="user"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" Id="uname" required>
 
     <label for="psw"><b>Password</b></label>
@@ -55,8 +41,12 @@
 </div>
 
 <div id="GameArea">
+  <div id="statPage" style="visibility: hidden;">
+    <img src="imgs/explosion.png">
+  </div>
 	<canvas id="GameCanvas">
-	</canvas>
+  </canvas>
+  <div id="button" onmouseover="stats()">Stats</div>
 </div>
 
 <script>
@@ -74,6 +64,12 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
+}
+
+function stats(){
+  console.log("bruh:");
+  var statPage = document.getElementById('statPage');
+  statPage.style.visibility = "show";
 }
 </script>
 
