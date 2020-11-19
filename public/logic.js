@@ -163,6 +163,7 @@ function handleKey(code){
 			socket.emit("shipFire", shoot);
 			bullets.push(shoot);
 			me.munitions--;
+			document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 			console.log("Bullets left " + me.munitions);
 		} else {
 			console.log("Out of Bullets");

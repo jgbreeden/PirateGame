@@ -150,8 +150,20 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	}
 };
 //hi 
+
+function stats(){
+	console.log("bruh:");
+	var statPage = document.getElementById('statPage');
+	statPage.style.display = "block";
+	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
+	document.getElementById("pScore").innerHTML = 'Player Score: ' + 0;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
+	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
+	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + 100;
+}
+
 function confirmSelect(x){
-	shipType = "imgs/ship" + x + ".png"
+	shipType = "imgs/ship" + x + ".png";
 }
 
 function User(username){
