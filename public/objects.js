@@ -142,9 +142,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				}
 		}
 	};
-	this.hit = function(x, y){
-		boom = new Explosion(x, y);
-		//socket.emit("startPosition", pos);
+	this.hit = function(x, y, uname){
+		this.explosion = new Explosion(this.x, this.y, uname);
+		socket.emit("playerHit", this.explosion);
 	}
 };
 //hi 
@@ -184,7 +184,7 @@ function Bullet(x, y, dir){
 			this.y -= dis;
 			this.x += dis;
 		} else {
-			console(this.dir)
+			console.log(this.dir)
 		};
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
@@ -192,7 +192,7 @@ function Bullet(x, y, dir){
 			if(checkDistance(users[u].ship, this) < 10 ){
 				console.log("end me");
 				this.life = 0;
-				users[u].ship.hit(this.x, this.y);
+				users[u].ship.hit(this.x, this.y, users[u].username);
 			}
 		}
 	};
@@ -210,10 +210,15 @@ function Bullet(x, y, dir){
 			//display boo
 }
 
-function Explosion(x, y){
+function Explosion(x, y, user){
+	this.x = x;
+	this.y = y;
+	this.user = user;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/explosion.png";
-	game.context.drawImage(this.img, x, y);
+	this.draw = function() {
+		game.context.drawImage(this.img, this.x, this.y);
+	}
 }
 
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
