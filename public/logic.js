@@ -152,7 +152,7 @@ function handleKey(code){
 		}
 
 	if (code == "keyY"){//dock
-		this.docked = true; 
+		//Me.docked
 
 
 	}
