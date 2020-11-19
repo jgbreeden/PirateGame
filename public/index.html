@@ -15,7 +15,7 @@
 <div id="LoginArea">
   <form id="loginForm">
 	<label for="ships"> CHOOSE YOUR SHIP:</label>
-	  <select name="ships" id="ships">
+	  <select name="ships" id="ships" onchange="confirmSelect(this.value)">
       <option value="1">sloop</option>
       <option value="2">Schooners</option>
       <option value="3">Dutch Fleut</option>
