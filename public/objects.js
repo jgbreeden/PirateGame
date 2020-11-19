@@ -138,7 +138,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			if(this.y >= map.ports[i].y 
 				&& this.y <= map.ports[i].y
 				&& this.x >= map.ports[i].x
-				&& this.x <= map.ports[i].x){
+				&& this.x <= map.ports[i].x)
+				this.docked = true; {
 				}
 		}
 	};
