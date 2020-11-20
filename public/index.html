@@ -4,14 +4,10 @@
 	<link href="PrettyMenu.css" rel="stylesheet" type="text/css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body style="background-image: url('imgs/NotFinal1.png');">
-
 <button class="open-button" onclick="openForm()">Login</button>
-
 <div class="form-popup" id="myForm">
- 
- <!-- Ill add photos later -->
- 
  
  
 <h1>Login</h1>
@@ -19,7 +15,8 @@
 <div id="LoginArea">
   <form id="loginForm">
 	<label for="ships"> CHOOSE YOUR SHIP:</label>
-	  <select name="ships" id="ships" onchange="confirmSelect(this.value)">
+	  <select required name="ships" id="ships" onchange="confirmSelect(this.value)">
+      <option value="">None</option>
       <option value="1">sloop</option>
       <option value="2">Schooners</option>
       <option value="3">Dutch Fleut</option>
@@ -45,8 +42,14 @@
 </div>
 
 <div id="GameArea">
-  <div id="statPage" style="visibility: hidden;">
-    <img src="imgs/explosion.png">
+  <div id="statPage" style="display: none;">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeStats()">&times;</a>
+    <a></a>
+    <a id='pName'></a>
+    <a id='pScore'></a>
+    <a id='pKills'></a>
+    <a id='pAmmo'></a>
+    <a id='pFuel'></a>
   </div>
 	<canvas id="GameCanvas">
   </canvas>
@@ -70,15 +73,12 @@ window.onclick = function(event) {
     }
 }
 
-function stats(){
-  console.log("bruh:");
-  var statPage = document.getElementById('statPage');
-  statPage.style.visibility = "show";
+function closeStats(){
+  document.getElementById('statPage').style.display = 'none';
 }
 
 function confirmSelect(x){
   shipType(x);
-  console.log("bruh")
 };
 </script>
 
