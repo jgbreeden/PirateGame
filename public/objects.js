@@ -1,4 +1,5 @@
 const len = 90;
+var shipType;
 
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
 	//in relation to their respawn port, with an area of interaction that moves with the player
@@ -13,7 +14,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.docked = false;
 	this.explosion = false;
 	this.img = document.createElement("img");
-	this.img.src = "imgs/ship.png";
+	this.img.src = shipType;
 	this.draw = function() {
 		let imgw = this.img.width/2
 		var offsetx = this.x;
@@ -138,16 +139,32 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			if(this.y >= map.ports[i].y 
 				&& this.y <= map.ports[i].y
 				&& this.x >= map.ports[i].x
-				&& this.x <= map.ports[i].x){
+				&& this.x <= map.ports[i].x)
+				this.docked = true; {
 				}
 		}
 	};
-	this.hit = function(x, y){
-		boom = new Explosion(x, y);
-		//socket.emit("startPosition", pos);
+	this.hit = function(x, y, uname){
+		this.explosion = new Explosion(this.x, this.y, uname);
+		socket.emit("playerHit", this.explosion);
 	}
 };
 //hi 
+
+function stats(){
+	console.log("bruh:");
+	var statPage = document.getElementById('statPage');
+	statPage.style.display = "block";
+	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
+	document.getElementById("pScore").innerHTML = 'Player Score: ' + 0;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
+	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
+	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + 100;
+}
+
+function confirmSelect(x){
+	shipType = "imgs/ship" + x + ".png";
+}
 
 function User(username){
 	this.ship = {};
@@ -184,7 +201,7 @@ function Bullet(x, y, dir){
 			this.y -= dis;
 			this.x += dis;
 		} else {
-			console(this.dir)
+			console.log(this.dir)
 		};
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
@@ -192,7 +209,7 @@ function Bullet(x, y, dir){
 			if(checkDistance(users[u].ship, this) < 10 ){
 				console.log("end me");
 				this.life = 0;
-				users[u].ship.hit(this.x, this.y);
+				users[u].ship.hit(this.x, this.y, users[u].username);
 			}
 		}
 	};
@@ -210,10 +227,15 @@ function Bullet(x, y, dir){
 			//display boo
 }
 
-function Explosion(x, y){
+function Explosion(x, y, user){
+	this.x = x;
+	this.y = y;
+	this.user = user;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/explosion.png";
-	game.context.drawImage(this.img, x, y);
+	this.draw = function() {
+		game.context.drawImage(this.img, this.x, this.y);
+	}
 }
 
 function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 

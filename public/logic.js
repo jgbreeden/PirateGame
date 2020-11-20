@@ -152,7 +152,7 @@ function handleKey(code){
 		}
 
 	if (code == "keyY"){//dock
-		this.docked = true; 
+		//Me.docked
 
 
 	}
@@ -163,6 +163,7 @@ function handleKey(code){
 			socket.emit("shipFire", shoot);
 			bullets.push(shoot);
 			me.munitions--;
+			document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 			console.log("Bullets left " + me.munitions);
 		} else {
 			console.log("Out of Bullets");
@@ -275,8 +276,12 @@ $(function () {
 		player.ship = new PlayerShip(400, 300, 0, 0);
 		users.push(player);
 	});
-	socket.on("playerKilled", function(ev) {
-		
+	socket.on("playerHit", function(playerHit) {
+		for(i = 0; i < users.length; i++){
+			if(playerHit.user == users[i].username){
+				users[i].ship.explosion = playerHit;
+			}
+		}
 	});
 	socket.on('playerMove', function(movement) {
 		for(i = 0; i < users.length; i ++){

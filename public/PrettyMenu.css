@@ -92,13 +92,34 @@ button:hover {
     height: 40px;
     width: 40px;
     background-color: grey;
-    position: fixed;
-    top: 136px;
-    left: 176px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 #statPage{
+	background-image: url('imgs/pirate.png');
 	position: fixed;
-	top:0;
-	left:0;
+	top: 100px;
+	left:0px;
+	height: 500px;
+	width: 200px;
 }
+
+.closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+	padding-bottom: 20px;
+  }
+
+  #statPage a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: black;
+	display: block;
+	transition: 0.3s;
+  }
