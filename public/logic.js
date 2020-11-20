@@ -174,7 +174,7 @@ function gameUpdate(){
 	game.clear();
 	game.draw();
 	for(i = 0; i < users.length; i++){
-		if(users[i].ship.visible == true){
+		if(users[i].ship.visible || users[i].ship.explosion){
 			users[i].ship.draw();
 		}
 	}

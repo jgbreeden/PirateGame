@@ -64,6 +64,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.visible = false;
 			}
 		};
+		if (this.explosion){
+			this.explosion.draw();
+		}
 	};
 	this.radar = function () {
 		var trans = 1;
@@ -143,7 +146,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		}
 	};
 	this.hit = function(x, y, uname){
-		this.explosion = new Explosion(this.x, this.y, uname);
+		this.explosion = new Explosion(this.x, this.y, uname, this);
 		socket.emit("playerHit", this.explosion);
 	}
 };
@@ -210,7 +213,7 @@ function Bullet(x, y, dir){
 			//display boo
 }
 
-function Explosion(x, y, user){
+function Explosion(x, y, user, ship){
 	this.x = x;
 	this.y = y;
 	this.user = user;
@@ -218,6 +221,9 @@ function Explosion(x, y, user){
 	this.img.src = "imgs/explosion.png";
 	this.draw = function() {
 		game.context.drawImage(this.img, this.x, this.y);
+		setTimeout(function() {
+			ship.explosion = false
+		}, 500);
 	}
 }
 
