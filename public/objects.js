@@ -1,4 +1,5 @@
 const len = 90;
+var shipType;
 
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
 	//in relation to their respawn port, with an area of interaction that moves with the player
@@ -13,7 +14,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.docked = false;
 	this.explosion = false;
 	this.img = document.createElement("img");
-	this.img.src = "imgs/ship.png";
+	this.img.src = shipType;
 	this.draw = function() {
 		let imgw = this.img.width/2
 		var offsetx = this.x;
@@ -141,7 +142,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			if(this.y >= map.ports[i].y 
 				&& this.y <= map.ports[i].y
 				&& this.x >= map.ports[i].x
-				&& this.x <= map.ports[i].x){
+				&& this.x <= map.ports[i].x)
+				this.docked = true; {
 				}
 		}
 	};
@@ -151,6 +153,21 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	}
 };
 //hi 
+
+function stats(){
+	console.log("bruh:");
+	var statPage = document.getElementById('statPage');
+	statPage.style.display = "block";
+	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
+	document.getElementById("pScore").innerHTML = 'Player Score: ' + 0;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
+	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
+	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + 100;
+}
+
+function confirmSelect(x){
+	shipType = "imgs/ship" + x + ".png";
+}
 
 function User(username){
 	this.ship = {};

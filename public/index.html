@@ -9,13 +9,17 @@
 <button class="open-button" onclick="openForm()">Login</button>
 
 <div class="form-popup" id="myForm">
-  
+ 
+ <!-- Ill add photos later -->
+ 
+ 
+ 
 <h1>Login</h1>
  
 <div id="LoginArea">
   <form id="loginForm">
 	<label for="ships"> CHOOSE YOUR SHIP:</label>
-	  <select name="ships" id="ships" onchange="shipType(this.value)">
+	  <select name="ships" id="ships" onchange="confirmSelect(this.value)">
       <option value="1">sloop</option>
       <option value="2">Schooners</option>
       <option value="3">Dutch Fleut</option>
@@ -71,6 +75,11 @@ function stats(){
   var statPage = document.getElementById('statPage');
   statPage.style.visibility = "show";
 }
+
+function confirmSelect(x){
+  shipType(x);
+  console.log("bruh")
+};
 </script>
 
 <script src='/socket.io/socket.io.js'></script>
