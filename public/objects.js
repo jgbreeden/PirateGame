@@ -14,7 +14,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.docked = false;
 	this.explosion = false;
 	this.img = document.createElement("img");
-	this.img.src = shipType;
+	this.img.src = shipType.imgName;
 	this.draw = function() {
 		let imgw = this.img.width/2
 		var offsetx = this.x;
@@ -166,7 +166,11 @@ function stats(){
 }
 
 function confirmSelect(x){
-	shipType = "imgs/ship" + x + ".png";
+	shipType = new ShipType("imgs/ship" + x + ".png");
+}
+
+function ShipType(imgName){
+	this.imgName = imgName;
 }
 
 function User(username){
