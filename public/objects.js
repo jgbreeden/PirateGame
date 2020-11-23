@@ -146,6 +146,17 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.docked = true; {
 				}
 		}
+		if(this.docked = false){
+			for (i = 0; i < map.islands.length; i++){
+				if(this.y >= map.islands[i].north - 10
+					|| this.y <= map.islands[i].south + 10
+					|| this.x >= map.islands[i].west - 10
+					|| this.x <= map.islands[i].east + 10){
+						this.docked = true;
+						console.log("Dock");
+					}
+			}
+		}
 	};
 	this.hit = function(x, y, uname){
 		this.explosion = new Explosion(this.x, this.y, uname, this);
@@ -184,7 +195,7 @@ function Bullet(x, y, dir){
 	this.dir = dir;
 	this.startx = x;
 	this.starty = y;
-	this.life = 100;
+	this.life = 60;
 	this.move = function(){
 		let dis = 3;
 		if(this.dir == 90){//Right or E
