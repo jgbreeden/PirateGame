@@ -65,9 +65,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.visible = false;
 			}
 		};
-		if (this.explosion){
-			this.explosion.draw();
-		}
 	};
 	this.radar = function () {
 		var trans = 1;
@@ -140,10 +137,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.dock = function(){//checkdistance <- (reminder)
 		for (i = 0; i < map.ports.length; i++){
 			if(this.y >= map.ports[i].y 
-				&& this.y <= map.ports[i].y
-				&& this.x >= map.ports[i].x
-				&& this.x <= map.ports[i].x)
-				this.docked = true; {
+				&& this.y <= map.ports[i].y // add 10
+				&& this.x >= map.ports[i].x // click X/Y into port
+				&& this.x <= map.ports[i].x) {
+				this.docked = true; 
 				}
 		}
 		if(this.docked = false){
@@ -159,7 +156,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		}
 	};
 	this.hit = function(x, y, uname){
-		this.explosion = new Explosion(this.x, this.y, uname, this);
+		this.explosion = new Explosion(this.x, this.y, uname);
 		socket.emit("playerHit", this.explosion);
 	}
 };
@@ -194,7 +191,7 @@ function Bullet(x, y, dir){
 	this.dir = dir;
 	this.startx = x;
 	this.starty = y;
-	this.life = 60;
+	this.life = 100;
 	this.move = function(){
 		let dis = 3;
 		if(this.dir == 90){//Right or E
@@ -244,7 +241,7 @@ function Bullet(x, y, dir){
 			//display boo
 }
 
-function Explosion(x, y, user, ship){
+function Explosion(x, y, user){
 	this.x = x;
 	this.y = y;
 	this.user = user;
@@ -252,9 +249,6 @@ function Explosion(x, y, user, ship){
 	this.img.src = "imgs/explosion.png";
 	this.draw = function() {
 		game.context.drawImage(this.img, this.x, this.y);
-		setTimeout(function() {
-			ship.explosion = false
-		}, 500);
 	}
 }
 
