@@ -14,7 +14,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.docked = false;
 	this.explosion = false;
 	this.img = document.createElement("img");
-	this.img.src = shipType;
+	this.img.src = shipType.imgName;
 	this.draw = function() {
 		let imgw = this.img.width/2
 		var offsetx = this.x;
@@ -145,6 +145,17 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				 
 				}
 		}
+		if(this.docked = false){
+			for (i = 0; i < map.islands.length; i++){
+				if(this.y >= map.islands[i].north - 10
+					|| this.y <= map.islands[i].south + 10
+					|| this.x >= map.islands[i].west - 10
+					|| this.x <= map.islands[i].east + 10){
+						this.docked = true;
+						console.log("Dock");
+					}
+			}
+		}
 	};
 	this.hit = function(x, y, uname){
 		this.explosion = new Explosion(this.x, this.y, uname);
@@ -152,8 +163,23 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	}
 };
 //hi 
+
+function stats(){
+	var statPage = document.getElementById('statPage');
+	statPage.style.display = "block";
+	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
+	document.getElementById("pScore").innerHTML = 'Player Score: ' + 0;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
+	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
+	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + 100;
+}
+
 function confirmSelect(x){
-	shipType = "imgs/ship" + x + ".png"
+	shipType = new ShipType("imgs/ship" + x + ".png");
+}
+
+function ShipType(imgName){
+	this.imgName = imgName;
 }
 
 function User(username){
