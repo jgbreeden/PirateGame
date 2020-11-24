@@ -65,9 +65,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.visible = false;
 			}
 		};
-		if (this.explosion){
-			this.explosion.draw();
-		}
 	};
 	this.radar = function () {
 		var trans = 1;
@@ -140,44 +137,21 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.dock = function(){//checkdistance <- (reminder)
 		for (i = 0; i < map.ports.length; i++){
 			if(this.y >= map.ports[i].y 
-				&& this.y <= map.ports[i].y
-				&& this.x >= map.ports[i].x
-				&& this.x <= map.ports[i].x)
-				this.docked = true; {
+				&& this.y <= map.ports[i].y // add 10
+				&& this.x >= map.ports[i].x // click X/Y into port
+				&& this.x <= map.ports[i].x) {
+				this.docked = true; 
 				}
-		}
-		if(this.docked = false){
-			for (i = 0; i < map.islands.length; i++){
-				if(this.y >= map.islands[i].north - 10
-					|| this.y <= map.islands[i].south + 10
-					|| this.x >= map.islands[i].west - 10
-					|| this.x <= map.islands[i].east + 10){
-						this.docked = true;
-						console.log("Dock");
-					}
-			}
 		}
 	};
 	this.hit = function(x, y, uname){
-		this.explosion = new Explosion(this.x, this.y, uname, this);
+		this.explosion = new Explosion(this.x, this.y, uname);
 		socket.emit("playerHit", this.explosion);
 	}
 };
 //hi 
-
-function stats(){
-	console.log("bruh:");
-	var statPage = document.getElementById('statPage');
-	statPage.style.display = "block";
-	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
-	document.getElementById("pScore").innerHTML = 'Player Score: ' + 0;
-	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
-	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
-	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + 100;
-}
-
 function confirmSelect(x){
-	shipType = "imgs/ship" + x + ".png";
+	shipType = "imgs/ship" + x + ".png"
 }
 
 function User(username){
@@ -191,7 +165,7 @@ function Bullet(x, y, dir){
 	this.dir = dir;
 	this.startx = x;
 	this.starty = y;
-	this.life = 60;
+	this.life = 100;
 	this.move = function(){
 		let dis = 3;
 		if(this.dir == 90){//Right or E
@@ -241,7 +215,7 @@ function Bullet(x, y, dir){
 			//display boo
 }
 
-function Explosion(x, y, user, ship){
+function Explosion(x, y, user){
 	this.x = x;
 	this.y = y;
 	this.user = user;
@@ -249,9 +223,6 @@ function Explosion(x, y, user, ship){
 	this.img.src = "imgs/explosion.png";
 	this.draw = function() {
 		game.context.drawImage(this.img, this.x, this.y);
-		setTimeout(function() {
-			ship.explosion = false
-		}, 500);
 	}
 }
 
