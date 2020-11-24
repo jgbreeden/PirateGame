@@ -166,7 +166,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 //hi 
 
 function stats(){
-	console.log("bruh:");
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
 	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
