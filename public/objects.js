@@ -79,7 +79,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			game.context.lineTo(linex, liney);
 			game.context.stroke();
 			for (j = 0; j < users.length; j++) {
-				if (users[j].username != myname)
+				if (users[j].username != myname){
 					var deltax = users[j].ship.x - this.x;
 					var deltay = users[j].ship.y - this.y;
 					var rad = Math.atan2(deltax, deltay);
@@ -94,6 +94,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 						game.context.fillRect(users[j].ship.x, users[j].ship.y, 10, 10);
 					
 					};
+				};
 			};
 			this.rot -= 0.05;
 			trans -= 0.2;
@@ -179,7 +180,7 @@ function confirmSelect(x){
 	shipType = new ShipType("imgs/ship" + x + ".png");
 }
 
-function ShipType(imgName){
+function ShipType(imgName, health, ammo, speed, length){
 	this.imgName = imgName;
 }
 
