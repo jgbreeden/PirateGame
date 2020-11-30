@@ -68,7 +68,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.radar = function () {
 		var trans = 1;
-		for( i = 0; i < 10; i++){
+		for( k = 0; k < 10; k++){
 			var x = Math.sin(this.rot) * len;
 			var y = Math.cos(this.rot) * len;
 			game.context.strokeStyle = "rgba(50, 205, 50," + trans + ")";
@@ -99,8 +99,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 			this.rot -= 0.05;
 			trans -= 0.2;
 		};
-	this.rot += .55;
-	if(this.rot > Math.PI * 2) {
+		this.rot += .55;
+		if(this.rot > Math.PI * 2) {
 			this.rot = 0;
 		};
 	};
