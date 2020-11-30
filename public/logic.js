@@ -177,8 +177,9 @@ function handleKey(code){
 		me.move(movement);     
 		}
 
-	if (code == "keyY"){//dock
+	if (code == "KeyY"){//dock
 		me.dock();
+		console.log('Key works')
 
 
 	}

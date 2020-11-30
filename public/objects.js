@@ -143,6 +143,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 					this.docked = true;
 					this.x = map.ports[i].x
 					this.y = map.ports[i].y
+					console.log('something worked');
 				}
 		}
 		if(this.docked = false){
