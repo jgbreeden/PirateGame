@@ -136,11 +136,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.dock = function(){//checkdistance <- (reminder)
 		for (i = 0; i < map.ports.length; i++){
-			if(this.y >= map.ports[i].y 
-				&& this.y <= map.ports[i].y // add 10
-				&& this.x >= map.ports[i].x // click X/Y into port
-				&& this.x <= map.ports[i].x) {
-				this.docked = true; 
+			if(this.y >= map.ports[i].y - 10
+				&& this.y <= map.ports[i].y + 10 // add 10
+				&& this.x >= map.ports[i].x - 10// click X/Y into port
+				&& this.x <= map.ports[i].x + 10) { 
+					this.docked = true;
+					this.x = map.ports[i].x
+					this.y = map.ports[i].y
 				}
 		}
 		if(this.docked = false){
