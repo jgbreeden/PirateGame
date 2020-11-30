@@ -159,7 +159,7 @@ function handleKey(code){
 	
 	if(code == "KeyE"){//fire
 		if (me.munitions > 0 ){
-			var shoot = new Bullet(me.x, me.y, me.dir);
+			var shoot = new Bullet(me.x, me.y, me.dir, myname);
 			socket.emit("shipFire", shoot);
 			bullets.push(shoot);
 			me.munitions--;
@@ -280,6 +280,14 @@ $(function () {
 		for(i = 0; i < users.length; i++){
 			if(playerHit.user == users[i].username){
 				users[i].ship.explosion = playerHit;
+				users[i].ship.health = users[i].ship.health - 50;
+				if(users[i].ship.health == 0){
+					for(k = 0; k < users.length; k++){
+						if(playerHit.killer == users[k].username){
+							user[k].ship.kills + 1;
+						}
+					}
+				}
 			}
 		}
 	});

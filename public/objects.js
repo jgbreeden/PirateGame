@@ -10,6 +10,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.munitions = 90;
 	this.rot = 0;
 	this.health = 100;
+	this.kills = 0;
 	this.visible = false;
 	this.docked = false;
 	this.explosion = false;
@@ -185,10 +186,11 @@ function User(username){
 	this.username = username;
 
 }
-function Bullet(x, y, dir){
+function Bullet(x, y, dir, killer){
 	this.x = x;
 	this.y = y;
 	this.dir = dir;
+	this.killer = killer;
 	this.startx = x;
 	this.starty = y;
 	this.life = 60;
@@ -223,7 +225,7 @@ function Bullet(x, y, dir){
 			if(checkDistance(users[u].ship, this) < 10 ){
 				console.log("end me");
 				this.life = 0;
-				users[u].ship.hit(this.x, this.y, users[u].username);
+				users[u].ship.hit(this.x, this.y, users[u].username, this.killer);
 			}
 		}
 	};
@@ -241,10 +243,11 @@ function Bullet(x, y, dir){
 			//display boo
 }
 
-function Explosion(x, y, user, ship){
+function Explosion(x, y, user, ship, killer){
 	this.x = x;
 	this.y = y;
 	this.user = user;
+	this.killer = killer;
 	this.img = document.createElement("img");
 	this.img.src = "imgs/explosion.png";
 	this.draw = function() {
