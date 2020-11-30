@@ -176,7 +176,7 @@ function confirmSelect(x){
 	shipType = new ShipType("imgs/ship" + x + ".png");
 }
 
-function ShipType(imgName){
+function ShipType(imgName, health, ammo, speed, length){
 	this.imgName = imgName;
 }
 
