@@ -223,7 +223,7 @@ function Bullet(x, y, dir){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 10 ){
+			if(checkDistance(users[u].ship, this) < 10 && users[u].ship != me ){
 				console.log("end me");
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username);
