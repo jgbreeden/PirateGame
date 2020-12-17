@@ -65,6 +65,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.visible = false;
 			}
 		};
+		if (this.explosion){	
+			this.explosion.draw();	
+		}
 	};
 	this.radar = function () {
 		var trans = 1;
@@ -161,6 +164,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.hit = function(x, y, uname){
 		this.explosion = new Explosion(this.x, this.y, uname);
 		socket.emit("playerHit", this.explosion);
+		var local = this;
+		setTimeout(function() {	
+			local.explosion = false;	
+		}, 500);
 	}
 };
 //hi 
