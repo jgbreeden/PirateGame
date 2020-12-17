@@ -5,7 +5,7 @@ var update;
 var me;
 var myname;
 let radlen = 100;
-let	maxwidth = 800;
+let maxwidth = 800;
 let maxheight = 600;
 var Surface = document.getElementById("GameArea");
 var login = document.getElementById("LoginArea");
