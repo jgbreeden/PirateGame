@@ -307,8 +307,9 @@ $(function () {
 		for(i = 0; i < users.length; i++){
 			if(playerHit.user == users[i].username){
 				users[i].ship.explosion = new Explosion(playerHit.x, playerHit.y, playerHit.username);
+				var user = users[i]
 				setTimeout(function() {	
-					users[i].ship.explosion = false;	
+					user.ship.explosion = false;	
 				}, 500);
 			}
 		}
