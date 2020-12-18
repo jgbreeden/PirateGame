@@ -1,4 +1,4 @@
-var socket = io();
+var socket = io({transports: ['websocket'], upgrade: false});
 var users = [];
 var bullets = [];
 var update;
