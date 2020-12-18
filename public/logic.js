@@ -1,11 +1,11 @@
-var socket = io();
+var socket = io({transports: ['websocket'], upgrade: false});
 var users = [];
 var bullets = [];
 var update;
 var me;
 var myname;
 let radlen = 100;
-let	maxwidth = 800;
+let maxwidth = 800;
 let maxheight = 600;
 var Surface = document.getElementById("GameArea");
 var login = document.getElementById("LoginArea");
@@ -307,7 +307,11 @@ $(function () {
 	socket.on("playerHit", function(playerHit) {
 		for(i = 0; i < users.length; i++){
 			if(playerHit.user == users[i].username){
-				users[i].ship.explosion = playerHit;
+				users[i].ship.explosion = new Explosion(playerHit.x, playerHit.y, playerHit.username);
+				var user = users[i]
+				setTimeout(function() {	
+					user.ship.explosion = false;	
+				}, 500);
 			}
 		}
 	});

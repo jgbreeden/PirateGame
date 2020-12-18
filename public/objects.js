@@ -65,6 +65,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.visible = false;
 			}
 		};
+		if (this.explosion){	
+			this.explosion.draw();	
+		}
 	};
 	this.radar = function () {
 		var trans = 1;
@@ -162,6 +165,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.hit = function(x, y, uname){
 		this.explosion = new Explosion(this.x, this.y, uname);
 		socket.emit("playerHit", this.explosion);
+		var local = this;
+		setTimeout(function() {	
+			local.explosion = false;	
+		}, 500);
 	}
 };
 //hi 
@@ -224,7 +231,7 @@ function Bullet(x, y, dir){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 10 ){
+			if(checkDistance(users[u].ship, this) < 10 && users[u].ship != me ){
 				console.log("end me");
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username);
