@@ -8,8 +8,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.dir = dir;
 	this.a = a;
 	this.munitions = 90;
+	this.score = 0;
 	this.rot = 0;
 	this.health = 100;
+	this.fuel = 100;
 	this.visible = false;
 	this.docked = false;
 	this.explosion = false;
@@ -163,6 +165,8 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		}
 	};
 	this.hit = function(x, y, uname){
+		me.score += 25;
+		stats();
 		this.explosion = new Explosion(this.x, this.y, uname);
 		socket.emit("playerHit", this.explosion);
 		var local = this;
@@ -177,10 +181,10 @@ function stats(){
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
 	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
-	document.getElementById("pScore").innerHTML = 'Player Score: ' + 0;
+	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
 	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
-	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + 100;
+	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
 }
 
 function confirmSelect(x){
@@ -231,9 +235,11 @@ function Bullet(x, y, dir){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 10 && users[u].ship != me ){
+			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me ){
 				console.log("end me");
 				this.life = 0;
+				me.score += 25;
+				stats();
 				users[u].ship.hit(this.x, this.y, users[u].username);
 			}
 		}

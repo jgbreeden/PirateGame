@@ -29,8 +29,12 @@ io.on('connection', function(socket){
 		connections.splice(connections.indexOf(socket), 1);
 		users.splice(users.indexOf(socket.user), 1);
 		console.log('Disconnection:' + socket.user);
-		io.emit("user list", users); 
-		runtime = false;
+		if(runtime != true){
+			io.emit("user list", users);
+		}
+		if(users.length == 0){
+			runtime = false;
+		}
 	});
 
 	socket.on('startGame', function (){

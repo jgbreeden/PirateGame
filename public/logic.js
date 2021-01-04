@@ -152,12 +152,16 @@ var ships = {
 function handleKey(code){
 	if (code == "KeyW") {//move forward
 		var dis = 10;
+		me.fuel -= 0.5;
+		stats();
 		var movement = new Move(0, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);
 	}
 	if (code == "KeyS"){//move backwards
 		var dis = -10;
+		me.fuel -= 0.5;
+		stats();
 		var movement = new Move(0, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);
@@ -165,6 +169,8 @@ function handleKey(code){
 	if (code == "KeyD"){//turn right
 		var dir = 45;
 		var dis = 10;
+		me.fuel -= 0.5;
+		stats();
 		var movement = new Move(dir, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);
@@ -172,6 +178,8 @@ function handleKey(code){
 	if(code == "KeyA"){//turn left
 		var dir = -45;
 		var dis = 10;
+		me.fuel -= 0.5;
+		stats();
 		var movement = new Move(dir, dis, myname);
 		socket.emit("playerMove", movement);
 		me.move(movement);     
