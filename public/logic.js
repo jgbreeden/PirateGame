@@ -140,8 +140,8 @@ var ships = {
         length: 4
       },
       {
-        name: "Submarine Dominator",
-        health: 150,
+        name: "Battleship Batalion",
+        health: 200,
         ammo: 35,
         speed: 4,
         length: 5
