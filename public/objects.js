@@ -183,6 +183,7 @@ function stats(){
 	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
 	document.getElementById("pHealth").innerHTML = 'Player Health: ' + me.health;
 	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
+	document.getElementById("pCoins").innerHTML = 'Player Coins: ' + me.coins;
 	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
