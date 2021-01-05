@@ -2,15 +2,16 @@
 <html>
 <head>
 	<link href="PrettyMenu.css" rel="stylesheet" type="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oceans Of Valor</title>
 </head>
 
 <body style="background-image: url('imgs/NotFinal1.png');">
-<button class="open-button" onclick="openForm(); fillSelect();">Login</button>
+<button class="open-button" id="openBtn" onclick="openForm(); fillSelect();">Login</button>
 <div class="form-popup" id="myForm">
  
  
-<h1>Login</h1>
+<h1 id="head">Login</h1>
  
 <div id="LoginArea">
   <form id="loginForm">
@@ -25,7 +26,7 @@
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
 
-    <button type="submit" class="btn">Login</button>
+    <button type="submit" class="btn" onclick="document.getElementById('head').innerHTML = 'OCEANS OF VALOR';">Login</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
@@ -35,14 +36,14 @@
 	<ul id="userList"></ul>
 
 	<button onclick="gameStart()">Start</button>
-	<p> Cannot join </p>
+	<p style="display: none"> Cannot join </p>
 </div>
 
 <div id="GameArea">
   <div id="statPage" style="display: none;">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeStats()">&times;</a>
     <a></a>
     <a id='pName'></a>
+    <a id='pHealth'></a>
     <a id='pScore'></a>
     <a id='pKills'></a>
     <a id='pAmmo'></a>
@@ -50,7 +51,6 @@
   </div>
 	<canvas id="GameCanvas">
   </canvas>
-  <div id="button" onmouseover="stats()">Stats</div>
 </div>
 
 <div id="ShoppingCart">
@@ -64,11 +64,13 @@
   }
 
   function openForm() {
+    document.getElementById("openBtn").style.display = "none";
     document.getElementById("myForm").style.display = "block";
   }
 
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
+
   }
 
   var modal = document.getElementById('idea');
