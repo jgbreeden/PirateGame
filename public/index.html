@@ -6,7 +6,7 @@
 </head>
 
 <body style="background-image: url('imgs/NotFinal1.png');">
-<button class="open-button" onclick="openForm()">Login</button>
+<button class="open-button" onclick="openForm(); fillSelect();">Login</button>
 <div class="form-popup" id="myForm">
  
  
@@ -17,9 +17,6 @@
 	<label for="ships"> CHOOSE YOUR SHIP:</label>
 	  <select required name="ships" id="ships" onchange="confirmSelect(this.value)">
       <option value="">None</option>
-      <option value="1">sloop</option>
-      <option value="2">Schooners</option>
-      <option value="3">Dutch Fleut</option>
 	  </select>
 
     <label for="user"><b>Username</b></label>
@@ -56,30 +53,39 @@
   <div id="button" onmouseover="stats()">Stats</div>
 </div>
 
+<div id="ShoppingCart">
+
 <script>
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
+  function fillSelect(){
+    for(i = 0; i < ships.ships.length; i++){
+      var num = i + 1;
+      document.getElementById("ships").innerHTML += "<option value=" + num + ">"+ ships.ships[i].name +"</option>";
+    };
+  }
 
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
 
-var modal = document.getElementById('idea');
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
 
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+  var modal = document.getElementById('idea');
 
-function closeStats(){
-  document.getElementById('statPage').style.display = 'none';
-}
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
 
-function confirmSelect(x){
-  shipType(x);
-};
+  function closeStats(){
+    document.getElementById('statPage').style.display = 'none';
+  }
+
+  function confirmSelect(x){
+    shipType(x);
+  };
 </script>
 
 <script src='/socket.io/socket.io.js'></script>

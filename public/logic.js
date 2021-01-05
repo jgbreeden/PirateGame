@@ -123,6 +123,32 @@ var map = {
 	]
 };
 
+var ships = {
+    ships: [
+      {
+        name: "Silver Bullet",
+        health: 100,
+        ammo: 15,
+        speed: 8,
+        length: 3
+      },
+      {
+        name: "S.S Payback",
+        health: 120,
+        ammo: 25,
+        speed: 5,
+        length: 4
+      },
+      {
+        name: "Submarine Dominator",
+        health: 150,
+        ammo: 35,
+        speed: 4,
+        length: 5
+      }
+    ]
+};
+
 function handleKey(code){
 	if (code == "KeyW") {//move forward
 		var dis = 10;
@@ -152,7 +178,7 @@ function handleKey(code){
 		}
 
 	if (code == "keyY"){//dock
-		//Me.docked
+		me.dock();
 
 
 	}
@@ -200,12 +226,13 @@ function serverStart(){
 		if (users[i].username == myname) {
 			x = map.islands[i].west;
 			y = map.islands[i].south;
+			me = new PlayerShip(x, y, 0, 0);
+			users[i].ship = me;
 		} else {
 			users[i].ship = new PlayerShip(400, 300, 0, 0);
 		}
 	}
 	update = setInterval(gameUpdate, 20);
-	me = new PlayerShip(x, y, 0, 0);
 	me.visible = true;
 	playerPos();
 	console.log("start");
