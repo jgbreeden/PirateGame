@@ -49,6 +49,12 @@
     <a id='pAmmo'></a>
     <a id='pFuel'></a>
   </div>
+  
+<button onclick="myFunction()">button</button>
+
+<p id="popup"></p>
+
+
     <div id="Merchant" style="display: none;">
 	
     <a id='Ammo'>Ammo</a>
@@ -96,6 +102,15 @@
   function confirmSelect(x){
     shipType(x);
   };
+  function myFunction() {
+  var txt;
+  if (confirm("Press the button")) {
+    txt = "OK";
+  } else {
+    txt = "Canceled";
+  }
+  document.getElementById("popup").innerHTML = txt;
+  }
 </script>
 
 <script src='/socket.io/socket.io.js'></script>
