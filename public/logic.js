@@ -129,21 +129,24 @@ var ships = {
         name: "Silver Bullet",
         health: 100,
         ammo: 15,
-        speed: 8,
+	   speed: 8,
+	   fuel: 150,
         length: 3
       },
       {
         name: "S.S Payback",
         health: 120,
         ammo: 25,
-        speed: 5,
+	   speed: 5,
+	   fuel: 125,
         length: 4
       },
       {
         name: "Battleship Batalion",
         health: 200,
         ammo: 35,
-        speed: 4,
+	   speed: 4,
+	   fuel: 225,
         length: 5
       }
     ]
@@ -151,39 +154,39 @@ var ships = {
 
 function handleKey(code){
 	if (code == "KeyW") {//move forward
-		var dis = 10;
-		me.fuel -= 0.5;
-		stats();
-		var movement = new Move(0, dis, myname);
-		socket.emit("playerMove", movement);
-		me.move(movement);
+		var dis = shipType.speed;
+		if (me.fuel > 0){
+			var movement = new Move(0, dis, myname);
+			socket.emit("playerMove", movement);
+			me.move(movement);
+		}
 	}
 	if (code == "KeyS"){//move backwards
-		var dis = -10;
-		me.fuel -= 0.5;
-		stats();
-		var movement = new Move(0, dis, myname);
-		socket.emit("playerMove", movement);
-		me.move(movement);
+		var dis = -shipType.speed;
+		if (me.fuel > 0){
+			var movement = new Move(0, dis, myname);
+			socket.emit("playerMove", movement);
+			me.move(movement);
+		}
 	}
 	if (code == "KeyD"){//turn right
 		var dir = 45;
-		var dis = 10;
-		me.fuel -= 0.5;
-		stats();
-		var movement = new Move(dir, dis, myname);
-		socket.emit("playerMove", movement);
-		me.move(movement);
+		var dis = shipType.speed;
+		if (me.fuel > 0){
+			var movement = new Move(dir, dis, myname);
+			socket.emit("playerMove", movement);
+			me.move(movement);
+		}
 	}
 	if(code == "KeyA"){//turn left
 		var dir = -45;
-		var dis = 10;
-		me.fuel -= 0.5;
-		stats();
-		var movement = new Move(dir, dis, myname);
-		socket.emit("playerMove", movement);
-		me.move(movement);     
-		}
+		var dis = shipType.speed;
+		if (me.fuel > 0){
+			var movement = new Move(dir, dis, myname);
+			socket.emit("playerMove", movement);
+			me.move(movement);  
+		}   
+	}
 
 	if (code == "KeyY"){//dock
 		me.dock();
