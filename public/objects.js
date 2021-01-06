@@ -110,35 +110,41 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 	};
 	this.move = function(Move) {
-		this.dir += Move.dir;
-		if(this.dir < 0){
-			this.dir = 315;
-		};
-		if(this.dir > 315){
-			this.dir = 0;
-		};
-		if(this.dir == 90){//Right or E
-			this.x += Move.dis;//Make move thing up/down/left/right
-		} else if(this.dir == 135){//SE or SE
-			this.y += Move.dis;
-			this.x += Move.dis;
-		} else if (this.dir == 180){//S our Down
-			this.y += Move.dis;
-		} else if (this.dir == 225){//SW or SW
-			this.y += Move.dis;
-			this.x -= Move.dis;
-		} else if (this.dir == 270){//W or left
-			this.x -= Move.dis;
-		} else if (this.dir == 315){// NW or NW
-			this.y -= Move.dis;
-			this.x -= Move.dis;
-		} else if (this.dir == 0){//N or UP
-			this.y -= Move.dis;
-		} else if (this.dir == 45){//NE or NE
-			this.y -= Move.dis;
-			this.x += Move.dis;
-		};
-		CheckBounds(this);
+		if (this.fuel > 0 ){
+			this.dir += Move.dir;
+			if(this.dir < 0){
+				this.dir = 315;
+			};
+			if(this.dir > 315){
+				this.dir = 0;
+			};
+			if(this.dir == 90){//Right or E
+				this.x += Move.dis;//Make move thing up/down/left/right
+			} else if(this.dir == 135){//SE or SE
+				this.y += Move.dis;
+				this.x += Move.dis;
+			} else if (this.dir == 180){//S our Down
+				this.y += Move.dis;
+			} else if (this.dir == 225){//SW or SW
+				this.y += Move.dis;
+				this.x -= Move.dis;
+			} else if (this.dir == 270){//W or left
+				this.x -= Move.dis;
+			} else if (this.dir == 315){// NW or NW
+				this.y -= Move.dis;
+				this.x -= Move.dis;
+			} else if (this.dir == 0){//N or UP
+				this.y -= Move.dis;
+			} else if (this.dir == 45){//NE or NE
+				this.y -= Move.dis;
+				this.x += Move.dis;
+			};
+			this.fuel -= 0.5;
+			CheckBounds(this);
+		} else if (this.fuel == 0) {
+			console.log(this.fuel);
+		}
+		stats();
 	};
 	this.dock = function(){//checkdistance <- (reminder)
 		for (i = 0; i < map.ports.length; i++){
@@ -177,7 +183,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	}
 };
 //hi 
-
+//if anyone else see this make a comment underneath mine - Sonny
 function stats(){
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
