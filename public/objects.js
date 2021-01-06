@@ -7,11 +7,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
-	this.munitions = 90;
-	this.score = 0;
 	this.rot = 0;
+	this.munitions = shipType.ammo;
+	this.score = 0;
+	this.kills = 0;
+	this.coins = 100;
 	this.health = shipType.health;
-	this.fuel = 100;
+	this.fuel = shipType.fuel;
 	this.visible = false;
 	this.docked = false;
 	this.explosion = false;
@@ -198,18 +200,20 @@ function stats(){
 
 function confirmSelect(x){
 	console.log(x);
-	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health);
+	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health, ships.ships[x - 1].ammo, ships.ships[x - 1].speed, ships.ships[x - 1].fuel);
 }
 
-function ShipType(imgName, health, ammo, speed, length){
+function ShipType(imgName, health, ammo, speed, fuel, length){
 	this.imgName = imgName;
 	this.health = health;
+	this.ammo = ammo;
+	this.speed = speed;
+	this.fuel = fuel;
 }
 
 function User(username){
 	this.ship = {};
 	this.username = username;
-
 }
 function Bullet(x, y, dir, killer){
 	this.x = x;
