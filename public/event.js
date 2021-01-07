@@ -31,6 +31,8 @@ function startPosition(user, x, y, img){
 	this.img = img;
 }
 
+//pushing comment
+
 function CheckBounds(PlayerShip){
 	if (PlayerShip.x <= map.minx){
 		PlayerShip.x = map.minx + shipType.speed;
