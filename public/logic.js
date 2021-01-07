@@ -265,7 +265,7 @@ function checkDistance(ob1, ob2) {
 }
 
 function playerPos(){
-	var pos = new startPosition(myname, me.x, me.y );
+	var pos = new startPosition(myname, me.x, me.y, shipType.imgName);
 	socket.emit("startPosition", pos);
 }
 
@@ -294,6 +294,7 @@ $(function () {
 			if (users[i].username == pos.user){
 				users[i].ship.x = pos.x;
 				users[i].ship.y = pos.y;
+				users[i].ship.img.src = pos.img;
 				break;
 			}
 		}
