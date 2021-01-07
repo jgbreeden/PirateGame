@@ -318,14 +318,8 @@ $(function () {
 	socket.on("playerHit", function(playerHit) {
 		for(i = 0; i < users.length; i++){
 			if(playerHit.user == users[i].username){
-				users[i].ship.health = users[i].ship.health - 50;
-				if(users[i].ship.health == 0){
-					for(k = 0; k < users.length; k++){
-						if(playerHit.killer == users[k].username){
-							user[k].ship.kills + 1;
-						}
-					}
-				}
+				me.health -= 25;
+				stats();
 				users[i].ship.explosion = new Explosion(playerHit.x, playerHit.y, playerHit.username);
 				var user = users[i]
 				setTimeout(function() {	
