@@ -135,19 +135,35 @@ var ships = {
       },
       {
         name: "S.S Payback",
-        health: 120,
-        ammo: 25,
+        health: 125,
+        ammo: 20,
 	   speed: 5,
 	   fuel: 125,
         length: 4
       },
       {
         name: "Battleship Batalion",
-        health: 200,
+        health: 225,
         ammo: 35,
 	   speed: 4,
 	   fuel: 225,
         length: 5
+      },
+      {
+        name: "Catalyst Cruiser",
+        health: 150,
+        ammo: 25,
+	   speed: 6,
+	   fuel: 175,
+        length: 3
+      },
+      {
+        name: "Submarine Subjugator",
+        health: 250,
+        ammo: 50,
+	   speed: 3,
+	   fuel: 275,
+        length: 6
       }
     ]
 };

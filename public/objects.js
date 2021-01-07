@@ -186,6 +186,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 };
 //hi 
 //if anyone else see this make a comment underneath mine - Sonny
+//no - Unknown
 function stats(){
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
@@ -193,7 +194,7 @@ function stats(){
 	document.getElementById("pHealth").innerHTML = 'Player Health: ' + me.health;
 	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
 	document.getElementById("pCoins").innerHTML = 'Player Coins: ' + me.coins;
-	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + me.kills;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
 }
