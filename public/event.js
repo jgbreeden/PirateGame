@@ -24,21 +24,22 @@ function TreasureCollection(x, y, a){//determines where treasure chest how big t
 	this.a = a;
 }
 
-function startPosition(user, x, y){
+function startPosition(user, x, y, img){
 	this.user = user;
 	this.x = x;
 	this.y = y;
+	this.img = img;
 }
 
 function CheckBounds(PlayerShip){
 	if (PlayerShip.x <= map.minx){
-		PlayerShip.x = map.minx + 10;
+		PlayerShip.x = map.minx + shipType.speed;
 	} else if (PlayerShip.x >= map.maxx){
-		PlayerShip.x = map.maxx - 10;
+		PlayerShip.x = map.maxx - shipType.speed;
 	} else if (PlayerShip.y <= map.miny){
-		PlayerShip.y = map.miny + 10;
+		PlayerShip.y = map.miny + shipType.speed;
 	} else if (PlayerShip.y >= map.maxy){
-		PlayerShip.y = map.maxy - 10;
+		PlayerShip.y = map.maxy - shipType.speed;
 	};
 	// console.log(PlayerShip.x + " : " + PlayerShip.y)
 	for(i = 0; i < map.islands.length; i ++){
@@ -47,25 +48,25 @@ function CheckBounds(PlayerShip){
 		 && PlayerShip.x >= map.islands[i].west
 		 && PlayerShip.x <= map.islands[i].east){
 			if(PlayerShip.dir == 0){
-				PlayerShip.y += 10;
+				PlayerShip.y += shipType.speed;
 			} else if(PlayerShip.dir == 45){
-				PlayerShip.y += 10;
-				PlayerShip.x -= 10;
+				PlayerShip.y += shipType.speed;
+				PlayerShip.x -= shipType.speed;
 			} else if(PlayerShip.dir == 90){
-				PlayerShip.x -= 10;
+				PlayerShip.x -= shipType.speed;
 			} else if(PlayerShip.dir == 135){
-				PlayerShip.y -= 10;
-				PlayerShip.x -= 10;
+				PlayerShip.y -= shipType.speed;
+				PlayerShip.x -= shipType.speed;
 			} else if(PlayerShip.dir == 180){
-				PlayerShip.y -= 10;
+				PlayerShip.y -= shipType.speed;
 			} else if(PlayerShip.dir == 225){
-				PlayerShip.y -= 10;
-				PlayerShip.x += 10;
+				PlayerShip.y -= shipType.speed;
+				PlayerShip.x += shipType.speed;
 			} else if(PlayerShip.dir == 270){
-				PlayerShip.x += 10;
+				PlayerShip.x += shipType.speed;
 			} else if(PlayerShip.dir == 315){
-				PlayerShip.y += 10;
-				PlayerShip.x += 10;
+				PlayerShip.y += shipType.speed;
+				PlayerShip.x += shipType.speed;
 			};
 			console.log("you just crash landed");
 		};
@@ -76,25 +77,25 @@ function CheckBounds(PlayerShip){
 			&& PlayerShip.x >= map.corners[i].west
 			&& PlayerShip.x <= map.corners[i].east){
 			   if(PlayerShip.dir == 0){
-				   PlayerShip.y += 10;
+				   PlayerShip.y += shipType.speed;
 			   } else if(PlayerShip.dir == 45){
-				   PlayerShip.y += 10;
-				   PlayerShip.x -= 10;
+				   PlayerShip.y += shipType.speed;
+				   PlayerShip.x -= shipType.speed;
 			   } else if(PlayerShip.dir == 90){
-				   PlayerShip.x -= 10;
+				   PlayerShip.x -= shipType.speed;
 			   } else if(PlayerShip.dir == 135){
-				   PlayerShip.y -= 10;
-				   PlayerShip.x -= 10;
+				   PlayerShip.y -= shipType.speed;
+				   PlayerShip.x -= shipType.speed;
 			   } else if(PlayerShip.dir == 180){
-				   PlayerShip.y -= 10;
+				   PlayerShip.y -= shipType.speed;
 			   } else if(PlayerShip.dir == 225){
-				   PlayerShip.y -= 10;
-				   PlayerShip.x += 10;
+				   PlayerShip.y -= shipType.speed;
+				   PlayerShip.x += shipType.speed;
 			   } else if(PlayerShip.dir == 270){
-				   PlayerShip.x += 10;
+				   PlayerShip.x += shipType.speed;
 			   } else if(PlayerShip.dir == 315){
-				   PlayerShip.y += 10;
-				   PlayerShip.x += 10;
+				   PlayerShip.y += shipType.speed;
+				   PlayerShip.x += shipType.speed;
 			   };
 		};
 	};

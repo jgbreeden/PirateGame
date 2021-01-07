@@ -129,21 +129,24 @@ var ships = {
         name: "Silver Bullet",
         health: 100,
         ammo: 15,
-        speed: 8,
+	   speed: 8,
+	   fuel: 150,
         length: 3
       },
       {
         name: "S.S Payback",
         health: 120,
         ammo: 25,
-        speed: 5,
+	   speed: 5,
+	   fuel: 125,
         length: 4
       },
       {
         name: "Battleship Batalion",
         health: 200,
         ammo: 35,
-        speed: 4,
+	   speed: 4,
+	   fuel: 225,
         length: 5
       }
     ]
@@ -151,7 +154,7 @@ var ships = {
 
 function handleKey(code){
 	if (code == "KeyW") {//move forward
-		var dis = 10;
+		var dis = shipType.speed;
 		if (me.fuel > 0){
 			var movement = new Move(0, dis, myname);
 			socket.emit("playerMove", movement);
@@ -159,7 +162,7 @@ function handleKey(code){
 		}
 	}
 	if (code == "KeyS"){//move backwards
-		var dis = -10;
+		var dis = -shipType.speed;
 		if (me.fuel > 0){
 			var movement = new Move(0, dis, myname);
 			socket.emit("playerMove", movement);
@@ -168,7 +171,7 @@ function handleKey(code){
 	}
 	if (code == "KeyD"){//turn right
 		var dir = 45;
-		var dis = 10;
+		var dis = shipType.speed;
 		if (me.fuel > 0){
 			var movement = new Move(dir, dis, myname);
 			socket.emit("playerMove", movement);
@@ -177,7 +180,7 @@ function handleKey(code){
 	}
 	if(code == "KeyA"){//turn left
 		var dir = -45;
-		var dis = 10;
+		var dis = shipType.speed;
 		if (me.fuel > 0){
 			var movement = new Move(dir, dis, myname);
 			socket.emit("playerMove", movement);
@@ -262,7 +265,7 @@ function checkDistance(ob1, ob2) {
 }
 
 function playerPos(){
-	var pos = new startPosition(myname, me.x, me.y );
+	var pos = new startPosition(myname, me.x, me.y, shipType.imgName);
 	socket.emit("startPosition", pos);
 }
 
@@ -291,6 +294,7 @@ $(function () {
 			if (users[i].username == pos.user){
 				users[i].ship.x = pos.x;
 				users[i].ship.y = pos.y;
+				users[i].ship.img.src = pos.img;
 				break;
 			}
 		}
@@ -315,14 +319,8 @@ $(function () {
 	socket.on("playerHit", function(playerHit) {
 		for(i = 0; i < users.length; i++){
 			if(playerHit.user == users[i].username){
-				users[i].ship.health = users[i].ship.health - 50;
-				if(users[i].ship.health == 0){
-					for(k = 0; k < users.length; k++){
-						if(playerHit.killer == users[k].username){
-							user[k].ship.kills + 1;
-						}
-					}
-				}
+				me.health -= 25;
+				stats();
 				users[i].ship.explosion = new Explosion(playerHit.x, playerHit.y, playerHit.username);
 				var user = users[i]
 				setTimeout(function() {	
