@@ -155,6 +155,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				&& this.x >= map.ports[i].x - 20// click X/Y into port
 				&& this.x <= map.ports[i].x + 20) { 
 					this.docked = true;
+					socket.emit("playerDocked");
 					document.getElementById("Merchant").style.display = "block";
 					this.x = map.ports[i].x
 					this.y = map.ports[i].y
@@ -168,6 +169,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 					|| this.x >= map.islands[i].west - 20
 					|| this.x <= map.islands[i].east + 20){
 						this.docked = true;
+						socket.emit("playerDocked");
 						console.log("Dock");
 					}
 			}
@@ -252,7 +254,7 @@ function Bullet(x, y, dir, killer){
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
 			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me && users[u].ship.docked == false){
-				console.log("end me");
+				console.log(users[u].ship.docked);
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username, this.killer);
 			}
