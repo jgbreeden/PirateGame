@@ -40,7 +40,7 @@
 </div>
 
 <div id="GameArea">
-  <div id="statPage" style="display: none;">
+  <div id="statPage">
     <a></a>
     <a id='pName'></a>
     <a id='pHealth'></a>
@@ -50,25 +50,16 @@
     <a id='pAmmo'></a>
     <a id='pFuel'></a>
   </div>
-  
-<button onclick="myFunction()">button</button>
-
-<p id="popup"></p>
-
-
-    <div id="Merchant" style="display: none;">
-	
+  <button onclick="myFunction()">button</button>
+  <p id="popup"></p>
+  <div id="Merchant" style="display: none;">
     <a id='Ammo'>Ammo</a>
     <a id='Crew'>Crew</a>
-	<a id="fuel">fuel</a>	
-	
+    <a id="fuel">fuel</a>	
 	</div>
 	<canvas id="GameCanvas">
   </canvas>
 </div>
-
-
-<div id="ShoppingCart">
 
 <script>
   function fillSelect(){
@@ -103,6 +94,7 @@
   function confirmSelect(x){
     shipType(x);
   };
+  
   function myFunction() {
   var txt;
   if (confirm("Press the button")) {
