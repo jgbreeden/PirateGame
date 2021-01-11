@@ -225,6 +225,17 @@ function handleKey(code){
 	}
 }
 
+function getCursorPosition(canvas, event) {
+	const x = event.clientX 
+	const y = event.clientY
+	console.log("x: " + x + " y: " + y)
+ }
+ 
+ const canvas = document.querySelector('canvas')
+ canvas.addEventListener('mousedown', function(e) {
+	getCursorPosition(canvas, e)
+ })
+
 function gameUpdate(){
 	game.clear();
 	game.draw();
@@ -281,7 +292,7 @@ function checkDistance(ob1, ob2) {
 }
 
 function playerPos(){
-	var pos = new startPosition(myname, me.x, me.y, shipType.imgName, 1);
+	var pos = new startPosition(myname, me.x, me.y, shipType.imgName, shipType.health);
 	socket.emit("startPosition", pos);
 }
 
@@ -311,10 +322,11 @@ $(function () {
 	});
 	socket.on("startPosition", function(pos) {
 		for (i = 0; i < users.length; i++){
-			if (users[i].username == pos.user && pos.type == 1){
+			if (users[i].username == pos.user){
 				users[i].ship.x = pos.x;
 				users[i].ship.y = pos.y;
 				users[i].ship.img.src = pos.img;
+				users[i].ship.health = pos.health;
 				break;
 			}
 		}
@@ -348,7 +360,7 @@ $(function () {
 				}, 500);
 				if(me.health == 0){
 					me.img.src = "imgs/treasure.png";
-					dead(users[i]); 
+					dead(users[i]);
 				}
 			}
 		}

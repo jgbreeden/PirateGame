@@ -78,8 +78,8 @@ io.on('connection', function(socket){
 		//data carrying the information of a sockets movement
 		socket.broadcast.emit('playerMove', movement);
 	});
-	socket.on('playerDocked', function (dock){
-		socket.broadcast.emit('playerDocked', dock);
+	socket.on('playerDocked', function (){
+		socket.broadcast.emit('playerDocked', socket.user);
 	});
 	socket.on('playerKilled', function (user){
 		socket.broadcast.emit('playerKilled', user);

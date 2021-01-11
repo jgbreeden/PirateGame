@@ -1,4 +1,5 @@
 const len = 90;
+var eHealth;
 var shipType;
 
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
@@ -175,8 +176,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.hit = function(x, y, uname){
 		me.score += 25;
+		this.health -= 25
+		if(this.health === 0){
+			me.kills += 1;
+			stats();
+		}
 		stats();
-		this.explosion = new Explosion(this.x, this.y, uname);
+		this.explosion = new Explosion(this.x, this.y, uname, this.user);
 		socket.emit("playerHit", this.explosion);
 		var local = this;
 		setTimeout(function() {	
@@ -273,7 +279,7 @@ function Bullet(x, y, dir, killer){
 			//display boo
 }
 
-function Explosion(x, y, user, ship, killer){
+function Explosion(x, y, user, killer){
 	this.x = x;
 	this.y = y;
 	this.user = user;
