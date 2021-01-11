@@ -192,7 +192,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 };
 //hi 
 //if anyone else see this make a comment underneath mine - Sonny
-//no - Unknown
 function stats(){
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
@@ -200,7 +199,7 @@ function stats(){
 	document.getElementById("pHealth").innerHTML = 'Player Health: ' + me.health;
 	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
 	document.getElementById("pCoins").innerHTML = 'Player Coins: ' + me.coins;
-	document.getElementById("pKills").innerHTML = 'Kill Count: ' + me.kills;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
 }
@@ -258,7 +257,7 @@ function Bullet(x, y, dir, killer){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me ){
+			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me && users[u].ship.health > 0){  //@ check health
 				console.log("end me");
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username, this.killer);
