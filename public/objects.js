@@ -112,7 +112,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 	};
 	this.move = function(Move) {
-		if (this.fuel > 0 ){
+		if (this.fuel > 0 && this.health > 0){
 			this.dir += Move.dir;
 			if(this.dir < 0){
 				this.dir = 315;

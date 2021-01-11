@@ -281,8 +281,12 @@ function checkDistance(ob1, ob2) {
 }
 
 function playerPos(){
-	var pos = new startPosition(myname, me.x, me.y, shipType.imgName);
+	var pos = new startPosition(myname, me.x, me.y, shipType.imgName, 1);
 	socket.emit("startPosition", pos);
+}
+
+function dead(user){
+	socket.emit('playerKilled', user);
 }
 
 function gameStart(){
@@ -307,7 +311,7 @@ $(function () {
 	});
 	socket.on("startPosition", function(pos) {
 		for (i = 0; i < users.length; i++){
-			if (users[i].username == pos.user){
+			if (users[i].username == pos.user && pos.type == 1){
 				users[i].ship.x = pos.x;
 				users[i].ship.y = pos.y;
 				users[i].ship.img.src = pos.img;
@@ -335,13 +339,24 @@ $(function () {
 	socket.on("playerHit", function(playerHit) {
 		for(i = 0; i < users.length; i++){
 			if(playerHit.user == users[i].username){
-				me.health -= 25;
+				users[i].ship.health -= 25;
 				stats();
 				users[i].ship.explosion = new Explosion(playerHit.x, playerHit.y, playerHit.username);
 				var user = users[i]
 				setTimeout(function() {	
 					user.ship.explosion = false;	
 				}, 500);
+				if(me.health == 0){
+					me.img.src = "imgs/treasure.png";
+					dead(users[i]); 
+				}
+			}
+		}
+	});
+	socket.on('playerKilled', function(user){
+		for(i = 0; i < users.length; i++){
+			if(user.username == users[i].username){
+				users[i].ship.img.src = "imgs/treasure.png";
 			}
 		}
 	});
