@@ -112,7 +112,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 	};
 	this.move = function(Move) {
-		if (this.fuel > 0 ){
+		if (this.fuel > 0 && this.health > 0){
 			this.dir += Move.dir;
 			if(this.dir < 0){
 				this.dir = 315;
@@ -150,10 +150,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.dock = function(){//checkdistance <- (reminder)
 		for (i = 0; i < map.ports.length; i++){
-			if(this.y >= map.ports[i].y - 10
-				&& this.y <= map.ports[i].y + 10 // add 10
-				&& this.x >= map.ports[i].x - 10// click X/Y into port
-				&& this.x <= map.ports[i].x + 10) { 
+			if(this.y >= map.ports[i].y - 20
+				&& this.y <= map.ports[i].y + 20 // add 10
+				&& this.x >= map.ports[i].x - 20// click X/Y into port
+				&& this.x <= map.ports[i].x + 20) { 
 					this.docked = true;
 					document.getElementById("Merchant").style.display = "block";
 					this.x = map.ports[i].x
@@ -163,10 +163,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		}
 		if(this.docked = false){
 			for (i = 0; i < map.islands.length; i++){
-				if(this.y >= map.islands[i].north - 10
-					|| this.y <= map.islands[i].south + 10
-					|| this.x >= map.islands[i].west - 10
-					|| this.x <= map.islands[i].east + 10){
+				if(this.y >= map.islands[i].north - 20
+					|| this.y <= map.islands[i].south + 20
+					|| this.x >= map.islands[i].west - 20
+					|| this.x <= map.islands[i].east + 20){
 						this.docked = true;
 						console.log("Dock");
 					}
@@ -251,7 +251,7 @@ function Bullet(x, y, dir, killer){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me ){
+			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me && users[u].ship.health > 0){  //@ check health
 				console.log("end me");
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username, this.killer);
