@@ -4,6 +4,7 @@ var bullets = [];
 var update;
 var me;
 var myname;
+var bounty;
 let radlen = 100;
 let maxwidth = 800;
 let maxheight = 600;
@@ -272,6 +273,7 @@ function serverStart(){
 			users[i].ship = new PlayerShip(400, 300, 0, 0);
 		}
 	}
+	bounty = new BountyShip();
 	update = setInterval(gameUpdate, 20);
 	me.visible = true;
 	playerPos();
