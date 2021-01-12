@@ -352,6 +352,13 @@ $(function () {
 			}
 		};
 	});
+	socket.on('playerDocked', function(user){
+		for(c= 0; c < users.length; c++){
+			if(user == users[c].username){
+				docked = true;
+			}
+		}
+	});
 	socket.on("joinInProgress", function(list) {
 		$("#LoginArea").hide();
 		users = [];
