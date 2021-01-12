@@ -24,11 +24,12 @@ function TreasureCollection(x, y, a){//determines where treasure chest how big t
 	this.a = a;
 }
 
-function startPosition(user, x, y, img){
+function startPosition(user, x, y, img, health){
 	this.user = user;
 	this.x = x;
 	this.y = y;
 	this.img = img;
+	this.health = health;
 }
 
 //pushing comment

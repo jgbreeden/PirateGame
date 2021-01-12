@@ -1,4 +1,5 @@
 const len = 90;
+var eHealth;
 var shipType;
 
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
@@ -112,7 +113,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 	};
 	this.move = function(Move) {
-		if (this.fuel > 0 ){
+		if (this.fuel > 0 && this.health > 0){
 			this.dir += Move.dir;
 			if(this.dir < 0){
 				this.dir = 315;
@@ -177,8 +178,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.hit = function(x, y, uname){
 		me.score += 25;
+		this.health -= 25
+		if(this.health === 0){
+			me.kills += 1;
+			stats();
+		}
 		stats();
-		this.explosion = new Explosion(this.x, this.y, uname);
+		this.explosion = new Explosion(this.x, this.y, uname, this.user);
 		socket.emit("playerHit", this.explosion);
 		var local = this;
 		setTimeout(function() {	
@@ -188,7 +194,6 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 };
 //hi 
 //if anyone else see this make a comment underneath mine - Sonny
-//no - Unknown
 function stats(){
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
@@ -196,7 +201,7 @@ function stats(){
 	document.getElementById("pHealth").innerHTML = 'Player Health: ' + me.health;
 	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
 	document.getElementById("pCoins").innerHTML = 'Player Coins: ' + me.coins;
-	document.getElementById("pKills").innerHTML = 'Kill Count: ' + me.kills;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
 }
@@ -254,7 +259,7 @@ function Bullet(x, y, dir, killer){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me && users[u].ship.docked == false){
+			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me && users[u].ship.docked == false && users[u].ship.health > 0){
 				console.log(users[u].ship.docked);
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username, this.killer);
@@ -275,7 +280,7 @@ function Bullet(x, y, dir, killer){
 			//display boo
 }
 
-function Explosion(x, y, user, ship, killer){
+function Explosion(x, y, user, killer){
 	this.x = x;
 	this.y = y;
 	this.user = user;

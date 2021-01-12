@@ -66,7 +66,7 @@ io.on('connection', function(socket){
 		io.emit('chatMessage', {user: socket.user, message: msg});
 	});	
 	socket.on('startPosition', function (pos){
-		//when players join a lobby
+		//when players join a lobb
 		socket.broadcast.emit('startPosition', pos);
 	});	
 	socket.on('playerStart', function (ship){
@@ -78,10 +78,13 @@ io.on('connection', function(socket){
 		//data carrying the information of a sockets movement
 		socket.broadcast.emit('playerMove', movement);
 	});
-	socket.on('playerDocked', function (dock){
-		socket.broadcast.emit('playerDocked', dock);
+	socket.on('playerDocked', function (){
+		socket.broadcast.emit('playerDocked', socket.user);
 	});
-
+	socket.on('playerKilled', function (user){
+		socket.broadcast.emit('playerKilled', user);
+		console.log('bruh');
+	});
 	socket.on('entitiesList', function (){
 		//data carrying the information of the game obstacles
 	});
