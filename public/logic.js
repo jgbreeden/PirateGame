@@ -40,45 +40,45 @@ var game = {
 	}
 }
 var map = {
-	minx: 40,
-	maxx: 700,
+	minx: 45,
+	maxx: 730,
 	miny: 70,
-	maxy: 580,
+	maxy: 555,
 	islands: [
 		{
 			name: "",
-			north: 150,
-			south: 180,
-			east: 200,
-			west: 150
+			north: 175,
+			south: 250,
+			east: 265,
+			west: 125
 		},
 		{
 			name: "",
-			north: 110,
-			south: 190,
-			east: 600,
-			west: 530
+			north: 100,
+			south: 210,
+			east: 440,
+			west: 322
 		},
 		{
 			name: "",
-			north: 240,
-			south: 290,
-			east: 320,
-			west: 290
+			north: 297,
+			south: 366,
+			east: 397,
+			west: 341
 		},
 		{
 			name: "",
 			north: 350,
-			south: 420,
-			east: 600,
-			west: 530
+			south: 475,
+			east: 560,
+			west: 406
 		}, 
 		{
 			name: "",
-			north: 420,
-			south: 490,
-			east: 280,
-			west: 200
+			north: 390,
+			south: 495,
+			east: 485,
+			west: 205
 		}
 	],
 	corners: [
@@ -109,16 +109,16 @@ var map = {
 	],
 	ports: [
 		{
-			x: 50,
-			y: 360
+			x: 53,
+			y: 333
 		},
 		{
-			x: 480,
-			y: 70
+			x: 723,
+			y: 501
 		},
 		{
-			x: 690,
-			y: 330
+			x: 658,
+			y: 64
 		}
 	]
 };
@@ -226,8 +226,9 @@ function handleKey(code){
 }
 
 function getCursorPosition(canvas, event) {
-	const x = event.clientX 
-	const y = event.clientY
+	const rect = canvas.getBoundingClientRect()
+	const x = event.clientX - rect.left
+	const y = event.clientY - rect.top
 	console.log("x: " + x + " y: " + y)
  }
  
