@@ -230,10 +230,12 @@ function handleKey(code){
 	}
 	if(code == "KeyQ"){
 		for(i = 0; i < users.length; i++){
-			if(users[i].ship.health == 0 && users[i].ship != me && me.x < users[i].ship.x + 20
+			if(users[i].ship.health == 0 && users[i].ship.erased == false && users[i].ship != me && me.x < users[i].ship.x + 20
 			  && me.x > users[i].ship.x - 20 && me.y < users[i].ship.y + 20 && me.y > users[i].ship.y - 20){
 				  console.log(users[i].ship.coins + " " + me.coins);
 				  me.coins += users[i].ship.coins;
+				  users[i].ship.erased = true;
+				  console.log(users[i].ship.erased);
 				  stats();
 			}
 		}
@@ -317,7 +319,6 @@ function playerPos(){
 
 function dead(death){
 	socket.emit('playerKilled', death);
-	console.log(death);
 }
 
 function gameStart(){
@@ -394,9 +395,14 @@ $(function () {
 	socket.on('playerKilled', function(dead){
 		for(i = 0; i < users.length; i++){
 			if(dead.user == users[i].username){
-				console.log("bruh");
 				users[i].ship.img.src = "imgs/treasure.png";
 				users[i].ship.coins = dead.coins;
+				document.getElementById("deathMsg").style.display = "block";
+				document.getElementById("deathMsg").innerHTML = users[i].username + " has been killed! Find the killer to earn more coins!";
+				setTimeout(function(){
+					document.getElementById("deathMsg").innerHTML = '';
+					document.getElementById("deathMsg").style.display = "none";
+				}, 3000);
 			}
 		}
 	});
@@ -426,5 +432,18 @@ $(function () {
 	});	
 	socket.on("startGame", function(AI){
 		serverStart(AI);
+	});
+	socket.on("bountyDocked", function(pData){
+		for(c = 0; c < users.length; c++){
+			if(pData.user == users[c].username){
+				users[c].ship.docked = true;
+				users[c].ship.coins += pData.coins;
+				stats();
+				var local = users[c];
+				setTimeout(function(){
+					local.ship.docked = false;
+				}, 1000);
+			}
+		}
 	});
 });

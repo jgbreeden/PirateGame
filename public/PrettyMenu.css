@@ -132,6 +132,7 @@ button:hover {
 	border: black;
 }
 
+<<<<<<< HEAD
 
 .modal {
   display: none; 
@@ -196,4 +197,16 @@ button:hover {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+} 
+
+#deathMsg {
+	background-color: black;
+	color: white;
+	position: fixed;
+	font-family: papyrus;
+	text-align: center;
+	top: 425px;
+	right: 250px;
+	height: 100px;
+	width: 100px;
 }
