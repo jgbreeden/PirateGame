@@ -7,13 +7,11 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
-	this.rot = 0;
-	this.munitions = shipType.ammo;
+	this.munitions = 90;
 	this.score = 0;
-	this.kills = 0;
-	this.coins = 100;
+	this.rot = 0;
 	this.health = shipType.health;
-	this.fuel = shipType.fuel;
+	this.fuel = 100;
 	this.visible = false;
 	this.docked = false;
 	this.explosion = false;
@@ -112,50 +110,45 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 	};
 	this.move = function(Move) {
-		if (this.fuel > 0 && this.health > 0){
-			this.dir += Move.dir;
-			if(this.dir < 0){
-				this.dir = 315;
-			};
-			if(this.dir > 315){
-				this.dir = 0;
-			};
-			if(this.dir == 90){//Right or E
-				this.x += Move.dis;//Make move thing up/down/left/right
-			} else if(this.dir == 135){//SE or SE
-				this.y += Move.dis;
-				this.x += Move.dis;
-			} else if (this.dir == 180){//S our Down
-				this.y += Move.dis;
-			} else if (this.dir == 225){//SW or SW
-				this.y += Move.dis;
-				this.x -= Move.dis;
-			} else if (this.dir == 270){//W or left
-				this.x -= Move.dis;
-			} else if (this.dir == 315){// NW or NW
-				this.y -= Move.dis;
-				this.x -= Move.dis;
-			} else if (this.dir == 0){//N or UP
-				this.y -= Move.dis;
-			} else if (this.dir == 45){//NE or NE
-				this.y -= Move.dis;
-				this.x += Move.dis;
-			};
-			this.fuel -= 0.5;
-			CheckBounds(this);
-		} else if (this.fuel == 0) {
-			console.log(this.fuel);
-		}
-		stats();
+		this.dir += Move.dir;
+		if(this.dir < 0){
+			this.dir = 315;
+		};
+		if(this.dir > 315){
+			this.dir = 0;
+		};
+		if(this.dir == 90){//Right or E
+			this.x += Move.dis;//Make move thing up/down/left/right
+		} else if(this.dir == 135){//SE or SE
+			this.y += Move.dis;
+			this.x += Move.dis;
+		} else if (this.dir == 180){//S our Down
+			this.y += Move.dis;
+		} else if (this.dir == 225){//SW or SW
+			this.y += Move.dis;
+			this.x -= Move.dis;
+		} else if (this.dir == 270){//W or left
+			this.x -= Move.dis;
+		} else if (this.dir == 315){// NW or NW
+			this.y -= Move.dis;
+			this.x -= Move.dis;
+		} else if (this.dir == 0){//N or UP
+			this.y -= Move.dis;
+		} else if (this.dir == 45){//NE or NE
+			this.y -= Move.dis;
+			this.x += Move.dis;
+		};
+		CheckBounds(this);
 	};
 	this.dock = function(){//checkdistance <- (reminder)
 		for (i = 0; i < map.ports.length; i++){
-			if(this.y >= map.ports[i].y - 20
-				&& this.y <= map.ports[i].y + 20 // add 10
-				&& this.x >= map.ports[i].x - 20// click X/Y into port
-				&& this.x <= map.ports[i].x + 20) { 
+			if(this.y >= map.ports[i].y - 10
+				&& this.y <= map.ports[i].y + 10 // add 10
+				&& this.x >= map.ports[i].x - 10// click X/Y into port
+				&& this.x <= map.ports[i].x + 10) { 
 					this.docked = true;
 					document.getElementById("Merchant").style.display = "block";
+					document.getElementById("myImg").style.display = "block";
 					this.x = map.ports[i].x
 					this.y = map.ports[i].y
 					console.log('something worked');
@@ -163,10 +156,10 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		}
 		if(this.docked = false){
 			for (i = 0; i < map.islands.length; i++){
-				if(this.y >= map.islands[i].north - 20
-					|| this.y <= map.islands[i].south + 20
-					|| this.x >= map.islands[i].west - 20
-					|| this.x <= map.islands[i].east + 20){
+				if(this.y >= map.islands[i].north - 10
+					|| this.y <= map.islands[i].south + 10
+					|| this.x >= map.islands[i].west - 10
+					|| this.x <= map.islands[i].east + 10){
 						this.docked = true;
 						console.log("Dock");
 					}
@@ -185,14 +178,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	}
 };
 //hi 
-//if anyone else see this make a comment underneath mine - Sonny
+
 function stats(){
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
 	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
 	document.getElementById("pHealth").innerHTML = 'Player Health: ' + me.health;
 	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
-	document.getElementById("pCoins").innerHTML = 'Player Coins: ' + me.coins;
 	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
@@ -200,20 +192,18 @@ function stats(){
 
 function confirmSelect(x){
 	console.log(x);
-	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health, ships.ships[x - 1].ammo, ships.ships[x - 1].speed, ships.ships[x - 1].fuel);
+	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health);
 }
 
-function ShipType(imgName, health, ammo, speed, fuel, length){
+function ShipType(imgName, health, ammo, speed, length){
 	this.imgName = imgName;
 	this.health = health;
-	this.ammo = ammo;
-	this.speed = speed;
-	this.fuel = fuel;
 }
 
 function User(username){
 	this.ship = {};
 	this.username = username;
+
 }
 function Bullet(x, y, dir, killer){
 	this.x = x;
@@ -251,7 +241,7 @@ function Bullet(x, y, dir, killer){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me && users[u].ship.health > 0){  //@ check health
+			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me ){
 				console.log("end me");
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username, this.killer);

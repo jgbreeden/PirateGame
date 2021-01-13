@@ -37,8 +37,8 @@ io.on('connection', function(socket){
 		}
 	});
 
-	socket.on('startGame', function (){
-		io.emit('startGame', '');
+	socket.on('startGame', function (AI){
+		io.emit('startGame', AI);
 		runtime = true;
 	});
 	socket.on('midGame', function (){
@@ -78,12 +78,11 @@ io.on('connection', function(socket){
 		//data carrying the information of a sockets movement
 		socket.broadcast.emit('playerMove', movement);
 	});
-	socket.on('playerDocked', function (dock){
-		socket.broadcast.emit('playerDocked', dock);
+	socket.on('playerDocked', function (){
+		socket.broadcast.emit('playerDocked', socket.user);
 	});
-	socket.on('playerKilled', function (user){
-		socket.broadcast.emit('playerKilled', user);
-		console.log('bruh');
+	socket.on('playerKilled', function (death){
+		socket.broadcast.emit('playerKilled', death);
 	});
 	socket.on('entitiesList', function (){
 		//data carrying the information of the game obstacles

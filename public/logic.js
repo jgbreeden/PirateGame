@@ -4,6 +4,7 @@ var bullets = [];
 var update;
 var me;
 var myname;
+var bounty;
 let radlen = 100;
 let maxwidth = 800;
 let maxheight = 600;
@@ -40,45 +41,45 @@ var game = {
 	}
 }
 var map = {
-	minx: 40,
-	maxx: 700,
+	minx: 45,
+	maxx: 730,
 	miny: 70,
-	maxy: 580,
+	maxy: 555,
 	islands: [
 		{
 			name: "",
-			north: 150,
-			south: 180,
-			east: 200,
-			west: 150
+			north: 175,
+			south: 250,
+			east: 265,
+			west: 125
 		},
 		{
 			name: "",
-			north: 110,
-			south: 190,
-			east: 600,
-			west: 530
+			north: 100,
+			south: 210,
+			east: 440,
+			west: 322
 		},
 		{
 			name: "",
-			north: 240,
-			south: 290,
-			east: 320,
-			west: 290
+			north: 297,
+			south: 366,
+			east: 397,
+			west: 341
 		},
 		{
 			name: "",
 			north: 350,
-			south: 420,
-			east: 600,
-			west: 530
+			south: 475,
+			east: 560,
+			west: 406
 		}, 
 		{
 			name: "",
-			north: 420,
-			south: 490,
-			east: 280,
-			west: 200
+			north: 390,
+			south: 495,
+			east: 485,
+			west: 205
 		}
 	],
 	corners: [
@@ -109,20 +110,19 @@ var map = {
 	],
 	ports: [
 		{
-			x: 50,
-			y: 360
+			x: 53,
+			y: 333
 		},
 		{
-			x: 480,
-			y: 70
+			x: 723,
+			y: 501
 		},
 		{
-			x: 690,
-			y: 330
+			x: 658,
+			y: 64
 		}
 	]
 };
-
 var ships = {
     ships: [
       {
@@ -131,7 +131,8 @@ var ships = {
         ammo: 15,
 	   speed: 8,
 	   fuel: 150,
-        length: 3
+	   length: 3,
+	   coins: 150
       },
       {
         name: "S.S Payback",
@@ -139,7 +140,8 @@ var ships = {
         ammo: 20,
 	   speed: 5,
 	   fuel: 125,
-        length: 4
+	   length: 4,
+	   coins: 125
       },
       {
         name: "Battleship Batalion",
@@ -147,7 +149,8 @@ var ships = {
         ammo: 35,
 	   speed: 4,
 	   fuel: 225,
-        length: 5
+	   length: 5,
+	   coins: 350
       },
       {
         name: "Catalyst Cruiser",
@@ -155,7 +158,8 @@ var ships = {
         ammo: 25,
 	   speed: 6,
 	   fuel: 175,
-        length: 3
+	   length: 3,
+	   coins: 175
       },
       {
         name: "Submarine Subjugator",
@@ -163,7 +167,8 @@ var ships = {
         ammo: 50,
 	   speed: 3,
 	   fuel: 275,
-        length: 6
+	   length: 6,
+	   coins: 250
       }
     ]
 };
@@ -223,7 +228,29 @@ function handleKey(code){
 			console.log("Out of Bullets");
 		}
 	}
+	if(code == "KeyQ"){
+		for(i = 0; i < users.length; i++){
+			if(users[i].ship.health == 0 && users[i].ship != me && me.x < users[i].ship.x + 20
+			  && me.x > users[i].ship.x - 20 && me.y < users[i].ship.y + 20 && me.y > users[i].ship.y - 20){
+				  console.log(users[i].ship.coins + " " + me.coins);
+				  me.coins += users[i].ship.coins;
+				  stats();
+			}
+		}
+	}
 }
+
+function getCursorPosition(canvas, event) {
+	const rect = canvas.getBoundingClientRect()
+	const x = event.clientX - rect.left
+	const y = event.clientY - rect.top
+	console.log("x: " + x + " y: " + y)
+ }
+ 
+ const canvas = document.querySelector('canvas')
+ canvas.addEventListener('mousedown', function(e) {
+	getCursorPosition(canvas, e)
+ })
 
 function gameUpdate(){
 	game.clear();
@@ -242,9 +269,10 @@ function gameUpdate(){
 			bullets.splice(i, 1)
 		}
 	};
+	//bounty.draw();
 }
 
-function serverStart(){
+function serverStart(AI){
 	var x = 400;
 	var y = 300;
 	game.start();
@@ -254,16 +282,18 @@ function serverStart(){
 		if (users[i].username == myname) {
 			x = map.islands[i].west;
 			y = map.islands[i].south;
-			me = new PlayerShip(x, y, 0, 0);
+			me = new PlayerShip(x , y, 0, 0);
 			users[i].ship = me;
 		} else {
 			users[i].ship = new PlayerShip(400, 300, 0, 0);
 		}
 	}
+	bounty = new BountyShip(x==0? map.minx: map.maxx, y, x==0? 90: 270);
 	update = setInterval(gameUpdate, 20);
 	me.visible = true;
 	playerPos();
 	console.log("start");
+	console.log(AI);
 }
 
 function checkDistance(ob1, ob2) {
@@ -281,16 +311,20 @@ function checkDistance(ob1, ob2) {
 }
 
 function playerPos(){
-	var pos = new startPosition(myname, me.x, me.y, shipType.imgName, 1);
+	var pos = new startPosition(myname, me.x, me.y, shipType.imgName, shipType.health, shipType.coins);
 	socket.emit("startPosition", pos);
 }
 
-function dead(user){
-	socket.emit('playerKilled', user);
+function dead(death){
+	socket.emit('playerKilled', death);
+	console.log(death);
 }
 
 function gameStart(){
-	socket.emit("startGame");
+	var x = Math.round(Math.random() * 1);
+	var y = Math.floor(Math.random() * 600) + 50;
+	socket.emit("startGame", {x:x, y:y});
+
 }
 
 function openHelp() {
@@ -311,10 +345,13 @@ $(function () {
 	});
 	socket.on("startPosition", function(pos) {
 		for (i = 0; i < users.length; i++){
-			if (users[i].username == pos.user && pos.type == 1){
+			if (users[i].username == pos.user){
 				users[i].ship.x = pos.x;
 				users[i].ship.y = pos.y;
 				users[i].ship.img.src = pos.img;
+				users[i].ship.health = pos.health;
+				users[i].ship.coins = pos.coins;
+				console.log(users[i].ship.coins)
 				break;
 			}
 		}
@@ -348,15 +385,18 @@ $(function () {
 				}, 500);
 				if(me.health == 0){
 					me.img.src = "imgs/treasure.png";
-					dead(users[i]); 
+					var death = new Dead(users[i].username, users[i].ship.coins)
+					dead(death);
 				}
 			}
 		}
 	});
-	socket.on('playerKilled', function(user){
+	socket.on('playerKilled', function(dead){
 		for(i = 0; i < users.length; i++){
-			if(user.username == users[i].username){
+			if(dead.user == users[i].username){
+				console.log("bruh");
 				users[i].ship.img.src = "imgs/treasure.png";
+				users[i].ship.coins = dead.coins;
 			}
 		}
 	});
@@ -366,6 +406,13 @@ $(function () {
 				users[i].ship.move(movement);
 			}
 		};
+	});
+	socket.on('playerDocked', function(user){
+		for(c= 0; c < users.length; c++){
+			if(user == users[c].username){
+				users[c].ship.docked = true;
+			}
+		}
 	});
 	socket.on("joinInProgress", function(list) {
 		$("#LoginArea").hide();
@@ -377,7 +424,7 @@ $(function () {
 		}
 		serverStart();
 	});	
-	socket.on("startGame", function(ev){
-		serverStart();
+	socket.on("startGame", function(AI){
+		serverStart(AI);
 	});
 });

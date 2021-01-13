@@ -59,7 +59,7 @@
 	<a id="fuel">coin</a>	
 
 	</div>
-<img id="myImg" src="TikiMerchant.png">
+<img id="myImg" style="display: none" src="imgs/TikiMerchant.png">
 
 <div id="myModal" class="modal">
   <span class="close">&times;</span>
@@ -114,19 +114,20 @@
   document.getElementById("popup").innerHTML = txt;
   }
 
-var modal = document.getElementById("myModal");
-var img = document.getElementById("myImg");
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() { 
-  modal.style.display = "none";
-}
-}
+	var modal = document.getElementById("myModal");
+	var img = document.getElementById("myImg");
+	var modalImg = document.getElementById("img01");
+	var captionText = document.getElementById("caption");
+	img.onclick = function(){
+	  modal.style.display = "block";
+	  modalImg.src = this.src;
+	  captionText.innerHTML = this.alt;
+	 }
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function() { 
+	  modal.style.display = "none";
+	}
+
 </script>
 
 <script src='/socket.io/socket.io.js'></script>
