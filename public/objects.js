@@ -1,4 +1,5 @@
 const len = 90;
+var eHealth;
 var shipType;
 
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
@@ -7,11 +8,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
-	this.munitions = 90;
-	this.score = 0;
 	this.rot = 0;
+	this.munitions = shipType.ammo;
+	this.score = 0;
+	this.kills = 0;
+	this.coins = shipType.coins;
 	this.health = shipType.health;
-	this.fuel = 100;
+	this.fuel = shipType.fuel;
 	this.visible = false;
 	this.docked = false;
 	this.explosion = false;
@@ -111,57 +114,70 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 	};
 	this.move = function(Move) {
-		this.dir += Move.dir;
-		if(this.dir < 0){
-			this.dir = 315;
-		};
-		if(this.dir > 315){
-			this.dir = 0;
-		};
-		if(this.dir == 90){//Right or E
-			this.x += Move.dis;//Make move thing up/down/left/right
-		} else if(this.dir == 135){//SE or SE
-			this.y += Move.dis;
-			this.x += Move.dis;
-		} else if (this.dir == 180){//S our Down
-			this.y += Move.dis;
-		} else if (this.dir == 225){//SW or SW
-			this.y += Move.dis;
-			this.x -= Move.dis;
-		} else if (this.dir == 270){//W or left
-			this.x -= Move.dis;
-		} else if (this.dir == 315){// NW or NW
-			this.y -= Move.dis;
-			this.x -= Move.dis;
-		} else if (this.dir == 0){//N or UP
-			this.y -= Move.dis;
-		} else if (this.dir == 45){//NE or NE
-			this.y -= Move.dis;
-			this.x += Move.dis;
-		};
-		CheckBounds(this);
+		if (this.fuel > 0 && this.health > 0){
+			this.dir += Move.dir;
+			if(this.dir < 0){
+				this.dir = 315;
+			};
+			if(this.dir > 315){
+				this.dir = 0;
+			};
+			if(this.dir == 90){//Right or E
+				this.x += Move.dis;//Make move thing up/down/left/right
+			} else if(this.dir == 135){//SE or SE
+				this.y += Move.dis;
+				this.x += Move.dis;
+			} else if (this.dir == 180){//S our Down
+				this.y += Move.dis;
+			} else if (this.dir == 225){//SW or SW
+				this.y += Move.dis;
+				this.x -= Move.dis;
+			} else if (this.dir == 270){//W or left
+				this.x -= Move.dis;
+			} else if (this.dir == 315){// NW or NW
+				this.y -= Move.dis;
+				this.x -= Move.dis;
+			} else if (this.dir == 0){//N or UP
+				this.y -= Move.dis;
+			} else if (this.dir == 45){//NE or NE
+				this.y -= Move.dis;
+				this.x += Move.dis;
+			};
+			this.fuel -= 0.5;
+			CheckBounds(this);
+		} else if (this.fuel == 0) {
+			console.log(this.fuel);
+		}
+		stats();
 	};
 	this.dock = function(){//checkdistance <- (reminder)
+		if(this.y >= BountyShip.north - 30
+			|| this.y <= BountyShip.south + 30
+			|| this.x >= BountyShip.west - 30
+			|| this.x <= BountyShip.east + 30){
+				this.docked = true;
+			}
 		for (i = 0; i < map.ports.length; i++){
-			if(this.y >= map.ports[i].y - 10
-				&& this.y <= map.ports[i].y + 10 // add 10
-				&& this.x >= map.ports[i].x - 10// click X/Y into port
-				&& this.x <= map.ports[i].x + 10) { 
+			if(this.y >= map.ports[i].y - 20
+				&& this.y <= map.ports[i].y + 20 // add 10
+				&& this.x >= map.ports[i].x - 20// click X/Y into port
+				&& this.x <= map.ports[i].x + 20) { 
 					this.docked = true;
+					socket.emit("playerDocked");
 					document.getElementById("Merchant").style.display = "block";
-					document.getElementById("myImg").style.display = "block";
 					this.x = map.ports[i].x
 					this.y = map.ports[i].y
 					console.log('something worked');
 				}
 		}
-		if(this.docked = false){
+		if(this.docked == false){
 			for (i = 0; i < map.islands.length; i++){
-				if(this.y >= map.islands[i].north - 10
-					|| this.y <= map.islands[i].south + 10
-					|| this.x >= map.islands[i].west - 10
-					|| this.x <= map.islands[i].east + 10){
+				if(this.y >= map.islands[i].north - 20
+					|| this.y <= map.islands[i].south + 20
+					|| this.x >= map.islands[i].west - 20
+					|| this.x <= map.islands[i].east + 20){
 						this.docked = true;
+						socket.emit("playerDocked");
 						console.log("Dock");
 					}
 			}
@@ -169,8 +185,13 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.hit = function(x, y, uname){
 		me.score += 25;
+		this.health -= 25
+		if(this.health == 0){
+			me.kills += 1;
+			stats();
+		}
 		stats();
-		this.explosion = new Explosion(this.x, this.y, uname);
+		this.explosion = new Explosion(this.x, this.y, uname, this.user);
 		socket.emit("playerHit", this.explosion);
 		var local = this;
 		setTimeout(function() {	
@@ -179,32 +200,41 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	}
 };
 //hi 
-
+//if anyone else see this make a comment underneath mine - Sonny
 function stats(){
 	var statPage = document.getElementById('statPage');
 	statPage.style.display = "block";
 	document.getElementById("pName").innerHTML = 'Player Name: ' + document.getElementById('uname').value; 
 	document.getElementById("pHealth").innerHTML = 'Player Health: ' + me.health;
 	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
-	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
+	document.getElementById("pCoins").innerHTML = 'Player Coins: ' + me.coins;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + me.kills;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
 }
 
 function confirmSelect(x){
 	console.log(x);
-	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health);
+	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health, ships.ships[x - 1].ammo, ships.ships[x - 1].speed, ships.ships[x - 1].fuel, ships.ships[x - 1].coins);
 }
 
-function ShipType(imgName, health, ammo, speed, length){
+function ShipType(imgName, health, ammo, speed, fuel, coins){
 	this.imgName = imgName;
 	this.health = health;
+	this.ammo = ammo;
+	this.speed = speed;
+	this.fuel = fuel;
+	this.coins = coins;
+}
+
+function Dead(user, coins){
+	this.user = user;
+	this.coins = coins;
 }
 
 function User(username){
 	this.ship = {};
 	this.username = username;
-
 }
 function Bullet(x, y, dir, killer){
 	this.x = x;
@@ -242,8 +272,8 @@ function Bullet(x, y, dir, killer){
 		this.life = this.life - 1;
 		checkDistance(me, bullets[i])
 		for (u = 0; u <users.length; u++){
-			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me ){
-				console.log("end me");
+			if(checkDistance(users[u].ship, this) < 20 && users[u].ship != me && users[u].ship.docked == false && users[u].ship.health > 0){
+				console.log(users[u].ship.docked);
 				this.life = 0;
 				users[u].ship.hit(this.x, this.y, users[u].username, this.killer);
 			}
@@ -263,7 +293,7 @@ function Bullet(x, y, dir, killer){
 			//display boo
 }
 
-function Explosion(x, y, user, ship, killer){
+function Explosion(x, y, user, killer){
 	this.x = x;
 	this.y = y;
 	this.user = user;
@@ -275,11 +305,60 @@ function Explosion(x, y, user, ship, killer){
 	}
 }
 
-function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
+function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard code AI
 	this.x = x;
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
+	this.coins = Math.floor(Math.random()*898) + 101;
+	this.docked = false;
+	this.img = document.createElement("img");
+	this.img.src = "imgs/FinalAI.png";
+	this.draw = function(){
+		let imgw = this.img.width/2
+		var offsetx = this.x;
+		var offsety = this.y;
+		switch (this.dir) {
+			case 0:
+				offsetx -= imgw;
+				offsety -= imgw;
+				break;
+			case 45:
+				offsety -= imgw * 1.4;
+				break;
+			case 90:
+				offsetx += imgw;
+				offsety -= imgw;
+				break;
+			case 135:
+				offsetx += imgw * 1.4;
+				break;
+			case 180:
+				offsetx += imgw;
+				offsety += imgw;
+				break;
+			case 225:
+				offsety += imgw * 1.4;
+				break;
+			case 270:
+				offsetx -= imgw;
+				offsety += imgw;
+				break;
+			case 315:
+				offsetx -= imgw * 1.4;
+				break;
+			default:
+				console.log("The code is not working")
+		  }
+		game.context.translate(offsetx, offsety);
+		game.context.rotate(+this.dir * Math.PI/180);
+		game.context.drawImage(this.img, 0, 0);
+		game.context.rotate(-this.dir * Math.PI/180);
+		game.context.translate(-offsetx, -offsety);
+	}
+	this.move = function(){
+
+	}
 }
 
 function Island(x, y, b){//position of island, with a barrier that playerships and other entities cannot cross unless it has treasure, or has resources.

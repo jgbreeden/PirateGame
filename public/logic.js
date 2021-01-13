@@ -4,7 +4,6 @@ var bullets = [];
 var update;
 var me;
 var myname;
-var bounty;
 let radlen = 100;
 let maxwidth = 800;
 let maxheight = 600;
@@ -271,7 +270,6 @@ function gameUpdate(){
 			bullets.splice(i, 1)
 		}
 	};
-	//bounty.draw();
 }
 
 function serverStart(AI){
@@ -290,7 +288,6 @@ function serverStart(AI){
 			users[i].ship = new PlayerShip(400, 300, 0, 0);
 		}
 	}
-	bounty = new BountyShip(x==0? map.minx: map.maxx, y, x==0? 90: 270);
 	update = setInterval(gameUpdate, 20);
 	me.visible = true;
 	playerPos();
@@ -322,9 +319,7 @@ function dead(death){
 }
 
 function gameStart(){
-	var x = Math.round(Math.random() * 1);
-	var y = Math.floor(Math.random() * 600) + 50;
-	socket.emit("startGame", {x:x, y:y});
+	socket.emit("startGame");
 }
 
 function openHelp() {
