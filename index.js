@@ -87,6 +87,10 @@ io.on('connection', function(socket){
 	socket.on('entitiesList', function (){
 		//data carrying the information of the game obstacles
 	});
+	ocket.on('bountyDocked', function (pData){
+		//when players set name and ship
+		io.emit('bountyDocked', {user: socket.user, coins: pData});
+	});	
 });
 
 http.listen(PORT, () => {

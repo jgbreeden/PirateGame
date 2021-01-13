@@ -18,6 +18,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.visible = false;
 	this.docked = false;
 	this.explosion = false;
+	this.erased = false;
 	this.img = document.createElement("img");
 	this.img.src = shipType.imgName;
 	this.draw = function() {

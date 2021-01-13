@@ -131,3 +131,15 @@ button:hover {
 	height: 10px;
 	border: black;
 }
+
+#deathMsg {
+	background-color: black;
+	color: white;
+	position: fixed;
+	font-family: papyrus;
+	text-align: center;
+	top: 425px;
+	right: 250px;
+	height: 100px;
+	width: 100px;
+}
