@@ -304,7 +304,11 @@ function dead(user){
 }
 
 function gameStart(){
-	socket.emit("startGame");
+	var x = Math.floor(Math.random() * 1);
+	var y = Math.floor(Math.random() * 600) + 50;
+	bounty = new BountyShip(x, y);
+	socket.emit("startGame", );
+
 }
 
 function openHelp() {

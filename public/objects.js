@@ -163,7 +163,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 					console.log('something worked');
 				}
 		}
-		if(this.docked = false){
+		if(this.docked == false){
 			for (i = 0; i < map.islands.length; i++){
 				if(this.y >= map.islands[i].north - 20
 					|| this.y <= map.islands[i].south + 20
