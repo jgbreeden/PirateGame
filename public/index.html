@@ -55,14 +55,17 @@
   <div id="Merchant" style="display: none;">
     <a id='Ammo'>Ammo</a>
     <a id='Crew'>Crew</a>
-<<<<<<< HEAD
 	<a id="fuel">fuel</a>	
 	<a id="fuel">coin</a>	
-	
-=======
-    <a id="fuel">fuel</a>	
->>>>>>> a7c07b146a04f9aaeb50133aea2a08f94ad663ea
+
 	</div>
+<img id="myImg" src="TikiMerchant.png">
+
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+</div>
+
 	<canvas id="GameCanvas">
   </canvas>
 </div>
@@ -101,8 +104,6 @@
     shipType(x);
   };
   
-<<<<<<< HEAD
-=======
   function myFunction() {
   var txt;
   if (confirm("Press the button")) {
@@ -112,7 +113,20 @@
   }
   document.getElementById("popup").innerHTML = txt;
   }
->>>>>>> a7c07b146a04f9aaeb50133aea2a08f94ad663ea
+
+var modal = document.getElementById("myModal");
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+}
 </script>
 
 <script src='/socket.io/socket.io.js'></script>
