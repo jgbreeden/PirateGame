@@ -292,11 +292,14 @@ function Explosion(x, y, user, killer){
 	}
 }
 
-function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation 
+function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard code AI
 	this.x = x;
 	this.y = y;
 	this.dir = dir;
 	this.a = a;
+	this.coins = Math.floor(Math.random()*898) + 101;
+	this.docked = false;
+
 }
 
 function Island(x, y, b){//position of island, with a barrier that playerships and other entities cannot cross unless it has treasure, or has resources.
