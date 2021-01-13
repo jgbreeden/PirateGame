@@ -305,6 +305,11 @@ function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard 
 	this.a = a;
 	this.coins = Math.floor(Math.random()*898) + 101;
 	this.docked = false;
+	if(this.y >= BountyShip[i].north - 30
+		|| this.y <= BountyShip[i].south + 30
+		|| this.x >= BountyShip[i].west - 30
+		|| this.x <= BountyShip[i].east + 30){
+			this.docked = true;
 
 }
 
