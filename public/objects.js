@@ -12,7 +12,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.munitions = shipType.ammo;
 	this.score = 0;
 	this.kills = 0;
-	this.coins = 100;
+	this.coins = shipType.coins;
 	this.health = shipType.health;
 	this.fuel = shipType.fuel;
 	this.visible = false;
@@ -179,7 +179,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	this.hit = function(x, y, uname){
 		me.score += 25;
 		this.health -= 25
-		if(this.health === 0){
+		if(this.health == 0){
 			me.kills += 1;
 			stats();
 		}
@@ -201,22 +201,28 @@ function stats(){
 	document.getElementById("pHealth").innerHTML = 'Player Health: ' + me.health;
 	document.getElementById("pScore").innerHTML = 'Player Score: ' + me.score;
 	document.getElementById("pCoins").innerHTML = 'Player Coins: ' + me.coins;
-	document.getElementById("pKills").innerHTML = 'Kill Count: ' + 0;
+	document.getElementById("pKills").innerHTML = 'Kill Count: ' + me.kills;
 	document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
 	document.getElementById("pFuel").innerHTML = 'Fuel Left: ' + me.fuel;
 }
 
 function confirmSelect(x){
 	console.log(x);
-	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health, ships.ships[x - 1].ammo, ships.ships[x - 1].speed, ships.ships[x - 1].fuel);
+	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health, ships.ships[x - 1].ammo, ships.ships[x - 1].speed, ships.ships[x - 1].fuel, ships.ships[x - 1].coins);
 }
 
-function ShipType(imgName, health, ammo, speed, fuel, length){
+function ShipType(imgName, health, ammo, speed, fuel, coins){
 	this.imgName = imgName;
 	this.health = health;
 	this.ammo = ammo;
 	this.speed = speed;
 	this.fuel = fuel;
+	this.coins = coins;
+}
+
+function Dead(user, coins){
+	this.user = user;
+	this.coins = coins;
 }
 
 function User(username){

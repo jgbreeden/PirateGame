@@ -122,7 +122,6 @@ var map = {
 		}
 	]
 };
-
 var ships = {
     ships: [
       {
@@ -131,7 +130,8 @@ var ships = {
         ammo: 15,
 	   speed: 8,
 	   fuel: 150,
-        length: 3
+	   length: 3,
+	   coins: 150
       },
       {
         name: "S.S Payback",
@@ -139,7 +139,8 @@ var ships = {
         ammo: 20,
 	   speed: 5,
 	   fuel: 125,
-        length: 4
+	   length: 4,
+	   coins: 125
       },
       {
         name: "Battleship Batalion",
@@ -147,7 +148,8 @@ var ships = {
         ammo: 35,
 	   speed: 4,
 	   fuel: 225,
-        length: 5
+	   length: 5,
+	   coins: 350
       },
       {
         name: "Catalyst Cruiser",
@@ -155,7 +157,8 @@ var ships = {
         ammo: 25,
 	   speed: 6,
 	   fuel: 175,
-        length: 3
+	   length: 3,
+	   coins: 175
       },
       {
         name: "Submarine Subjugator",
@@ -163,7 +166,8 @@ var ships = {
         ammo: 50,
 	   speed: 3,
 	   fuel: 275,
-        length: 6
+	   length: 6,
+	   coins: 250
       }
     ]
 };
@@ -223,6 +227,16 @@ function handleKey(code){
 			console.log("Out of Bullets");
 		}
 	}
+	if(code == "KeyQ"){
+		for(i = 0; i < users.length; i++){
+			if(users[i].ship.health == 0 && users[i].ship != me && me.x < users[i].ship.x + 20
+			  && me.x > users[i].ship.x - 20 && me.y < users[i].ship.y + 20 && me.y > users[i].ship.y - 20){
+				  console.log(users[i].ship.coins + " " + me.coins);
+				  me.coins += users[i].ship.coins;
+				  stats();
+			}
+		}
+	}
 }
 
 function getCursorPosition(canvas, event) {
@@ -256,7 +270,7 @@ function gameUpdate(){
 	};
 }
 
-function serverStart(){
+function serverStart(AI){
 	var x = 400;
 	var y = 300;
 	game.start();
@@ -266,7 +280,7 @@ function serverStart(){
 		if (users[i].username == myname) {
 			x = map.islands[i].west;
 			y = map.islands[i].south;
-			me = new PlayerShip(x, y, 0, 0);
+			me = new PlayerShip(x , y, 0, 0);
 			users[i].ship = me;
 		} else {
 			users[i].ship = new PlayerShip(400, 300, 0, 0);
@@ -276,6 +290,7 @@ function serverStart(){
 	me.visible = true;
 	playerPos();
 	console.log("start");
+	console.log(AI);
 }
 
 function checkDistance(ob1, ob2) {
@@ -293,12 +308,13 @@ function checkDistance(ob1, ob2) {
 }
 
 function playerPos(){
-	var pos = new startPosition(myname, me.x, me.y, shipType.imgName, shipType.health);
+	var pos = new startPosition(myname, me.x, me.y, shipType.imgName, shipType.health, shipType.coins);
 	socket.emit("startPosition", pos);
 }
 
-function dead(user){
-	socket.emit('playerKilled', user);
+function dead(death){
+	socket.emit('playerKilled', death);
+	console.log(death);
 }
 
 function gameStart(){
@@ -328,6 +344,8 @@ $(function () {
 				users[i].ship.y = pos.y;
 				users[i].ship.img.src = pos.img;
 				users[i].ship.health = pos.health;
+				users[i].ship.coins = pos.coins;
+				console.log(users[i].ship.coins)
 				break;
 			}
 		}
@@ -361,15 +379,18 @@ $(function () {
 				}, 500);
 				if(me.health == 0){
 					me.img.src = "imgs/treasure.png";
-					dead(users[i]);
+					var death = new Dead(users[i].username, users[i].ship.coins)
+					dead(death);
 				}
 			}
 		}
 	});
-	socket.on('playerKilled', function(user){
+	socket.on('playerKilled', function(dead){
 		for(i = 0; i < users.length; i++){
-			if(user.username == users[i].username){
+			if(dead.user == users[i].username){
+				console.log("bruh");
 				users[i].ship.img.src = "imgs/treasure.png";
+				users[i].ship.coins = dead.coins;
 			}
 		}
 	});
@@ -397,7 +418,7 @@ $(function () {
 		}
 		serverStart();
 	});	
-	socket.on("startGame", function(ev){
-		serverStart();
+	socket.on("startGame", function(AI){
+		serverStart(AI);
 	});
 });
