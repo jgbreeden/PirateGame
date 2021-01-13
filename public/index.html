@@ -55,11 +55,19 @@
   <div id="Merchant" style="display: none;">
     <a id='Ammo'>Ammo</a>
     <a id='Crew'>Crew</a>
-    <a id="fuel">fuel</a>	
-  </div>
+	<a id="fuel">fuel</a>	
+	<a id="fuel">coin</a>	
+   </div>
+	<img id="myImg" style="display: none" src="imgs/TikiMerchant.png">
+
+	<div id="myModal" class="modal">
+	  <span class="close">&times;</span>
+	  <img class="modal-content" id="img01">
+	</div>
+   
   <div id="deathMsg" style="display: none;"></div>
 	<canvas id="GameCanvas">
-  </canvas>
+	</canvas>
 </div>
 
 <script>
@@ -105,6 +113,21 @@
   }
   document.getElementById("popup").innerHTML = txt;
   }
+
+	var modal = document.getElementById("myModal");
+	var img = document.getElementById("myImg");
+	var modalImg = document.getElementById("img01");
+	var captionText = document.getElementById("caption");
+	img.onclick = function(){
+	  modal.style.display = "block";
+	  modalImg.src = this.src;
+	  captionText.innerHTML = this.alt;
+	 }
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function() { 
+	  modal.style.display = "none";
+	}
+
 </script>
 
 <script src='/socket.io/socket.io.js'></script>

@@ -271,7 +271,7 @@ function gameUpdate(){
 			bullets.splice(i, 1)
 		}
 	};
-	bounty.draw();
+	//bounty.draw();
 }
 
 function serverStart(AI){
