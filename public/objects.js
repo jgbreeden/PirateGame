@@ -305,7 +305,53 @@ function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard 
 	this.a = a;
 	this.coins = Math.floor(Math.random()*898) + 101;
 	this.docked = false;
+	this.img = document.createElement("img");
+	this.img.src = "imgs/FinalAI.png";
+	this.draw = function(){
+		let imgw = this.img.width/2
+		var offsetx = this.x;
+		var offsety = this.y;
+		switch (this.dir) {
+			case 0:
+				offsetx -= imgw;
+				offsety -= imgw;
+				break;
+			case 45:
+				offsety -= imgw * 1.4;
+				break;
+			case 90:
+				offsetx += imgw;
+				offsety -= imgw;
+				break;
+			case 135:
+				offsetx += imgw * 1.4;
+				break;
+			case 180:
+				offsetx += imgw;
+				offsety += imgw;
+				break;
+			case 225:
+				offsety += imgw * 1.4;
+				break;
+			case 270:
+				offsetx -= imgw;
+				offsety += imgw;
+				break;
+			case 315:
+				offsetx -= imgw * 1.4;
+				break;
+			default:
+				console.log("The code is not working")
+		  }
+		game.context.translate(offsetx, offsety);
+		game.context.rotate(+this.dir * Math.PI/180);
+		game.context.drawImage(this.img, 0, 0);
+		game.context.rotate(-this.dir * Math.PI/180);
+		game.context.translate(-offsetx, -offsety);
+	}
+	this.move = function(){
 
+	}
 }
 
 function Island(x, y, b){//position of island, with a barrier that playerships and other entities cannot cross unless it has treasure, or has resources.
