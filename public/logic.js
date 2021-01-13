@@ -325,7 +325,6 @@ function gameStart(){
 	var x = Math.round(Math.random() * 1);
 	var y = Math.floor(Math.random() * 600) + 50;
 	socket.emit("startGame", {x:x, y:y});
-
 }
 
 function openHelp() {
