@@ -151,6 +151,11 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 	};
 	this.dock = function(){//checkdistance <- (reminder)
 		for (i = 0; i < map.ports.length; i++){
+			if(this.y >= BountyShip[i].north - 30
+				|| this.y <= BountyShip[i].south + 30
+				|| this.x >= BountyShip[i].west - 30
+				|| this.x <= BountyShip[i].east + 30){
+					this.docked = true;
 			if(this.y >= map.ports[i].y - 20
 				&& this.y <= map.ports[i].y + 20 // add 10
 				&& this.x >= map.ports[i].x - 20// click X/Y into port
