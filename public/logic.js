@@ -322,8 +322,7 @@ function dead(death){
 function gameStart(){
 	var x = Math.floor(Math.random() * 1);
 	var y = Math.floor(Math.random() * 600) + 50;
-	bounty = new BountyShip(x, y);
-	socket.emit("startGame", );
+	socket.emit("startGame", {x:x, y:y});
 
 }
 
