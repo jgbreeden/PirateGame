@@ -356,7 +356,30 @@ function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard 
 		game.context.translate(-offsetx, -offsety);
 	}
 	this.move = function(){
-
+		let dis = 3;
+		if(this.dir == 90){//Right or E
+			this.x += dis;//Make move thing up/down/left/right
+		} else if(this.dir == 135){//SE or SE
+			this.y += dis;
+			this.x += dis;
+		} else if (this.dir == 180){//S our Down
+			this.y += dis;
+		} else if (this.dir == 225){//SW or SW
+			this.y += dis;
+			this.x -= dis;
+		} else if (this.dir == 270){//W or left
+			this.x -= dis;
+		} else if (this.dir == 315){// NW or NW
+			this.y -= dis;
+			this.x -= dis;
+		} else if (this.dir == 0){//N or UP
+			this.y -= dis;
+		} else if (this.dir == 45){//NE or NE
+			this.y -= dis;
+			this.x += dis;
+		} else {
+			console.log(this.dir)
+		};
 	}
 }
 
