@@ -6,8 +6,8 @@
   <title>Oceans Of Valor</title>
 </head>
 
-<body style="background-image: url('imgs/NotFinal1.png');">
-<button class="open-button" id="openBtn" onclick="openForm(); fillSelect();">Login</button>
+<body style="background-image: url('imgs/NotFinal1.png'); background-size: 100%;">
+<button class="open-button" id="button2" onclick="openForm(); fillSelect();">Login</button>
 <div class="form-popup" id="myForm">
  
  
@@ -21,13 +21,13 @@
 	  </select>
 
     <label for="user"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" Id="uname" required>
+    <input type="text" placeholder="Enter Username" id="uname" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
 
-    <button type="submit" class="btn" onclick="document.getElementById('head').innerHTML = 'OCEANS OF VALOR';">Login</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    <button type="submit" class="btn" id="button2" onclick="document.getElementById('head').innerHTML = 'OCEANS OF VALOR'; storeVal();")>Login</button>
+    <button type="button" class="btn cancel" id="button2" onclick="closeForm()">Close</button>
   </form>
 </div>
 
@@ -35,7 +35,7 @@
 <div id="lobby">
 	<ul id="userList"></ul>
 
-	<button onclick="gameStart()">Start</button>
+	<button onclick="gameStart()" id="button2">Start</button>
 	<p style="display: none"> Cannot join </p>
 </div>
 
@@ -50,27 +50,28 @@
     <a id='pAmmo'></a>
     <a id='pFuel'></a>
   </div>
-  <button onclick="myFunction()">button</button>
   <p id="popup"></p>
-  <div id="Merchant" style="display: none;">
-    <a id='Ammo'>Ammo</a>
-    <a id='Crew'>Crew</a>
-	<a id="fuel">fuel</a>	
-	<a id="fuel">coin</a>	
-   </div>
-	<img id="myImg" style="display: none" src="imgs/TikiMerchant.png">
-
-	<div id="myModal" class="modal">
-	  <span class="close">&times;</span>
-	  <img class="modal-content" id="img01">
-	</div>
+  <div id="Merchant" style="display: none; background-image: url('imgs/TikiMerchant.png'); background-size: 100%;">
+    <button id="fuel" onclick="fuel(document.getElementById('uname').value)">Fuel</button>
+    <button id="spacer">Health</button>
+    <button id='spacer'>Crew</button>
+    <button id='Ammo' onclick="ammo(document.getElementById('uname').value)">Ammo</button>	
+    <button id="repair" onclick="repair(document.getElementById('uname').value)">Repair</button>
+    <p></p>
+  </div>
    
   <div id="deathMsg" style="display: none;"></div>
 	<canvas id="GameCanvas">
 	</canvas>
 </div>
+</div>
 
 <script>
+  var name;
+  function storeVal(){
+    name = document.getElementById('uname').value;
+  }
+
   function fillSelect(){
     for(i = 0; i < ships.ships.length; i++){
       var num = i + 1;
@@ -79,7 +80,7 @@
   }
 
   function openForm() {
-    document.getElementById("openBtn").style.display = "none";
+    document.getElementById("button2").style.display = "none";
     document.getElementById("myForm").style.display = "block";
   }
 
@@ -96,37 +97,9 @@
       }
   }
 
-  function closeStats(){
-    document.getElementById('statPage').style.display = 'none';
-  }
-
   function confirmSelect(x){
     shipType(x);
   };
-  
-  function myFunction() {
-  var txt;
-  if (confirm("Press the button")) {
-    txt = "OK";
-  } else {
-    txt = "Canceled";
-  }
-  document.getElementById("popup").innerHTML = txt;
-  }
-
-	var modal = document.getElementById("myModal");
-	var img = document.getElementById("myImg");
-	var modalImg = document.getElementById("img01");
-	var captionText = document.getElementById("caption");
-	img.onclick = function(){
-	  modal.style.display = "block";
-	  modalImg.src = this.src;
-	  captionText.innerHTML = this.alt;
-	 }
-	var span = document.getElementsByClassName("close")[0];
-	span.onclick = function() { 
-	  modal.style.display = "none";
-	}
 
 </script>
 

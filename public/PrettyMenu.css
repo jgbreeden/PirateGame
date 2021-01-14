@@ -7,7 +7,7 @@ input {
   box-sizing: border-box;
 }
 
-button {
+#button2 {
   background-color: brown;
   color: white;
   padding: 14px 20px;
@@ -51,10 +51,9 @@ button:hover {
 .form-popup {
   display: none;
   position: fixed;
-  top: 10%;
+  top: 5%;
   left: 20%;
   border: 3px solid #f1f1f1;
-  z-index: 9;
 }
 
 .text-block {
@@ -195,7 +194,19 @@ button:hover {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+}
+
+#Merchant {
+  position:absolute;
+  top: 35%;
+  left: 30%;
+  z-index: 2;
+  padding: 100px 100px 100px 100px;
 } 
+
+#GameCanvas {
+  z-index: 1;
+}
 
 #deathMsg {
 	background-color: black;
@@ -207,4 +218,31 @@ button:hover {
 	right: 250px;
 	height: 100px;
 	width: 100px;
+}
+
+#fuel {
+  position: relative;
+  top: 80px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+}
+#Ammo {
+  position: relative;
+  bottom: 26px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+}
+
+#repair {
+  position: relative;
+  top: 30px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+}
+
+#spacer {
+  visibility: hidden;
 }

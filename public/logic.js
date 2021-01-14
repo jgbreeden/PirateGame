@@ -7,6 +7,7 @@ var myname;
 let radlen = 100;
 let maxwidth = 800;
 let maxheight = 600;
+var val = 0;
 var Surface = document.getElementById("GameArea");
 var login = document.getElementById("LoginArea");
 var modal = document.getElementById('idea');
@@ -209,7 +210,11 @@ function handleKey(code){
 	}
 
 	if (code == "KeyY"){//dock
-		me.dock();
+		val ++;
+		if(val > 2){
+			val = 1;
+		}
+		me.dock(val);
 		console.log('Key works')
 
 
@@ -407,13 +412,14 @@ $(function () {
 			}
 		};
 	});
-	socket.on('playerDocked', function(user){
+	socket.on('playerDocked', function(player){
 		for(c= 0; c < users.length; c++){
-			if(user == users[c].username){
+			if(player.user == users[c].username && player.val == 1){
 				users[c].ship.docked = true;
+			} else if(player.user == users[c].username && player.val == 2){
+				users[c].ship.docked = false;
 			}
-		}
-	});
+		}});
 	socket.on("joinInProgress", function(list) {
 		$("#LoginArea").hide();
 		users = [];
@@ -424,6 +430,16 @@ $(function () {
 		}
 		serverStart();
 	});	
+	socket.on('shopPurchase', function(data){
+		for(i = 0; i < users.length; i++){
+			if(data.user == users[i].username && data.val == 1){
+				users[i].ship.coins = data.data;
+			} else if (data.user == users[i].username && data.val == 2){
+				users[i].ship.coins = data.coins;
+				users[i].ship.health = data.health;
+			}
+		}
+	});
 	socket.on("startGame", function(AI){
 		serverStart(AI);
 	});

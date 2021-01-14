@@ -1,6 +1,9 @@
 const len = 90;
 var eHealth;
 var shipType;
+var shopAmmoCost = 50;
+var shopFuelCost = 25;
+var shopRepairCost = 50;
 
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
 	//in relation to their respawn port, with an area of interaction that moves with the player
@@ -114,7 +117,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		};
 	};
 	this.move = function(Move) {
-		if (this.fuel > 0 && this.health > 0){
+		if (this.fuel > 0 && this.health > 0 && this.docked == false){
 			this.dir += Move.dir;
 			if(this.dir < 0){
 				this.dir = 315;
@@ -150,7 +153,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 		}
 		stats();
 	};
-	this.dock = function(){//checkdistance <- (reminder)
+	this.dock = function(val){//checkdistance <- (reminder)
 		if(this.y >= BountyShip.north - 30
 			|| this.y <= BountyShip.south + 30
 			|| this.x >= BountyShip.west - 30
@@ -158,28 +161,23 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				this.docked = true;
 			}
 		for (i = 0; i < map.ports.length; i++){
-			if(this.y >= map.ports[i].y - 20
+			if(this.docked == false && val == 1 && this.y >= map.ports[i].y - 20
 				&& this.y <= map.ports[i].y + 20 // add 10
 				&& this.x >= map.ports[i].x - 20// click X/Y into port
 				&& this.x <= map.ports[i].x + 20) { 
 					this.docked = true;
-					socket.emit("playerDocked");
+					var type = 1;
+					socket.emit("playerDocked", type);
 					document.getElementById("Merchant").style.display = "block";
 					this.x = map.ports[i].x
 					this.y = map.ports[i].y
 					console.log('something worked');
-				}
-		}
-		if(this.docked == false){
-			for (i = 0; i < map.islands.length; i++){
-				if(this.y >= map.islands[i].north - 20
-					|| this.y <= map.islands[i].south + 20
-					|| this.x >= map.islands[i].west - 20
-					|| this.x <= map.islands[i].east + 20){
-						this.docked = true;
-						socket.emit("playerDocked");
-						console.log("Dock");
-					}
+			} else if(this.docked == true && val == 2){
+				this.docked = false;
+				console.log('bruh');
+				var type = 2;
+				socket.emit("playerDocked", type);
+				document.getElementById("Merchant").style.display = "none";
 			}
 		}
 	};
@@ -214,7 +212,6 @@ function stats(){
 }
 
 function confirmSelect(x){
-	console.log(x);
 	shipType = new ShipType("imgs/ship" + x + ".png", ships.ships[x - 1].health, ships.ships[x - 1].ammo, ships.ships[x - 1].speed, ships.ships[x - 1].fuel, ships.ships[x - 1].coins);
 }
 
@@ -225,6 +222,42 @@ function ShipType(imgName, health, ammo, speed, fuel, coins){
 	this.speed = speed;
 	this.fuel = fuel;
 	this.coins = coins;
+}
+
+function ammo(name){
+	for(i = 0; i < users.length; i++){
+		if(name == users[i].username && users[i].ship.coins >= shopAmmoCost){
+			users[i].ship.coins -= shopAmmoCost;
+			users[i].ship.munitions += 25;
+			stats();
+			var newCoins = {coins: users[i].ship.coins, val: 1};
+			socket.emit('shopPurchase', newCoins);
+		}
+	}
+}
+
+function repair(name){
+	for(i = 0; i < users.length; i++){
+		if(name == users[i].username && users[i].ship.coins >= shopRepairCost){
+			users[i].ship.coins -= shopRepairCost;
+			users[i].ship.health = shipType.health;
+			stats();
+			var newData = {coins: users[i].ship.coins, health: users[i].ship.health, val: 2};
+			socket.emit('shopPurchase', newData);
+		}
+	}
+}
+
+function fuel(name){
+	for(i = 0; i < users.length; i++){
+		if(name == users[i].username && users[i].ship.coins >= shopFuelCost){
+			users[i].ship.coins -= shopFuelCost;
+			users[i].ship.fuel += 50;
+			stats();
+			var newCoins = {coins: users[i].ship.coins, val: 1};
+			socket.emit('shopPurchase', newCoins);
+		}
+	}
 }
 
 function Dead(user, coins){
