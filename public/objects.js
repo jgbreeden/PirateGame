@@ -4,6 +4,12 @@ var shipType;
 var shopAmmoCost = 50;
 var shopFuelCost = 25;
 var shopRepairCost = 50;
+var shootSound;
+var deathSound;
+var collectSound;
+var hitSound;
+var shopKeep;
+var purchase;
 
 function PlayerShip(x, y, dir, a){//the place the players spawn, 
 	//in relation to their respawn port, with an area of interaction that moves with the player
@@ -169,6 +175,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 					var type = 1;
 					socket.emit("playerDocked", type);
 					document.getElementById("Merchant").style.display = "block";
+					shopKeep.play()
 					this.x = map.ports[i].x
 					this.y = map.ports[i].y
 					console.log('something worked');
@@ -178,6 +185,7 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 				var type = 2;
 				socket.emit("playerDocked", type);
 				document.getElementById("Merchant").style.display = "none";
+				shopKeep.stop();
 			}
 		}
 	};
@@ -230,6 +238,10 @@ function ammo(name){
 			users[i].ship.coins -= shopAmmoCost;
 			users[i].ship.munitions += 25;
 			stats();
+			purchase.play();
+			setTimeout(function() {	
+				purchase.stop();	
+			}, 2000);
 			var newCoins = {coins: users[i].ship.coins, val: 1};
 			socket.emit('shopPurchase', newCoins);
 		}
@@ -242,6 +254,10 @@ function repair(name){
 			users[i].ship.coins -= shopRepairCost;
 			users[i].ship.health = shipType.health;
 			stats();
+			purchase.play();
+			setTimeout(function() {	
+				purchase.stop();	
+			}, 2000);
 			var newData = {coins: users[i].ship.coins, health: users[i].ship.health, val: 2};
 			socket.emit('shopPurchase', newData);
 		}
@@ -254,11 +270,35 @@ function fuel(name){
 			users[i].ship.coins -= shopFuelCost;
 			users[i].ship.fuel += 50;
 			stats();
+			purchase.play()
+			setTimeout(function() {	
+				purchase.stop();	
+			}, 2000);
 			var newCoins = {coins: users[i].ship.coins, val: 1};
 			socket.emit('shopPurchase', newCoins);
 		}
 	}
 }
+
+function sound(src) {
+	this.sound = document.createElement("audio");
+	this.sound.src = src;
+	this.sound.setAttribute("preload", "auto");
+	this.sound.setAttribute("controls", "none");
+	this.sound.style.display = "none";
+	document.body.appendChild(this.sound);
+	this.play = function(){
+		this.sound.volume =  0.5;
+		this.sound.currentTime = 0;
+		this.sound.loop = 'true';
+		this.sound.play();
+	}
+	this.stop = function(){
+		this.sound.pause();
+		this.sound.loop = 'false';
+	    	this.sound.currentTime = 0;
+	}    
+ }
 
 function Dead(user, coins){
 	this.user = user;
