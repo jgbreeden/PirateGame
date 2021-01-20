@@ -225,7 +225,7 @@ function handleKey(code){
 			shootSound.play();
 			setTimeout(function() {	
 				shootSound.stop();	
-			}, 800);
+			}, 890);
 		} else {
 			console.log("Out of Bullets");
 		}
