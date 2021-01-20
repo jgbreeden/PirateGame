@@ -8,7 +8,7 @@
 </head>
 
 <body style="background-image: url('imgs/NotFinal1.png'); background-size: 100%;">
-<button class="open-button" id="button2" onclick="openForm(); fillSelect();">Login</button>
+<button id="mainBtn" onclick="openForm(); fillSelect();">Login</button>
 <div class="form-popup" id="myForm">
  
  
@@ -16,19 +16,18 @@
  
 <div id="LoginArea">
   <form id="loginForm">
-	<label for="ships"> CHOOSE YOUR SHIP:</label>
+	  <label for="ships"> CHOOSE YOUR SHIP:</label>
 	  <select required name="ships" id="ships" onchange="confirmSelect(this.value)">
       <option value="">None</option>
 	  </select>
-
+    <br>
     <label for="user"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" id="uname" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" autocomplete="on" required>
 
-    <button type="submit" class="btn" id="button2" onclick="document.getElementById('head').innerHTML = 'OCEANS OF VALOR'; storeVal();")>Login</button>
-    <button type="button" class="btn cancel" id="button2" onclick="closeForm()">Close</button>
+    <button type="submit" class="button2" onclick="document.getElementById('head').innerHTML = 'OCEANS OF VALOR'; storeVal();")>Login</button>
   </form>
 </div>
 
@@ -36,7 +35,7 @@
 <div id="lobby">
 	<ul id="userList"></ul>
 
-	<button onclick="gameStart()" id="button2">Start</button>
+	<button onclick="gameStart()" class="button2">Start</button>
 	<p style="display: none"> Cannot join </p>
 </div>
 
@@ -80,7 +79,7 @@
   }
 
   function openForm() {
-    document.getElementById("button2").style.display = "none";
+    document.getElementById("mainBtn").style.display = "none";
     document.getElementById("myForm").style.display = "block";
   }
 
