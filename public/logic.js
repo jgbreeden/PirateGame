@@ -4,6 +4,7 @@ var bullets = [];
 var update;
 var me;
 var myname;
+var bounty;
 let radlen = 100;
 let maxwidth = 800;
 let maxheight = 600;
@@ -304,7 +305,7 @@ function serverStart(AI){
 	me.visible = true;
 	playerPos();
 	console.log("start");
-	console.log(AI);
+	bounty = new BountyShip(AI.x == 0 ? x = map.minx: map.maxx, AI.y == 0 ? dir = 90: 270);
 }
 
 function checkDistance(ob1, ob2) {
