@@ -78,15 +78,26 @@ io.on('connection', function(socket){
 		//data carrying the information of a sockets movement
 		socket.broadcast.emit('playerMove', movement);
 	});
-	socket.on('playerDocked', function (){
-		socket.broadcast.emit('playerDocked', socket.user);
+	socket.on('playerDocked', function (val){
+		socket.broadcast.emit('playerDocked', {user: socket.user, val: val});
 	});
 	socket.on('playerKilled', function (death){
 		socket.broadcast.emit('playerKilled', death);
 	});
+	socket.on('shopPurchase', function (data){
+		if(data.val == 1){
+			socket.broadcast.emit('shopPurchase', {user: socket.user, data: data.coins, val: data.val});
+		} else if(data.val == 2){
+			socket.broadcast.emit('shopPurchase', {user: socket.user, coins: data.coins, health: data.health, val: data.val});
+		}
+	});
 	socket.on('entitiesList', function (){
 		//data carrying the information of the game obstacles
 	});
+	socket.on('bountyDocked', function (pData){
+		//when players set name and ship
+		io.emit('bountyDocked', {user: socket.user, coins: pData});
+	});	
 });
 
 http.listen(PORT, () => {

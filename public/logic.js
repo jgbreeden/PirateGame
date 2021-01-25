@@ -4,10 +4,10 @@ var bullets = [];
 var update;
 var me;
 var myname;
-var bounty;
 let radlen = 100;
 let maxwidth = 800;
 let maxheight = 600;
+var val = 0;
 var Surface = document.getElementById("GameArea");
 var login = document.getElementById("LoginArea");
 var modal = document.getElementById('idea');
@@ -208,14 +208,13 @@ function handleKey(code){
 			me.move(movement);  
 		}   
 	}
-
 	if (code == "KeyY"){//dock
-		me.dock();
-		console.log('Key works')
-
-
+		val ++;
+		if(val > 2){
+			val = 1;
+		}
+		me.dock(val);
 	}
-	
 	if(code == "KeyE"){//fire
 		if (me.munitions > 0 ){
 			var shoot = new Bullet(me.x, me.y, me.dir, myname);
@@ -223,18 +222,25 @@ function handleKey(code){
 			bullets.push(shoot);
 			me.munitions--;
 			document.getElementById("pAmmo").innerHTML = 'Ammunition: '+ me.munitions;
-			console.log("Bullets left " + me.munitions);
+			shootSound.play();
+			setTimeout(function() {	
+				shootSound.stop();	
+			}, 890);
 		} else {
 			console.log("Out of Bullets");
 		}
 	}
 	if(code == "KeyQ"){
 		for(i = 0; i < users.length; i++){
-			if(users[i].ship.health == 0 && users[i].ship != me && me.x < users[i].ship.x + 20
+			if(users[i].ship.health == 0 && users[i].ship.erased == false && users[i].ship != me && me.x < users[i].ship.x + 20
 			  && me.x > users[i].ship.x - 20 && me.y < users[i].ship.y + 20 && me.y > users[i].ship.y - 20){
-				  console.log(users[i].ship.coins + " " + me.coins);
 				  me.coins += users[i].ship.coins;
+				  users[i].ship.erased = true;
 				  stats();
+				  collectSound.play();
+				  setTimeout(function() {	
+					collectSound.stop();	
+				}, 900);
 			}
 		}
 	}
@@ -245,8 +251,7 @@ function getCursorPosition(canvas, event) {
 	const x = event.clientX - rect.left
 	const y = event.clientY - rect.top
 	console.log("x: " + x + " y: " + y)
- }
- 
+ } 
  const canvas = document.querySelector('canvas')
  canvas.addEventListener('mousedown', function(e) {
 	getCursorPosition(canvas, e)
@@ -276,6 +281,12 @@ function gameUpdate(){
 function serverStart(AI){
 	var x = 400;
 	var y = 300;
+	shootSound = new sound("sounds/shoot.mp3"); 
+	deathSound = new sound("sounds/death.mp3");
+	collectSound = new sound("sounds/collection.mp3");
+	hitSound = new sound("sounds/hit.mp3");
+	shopKeep = new sound("sounds/shopKeep.mp3");
+	purchase = new sound("sounds/purchase.mp3");
 	game.start();
 	$('#lobby').hide();
 	$("#GameArea").show();
@@ -289,7 +300,6 @@ function serverStart(AI){
 			users[i].ship = new PlayerShip(400, 300, 0, 0);
 		}
 	}
-	bounty = new BountyShip(x==0? map.minx: map.maxx, y, x==0? 90: 270);
 	update = setInterval(gameUpdate, 20);
 	me.visible = true;
 	playerPos();
@@ -318,14 +328,10 @@ function playerPos(){
 
 function dead(death){
 	socket.emit('playerKilled', death);
-	console.log(death);
 }
 
 function gameStart(){
-	var x = Math.round(Math.random() * 1);
-	var y = Math.floor(Math.random() * 600) + 50;
-	socket.emit("startGame", {x:x, y:y});
-
+	socket.emit("startGame");
 }
 
 function openHelp() {
@@ -359,6 +365,10 @@ $(function () {
 	});
 	socket.on("shipFire", function(ev) {
 		console.log("Other Ship Fire")
+		shootSound.play();
+		setTimeout(function() {	
+			shootSound.stop();	
+		}, 800);
 	});
 	socket.on("user list", function(list) {
 		$('#userList').text('');
@@ -379,6 +389,10 @@ $(function () {
 			if(playerHit.user == users[i].username){
 				users[i].ship.health -= 25;
 				stats();
+				hitSound.play();
+				setTimeout(function() {	
+					hitSound.stop();	
+				}, 800);
 				users[i].ship.explosion = new Explosion(playerHit.x, playerHit.y, playerHit.username);
 				var user = users[i]
 				setTimeout(function() {	
@@ -388,6 +402,10 @@ $(function () {
 					me.img.src = "imgs/treasure.png";
 					var death = new Dead(users[i].username, users[i].ship.coins)
 					dead(death);
+					deathSound.play();
+					setTimeout(function() {	
+						deathSound.stop();	
+					}, 6000);
 				}
 			}
 		}
@@ -395,9 +413,14 @@ $(function () {
 	socket.on('playerKilled', function(dead){
 		for(i = 0; i < users.length; i++){
 			if(dead.user == users[i].username){
-				console.log("bruh");
 				users[i].ship.img.src = "imgs/treasure.png";
 				users[i].ship.coins = dead.coins;
+				document.getElementById("deathMsg").style.display = "block";
+				document.getElementById("deathMsg").innerHTML = users[i].username + " has been killed! Find the killer to earn more coins!";
+				setTimeout(function(){
+					document.getElementById("deathMsg").innerHTML = '';
+					document.getElementById("deathMsg").style.display = "none";
+				}, 3000);
 			}
 		}
 	});
@@ -408,13 +431,14 @@ $(function () {
 			}
 		};
 	});
-	socket.on('playerDocked', function(user){
+	socket.on('playerDocked', function(player){
 		for(c= 0; c < users.length; c++){
-			if(user == users[c].username){
+			if(player.user == users[c].username && player.val == 1){
 				users[c].ship.docked = true;
+			} else if(player.user == users[c].username && player.val == 2){
+				users[c].ship.docked = false;
 			}
-		}
-	});
+		}});
 	socket.on("joinInProgress", function(list) {
 		$("#LoginArea").hide();
 		users = [];
@@ -425,7 +449,30 @@ $(function () {
 		}
 		serverStart();
 	});	
+	socket.on('shopPurchase', function(data){
+		for(i = 0; i < users.length; i++){
+			if(data.user == users[i].username && data.val == 1){
+				users[i].ship.coins = data.data;
+			} else if (data.user == users[i].username && data.val == 2){
+				users[i].ship.coins = data.coins;
+				users[i].ship.health = data.health;
+			}
+		}
+	});
 	socket.on("startGame", function(AI){
 		serverStart(AI);
+	});
+	socket.on("bountyDocked", function(pData){
+		for(c = 0; c < users.length; c++){
+			if(pData.user == users[c].username){
+				users[c].ship.docked = true;
+				users[c].ship.coins += pData.coins;
+				stats();
+				var local = users[c];
+				setTimeout(function(){
+					local.ship.docked = false;
+				}, 1000);
+			}
+		}
 	});
 });

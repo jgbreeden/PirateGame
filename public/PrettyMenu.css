@@ -7,7 +7,17 @@ input {
   box-sizing: border-box;
 }
 
-button {
+.button2 {
+  background-color: brown;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+#mainBtn {
   background-color: brown;
   color: white;
   padding: 14px 20px;
@@ -19,12 +29,6 @@ button {
 
 button:hover {
   opacity: 0.8;
-}
-
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: light-blue;
 }
 
 #GameCanvas {
@@ -51,52 +55,9 @@ button:hover {
 .form-popup {
   display: none;
   position: fixed;
-  top: 10%;
+  top: 5%;
   left: 20%;
   border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-.text-block {
-	font-size: 25px;
-	position: absolute;
-	top: 200px;
-	right: 120px;
-	background-color: black;
-	color: white;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-.footer {
-	width: 100%;
-	padding: 50px;
-	background-color: black;
-	display: block;
-}
-
-.titled {
-	padding-left: 50px;
-}
-
-.Titleontop {
-	position: absolute;
-	top: 200px;
-	left: 120px;
-	background-color: black;
-}
-
-.back {
-	width: 100%
-}
-
-#button{
-    height: 40px;
-    width: 40px;
-    background-color: grey;
-    position: absolute;
-    top: 0px;
-    left: 0px;
 }
 
 #statPage{
@@ -108,26 +69,67 @@ button:hover {
 	width: 200px;
 }
 
-.closebtn {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	font-size: 36px;
-	margin-left: 50px;
-	padding-bottom: 20px;
-  }
+#statPage a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
 
-  #statPage a {
-	padding: 8px 8px 8px 32px;
-	text-decoration: none;
-	font-size: 25px;
-	color: black;
-	display: block;
-	transition: 0.3s;
-  }
+#Merchant {
+  position:absolute;
+  top: 35%;
+  left: 30%;
+  z-index: 2;
+  padding: 100px 100px 100px 100px;
+} 
 
-#ShoppingCart {
-	width: 10px;
-	height: 10px;
-	border: black;
+#GameCanvas {
+  z-index: 1;
+}
+
+#deathMsg {
+	background-color: black;
+	color: white;
+	position: fixed;
+	font-family: papyrus;
+	text-align: center;
+	top: 425px;
+	right: 250px;
+	height: 100px;
+	width: 100px;
+}
+
+#fuel {
+  position: relative;
+  top: 80px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+}
+#Ammo {
+  position: relative;
+  bottom: 26px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+}
+
+#repair {
+  position: relative;
+  top: 30px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+}
+
+#spacer {
+  visibility: hidden;
+}
+
+#myForm {
+  background-color:rgba(0, 0, 0, 0.1);
+  color: black;
 }

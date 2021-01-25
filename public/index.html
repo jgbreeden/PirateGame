@@ -3,11 +3,12 @@
 <head>
 	<link href="PrettyMenu.css" rel="stylesheet" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.ico" />
   <title>Oceans Of Valor</title>
 </head>
 
-<body style="background-image: url('imgs/NotFinal1.png');">
-<button class="open-button" id="openBtn" onclick="openForm(); fillSelect();">Login</button>
+<body style="background-image: url('imgs/NotFinal1.png'); background-size: 100%;">
+<button id="mainBtn" onclick="openForm(); fillSelect();">Login</button>
 <div class="form-popup" id="myForm">
  
  
@@ -15,19 +16,18 @@
  
 <div id="LoginArea">
   <form id="loginForm">
-	<label for="ships"> CHOOSE YOUR SHIP:</label>
+	  <label for="ships"> CHOOSE YOUR SHIP:</label>
 	  <select required name="ships" id="ships" onchange="confirmSelect(this.value)">
       <option value="">None</option>
 	  </select>
-
+    <br>
     <label for="user"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" Id="uname" required>
+    <input type="text" placeholder="Enter Username" id="uname" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" autocomplete="on" required>
 
-    <button type="submit" class="btn" onclick="document.getElementById('head').innerHTML = 'OCEANS OF VALOR';">Login</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    <button type="submit" class="button2" onclick="document.getElementById('head').innerHTML = 'OCEANS OF VALOR'; storeVal();")>Login</button>
   </form>
 </div>
 
@@ -35,7 +35,7 @@
 <div id="lobby">
 	<ul id="userList"></ul>
 
-	<button onclick="gameStart()">Start</button>
+	<button onclick="gameStart()" class="button2">Start</button>
 	<p style="display: none"> Cannot join </p>
 </div>
 
@@ -50,18 +50,27 @@
     <a id='pAmmo'></a>
     <a id='pFuel'></a>
   </div>
-  <button onclick="myFunction()">button</button>
   <p id="popup"></p>
-  <div id="Merchant" style="display: none;">
-    <a id='Ammo'>Ammo</a>
-    <a id='Crew'>Crew</a>
-    <a id="fuel">fuel</a>	
-	</div>
+  <div id="Merchant" style="display: none; background-image: url('imgs/TikiMerchant.png'); background-size: 100%;">
+    <button id="fuel" onclick="fuel(document.getElementById('uname').value)">Fuel</button>
+    <button id="spacer">Health</button>
+    <button id='spacer'>Crew</button>
+    <button id='Ammo' onclick="ammo(document.getElementById('uname').value)">Ammo</button>	
+    <button id="repair" onclick="repair(document.getElementById('uname').value)">Repair</button>
+    <p></p>
+  </div>
+  <div id="deathMsg" style="display: none;"></div>
 	<canvas id="GameCanvas">
-  </canvas>
+	</canvas>
+</div>
 </div>
 
 <script>
+  var name;
+  function storeVal(){
+    name = document.getElementById('uname').value;
+  }
+
   function fillSelect(){
     for(i = 0; i < ships.ships.length; i++){
       var num = i + 1;
@@ -70,7 +79,7 @@
   }
 
   function openForm() {
-    document.getElementById("openBtn").style.display = "none";
+    document.getElementById("mainBtn").style.display = "none";
     document.getElementById("myForm").style.display = "block";
   }
 
@@ -87,23 +96,10 @@
       }
   }
 
-  function closeStats(){
-    document.getElementById('statPage').style.display = 'none';
-  }
-
   function confirmSelect(x){
     shipType(x);
   };
-  
-  function myFunction() {
-  var txt;
-  if (confirm("Press the button")) {
-    txt = "OK";
-  } else {
-    txt = "Canceled";
-  }
-  document.getElementById("popup").innerHTML = txt;
-  }
+
 </script>
 
 <script src='/socket.io/socket.io.js'></script>
@@ -111,8 +107,6 @@
 <script src="objects.js"></script>
 <script src="event.js"></script>
 <script src="logic.js"></script>
-
-
 
 </body>
 </html>
