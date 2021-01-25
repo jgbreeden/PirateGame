@@ -356,6 +356,7 @@ function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard 
 		game.context.translate(-offsetx, -offsety);
 	}
 	this.move = function(){
+		//movement
 		let dis = 3;
 		if(this.dir == 90){//Right or E
 			this.x += dis;//Make move thing up/down/left/right
@@ -380,6 +381,16 @@ function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard 
 		} else {
 			console.log(this.dir)
 		};
+		//checking bounds
+		if(this.x == map.minx){
+			console.log(dis);
+		} else if (this.x == map.maxx){
+			console.log(dis);
+		} else if (this.y == map.miny){
+			console.log(dis);
+		} else if (this.y == map.maxy){
+			console.log(dis);
+		}
 	}
 }
 

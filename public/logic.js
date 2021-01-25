@@ -270,6 +270,7 @@ function gameUpdate(){
 		}
 	};
 	bounty.draw();
+	bounty.move();
 }
 
 function serverStart(AI){
