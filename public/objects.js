@@ -280,6 +280,19 @@ function fuel(name){
 	}
 }
 
+function done(name){
+	for(i = 0; i < users.length; i++){
+		if(name == users[i].username){
+			users[i].ship.docked = false;
+			console.log('bruh');
+			var type = 2;
+			socket.emit("playerDocked", type);
+			document.getElementById("Merchant").style.display = "none";
+			shopKeep.stop();
+		}
+	}
+}
+
 function sound(src) {
 	this.sound = document.createElement("audio");
 	this.sound.src = src;
