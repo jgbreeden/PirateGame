@@ -114,9 +114,9 @@ function PlayerShip(x, y, dir, a){//the place the players spawn,
 					};
 				};
 			};
-			this.rot -= 0.05;
+			this.rot -= 0.05; //call this.checkBounty
 			trans -= 0.2;
-		};
+		};	
 		this.rot += .55;
 		if(this.rot > Math.PI * 2) {
 			this.rot = 0;
