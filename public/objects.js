@@ -280,6 +280,19 @@ function fuel(name){
 	}
 }
 
+function done(name){
+	for(i = 0; i < users.length; i++){
+		if(name == users[i].username){
+			users[i].ship.docked = false;
+			console.log('bruh');
+			var type = 2;
+			socket.emit("playerDocked", type);
+			document.getElementById("Merchant").style.display = "none";
+			shopKeep.stop();
+		}
+	}
+}
+
 function sound(src) {
 	this.sound = document.createElement("audio");
 	this.sound.src = src;
@@ -430,7 +443,41 @@ function BountyShip(x, y, dir, a){// Ship.AI, moves w/no limitation/ don't hard 
 		game.context.translate(-offsetx, -offsety);
 	}
 	this.move = function(){
-
+		//movement
+		let dis = 3;
+		if(this.dir == 90){//Right or E
+			this.x += dis;//Make move thing up/down/left/right
+		} else if(this.dir == 135){//SE or SE
+			this.y += dis;
+			this.x += dis;
+		} else if (this.dir == 180){//S our Down
+			this.y += dis;
+		} else if (this.dir == 225){//SW or SW
+			this.y += dis;
+			this.x -= dis;
+		} else if (this.dir == 270){//W or left
+			this.x -= dis;
+		} else if (this.dir == 315){// NW or NW
+			this.y -= dis;
+			this.x -= dis;
+		} else if (this.dir == 0){//N or UP
+			this.y -= dis;
+		} else if (this.dir == 45){//NE or NE
+			this.y -= dis;
+			this.x += dis;
+		} else {
+			console.log(this.dir)
+		};
+		//checking bounds
+		if(this.x == map.minx){
+			console.log(dis);
+		} else if (this.x == map.maxx){
+			console.log(dis);
+		} else if (this.y == map.miny){
+			console.log(dis);
+		} else if (this.y == map.maxy){
+			console.log(dis);
+		}
 	}
 }
 

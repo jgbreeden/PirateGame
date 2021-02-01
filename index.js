@@ -4,7 +4,6 @@ var app = express();
 var path = require('path');
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-//var mySQL = require('mySQL');
 var connections = [];
 var users = [];
 var runtime = false;
